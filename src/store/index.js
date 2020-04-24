@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { env } from "../../env";
+import userStore from "./user";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = env.backendUrl;
 
 export default new Vuex.Store({
   state: {
@@ -162,5 +164,7 @@ export default new Vuex.Store({
       });
     }
   },
-  modules: {}
+  modules: {
+    user: userStore
+  }
 });

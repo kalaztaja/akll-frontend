@@ -21,12 +21,16 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12">
-          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="E-mail"
+            required
+          ></v-text-field>
         </v-col>
         <v-col cols="12">
           <v-text-field
             v-model="password"
-            browser-autocomplete="new-password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
@@ -52,7 +56,17 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
-          <v-btn x-large block :disabled="!valid" color="success" @click="register">Register</v-btn>
+          <a href="/aklapi/integration/steam/login">Register with Steam</a>
+        </v-col>
+        <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+          <v-btn
+            x-large
+            block
+            :disabled="!valid"
+            color="success"
+            @click="register"
+            >Register</v-btn
+          >
         </v-col>
       </v-row>
     </v-form>
@@ -110,5 +124,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
