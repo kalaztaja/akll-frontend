@@ -28,7 +28,6 @@ export default new Vuex.Store({
       state.token = null;
     },
     retrieveUserInfo(state, user) {
-      console.log('budum');
       state.user = user;
     }
   },
@@ -37,7 +36,6 @@ export default new Vuex.Store({
       if (context.getters.loggedIn) {
         localStorage.removeItem('access_token');
         context.commit('destroyToken');
-        console.log(context.getters.loggedIn);
       }
     },
     retrieveToken(context, credentials) {
@@ -49,14 +47,12 @@ export default new Vuex.Store({
           })
           .then(response => {
             const token = response.data.access;
-            console.log(response);
             localStorage.setItem('access_token', token);
             context.commit('retrieveToken', token);
 
             resolve(response);
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       });
@@ -76,7 +72,6 @@ export default new Vuex.Store({
             resolve(response);
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       });
@@ -93,7 +88,6 @@ export default new Vuex.Store({
               resolve(response);
             })
             .catch(error => {
-              console.log(error);
               reject(error);
             });
         });
@@ -107,11 +101,9 @@ export default new Vuex.Store({
           axios
             .get('/users/')
             .then(response => {
-              console.log(response);
               resolve(response);
             })
             .catch(error => {
-              console.log(error);
               reject(error);
             });
         });
@@ -144,7 +136,6 @@ export default new Vuex.Store({
             resolve(response);
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       });

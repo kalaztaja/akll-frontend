@@ -31,7 +31,6 @@ export default {
     this.$store.dispatch('retrieveAllUsers').then(response => {
       this.users = response.data;
     });
-    console.log(this.users);
   }
 };
 </script>
