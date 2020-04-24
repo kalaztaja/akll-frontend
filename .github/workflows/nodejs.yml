@@ -20,5 +20,5 @@ jobs:
       with:
         node-version: 10
     - run: npm ci
-    - run: npm run build --if-present
     - run: npm run cli-prettier
+    - run: npm run build
