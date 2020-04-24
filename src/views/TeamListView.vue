@@ -15,7 +15,6 @@ export default {
   },
   created() {
     this.$store.dispatch('retrieveAllTeams').then(response => {
-      console.log(response.data);
       this.teams = response.data;
     });
   }

@@ -18,7 +18,6 @@ export default {
     this.$store.dispatch('retrieveAllPlayers').then(response => {
       this.players = response.data;
     });
-    console.log(this.players);
   }
 };
 </script>

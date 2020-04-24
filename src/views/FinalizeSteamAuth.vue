@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     register() {
-      console.log('register');
       this.$store.dispatch('registerWithSteam', {
         firstName: this.firstName,
         surname: this.surname,
