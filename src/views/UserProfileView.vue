@@ -4,14 +4,14 @@
 
 <script>
 export default {
-  name: "UserProfileView",
+  name: 'UserProfileView',
   data() {
     return {
       user: Object
     };
   },
   created() {
-    this.$store.dispatch("retrieveUserInfo", {}).then(response => {
+    this.$store.dispatch('retrieveUserInfo', {}).then(response => {
       this.user = response.data;
     });
     console.log(this.user);

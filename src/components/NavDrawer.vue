@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: "NavDrawer",
+  name: 'NavDrawer',
   props: {
     value: {
       type: Boolean,
@@ -48,24 +48,24 @@ export default {
     return {
       drawerOpen: this.value,
       navItems: [
-        { title: "Login", icon: "mdi-login", to: "/login", unauth: true },
-        { title: "Logout", icon: "mdi-logout", to: "/logout", unauth: false },
+        { title: 'Login', icon: 'mdi-login', to: '/login', unauth: true },
+        { title: 'Logout', icon: 'mdi-logout', to: '/logout', unauth: false },
         {
-          title: "Users",
-          icon: "mdi-book-account",
-          to: "/users",
+          title: 'Users',
+          icon: 'mdi-book-account',
+          to: '/users',
           unauth: null
         },
         {
-          title: "Players",
-          icon: "mdi-account-hard-hat",
-          to: "/players",
+          title: 'Players',
+          icon: 'mdi-account-hard-hat',
+          to: '/players',
           unauth: null
         },
         {
-          title: "Teams",
-          icon: "mdi-account-multiple",
-          to: "/teams",
+          title: 'Teams',
+          icon: 'mdi-account-multiple',
+          to: '/teams',
           unauth: null
         }
       ]
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     onInput(isOpen) {
-      this.$emit("opened", isOpen);
+      this.$emit('opened', isOpen);
     }
   }
 };

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "TeamListView",
+  name: 'TeamListView',
   components: {},
   data() {
     return {
@@ -14,7 +14,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("retrieveAllTeams").then(response => {
+    this.$store.dispatch('retrieveAllTeams').then(response => {
       console.log(response.data);
       this.teams = response.data;
     });

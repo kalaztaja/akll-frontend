@@ -11,15 +11,15 @@
 
 <script>
 export default {
-  name: "UserCard",
+  name: 'UserCard',
   props: {
     username: {
       type: String,
-      default: "NoName"
+      default: 'NoName'
     },
     team: {
       type: String,
-      default: "Not in a team"
+      default: 'Not in a team'
     },
     userId: {
       type: Number,

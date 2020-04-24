@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import NavDrawer from "./NavDrawer.vue";
+import NavDrawer from './NavDrawer.vue';
 
 export default {
-  name: "NavBar",
+  name: 'NavBar',
   components: {
     NavDrawer
   },

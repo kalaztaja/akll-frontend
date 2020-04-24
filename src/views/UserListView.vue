@@ -9,26 +9,26 @@
 </template>
 
 <script>
-import UserCard from "../components/UserCard.vue";
+import UserCard from '../components/UserCard.vue';
 
 export default {
-  name: "UserListView",
+  name: 'UserListView',
   components: { UserCard },
   data() {
     return {
       users: [
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" },
-        { username: "jiri", team: "jirin kakkoset" }
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' },
+        { username: 'jiri', team: 'jirin kakkoset' }
       ]
     };
   },
   created() {
-    this.$store.dispatch("retrieveAllUsers").then(response => {
+    this.$store.dispatch('retrieveAllUsers').then(response => {
       this.users = response.data;
     });
     console.log(this.users);

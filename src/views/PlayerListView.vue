@@ -8,14 +8,14 @@
 
 <script>
 export default {
-  name: "PlayersListView",
+  name: 'PlayersListView',
   data() {
     return {
       players: []
     };
   },
   created() {
-    this.$store.dispatch("retrieveAllPlayers").then(response => {
+    this.$store.dispatch('retrieveAllPlayers').then(response => {
       this.players = response.data;
     });
     console.log(this.players);

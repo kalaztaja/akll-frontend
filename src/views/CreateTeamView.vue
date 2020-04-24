@@ -16,22 +16,22 @@
 
 <script>
 export default {
-  name: "TeamRegisterView",
+  name: 'TeamRegisterView',
   data() {
     return {
-      team_name: "",
-      tag: ""
+      team_name: '',
+      tag: ''
     };
   },
   methods: {
     registerTeam() {
       this.$store
-        .dispatch("registerTeam", {
+        .dispatch('registerTeam', {
           team_name: this.team_name,
           tag: this.tag
         })
         .then(() => {
-          this.$router.push({ name: "front-page" });
+          this.$router.push({ name: 'front-page' });
         });
     }
   }

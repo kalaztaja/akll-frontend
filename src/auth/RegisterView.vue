@@ -86,41 +86,41 @@
 
 <script>
 export default {
-  name: "RegisterView",
+  name: 'RegisterView',
   data() {
     return {
       valid: true,
 
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      verify: "",
-      loginPassword: "",
-      loginEmail: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      verify: '',
+      loginPassword: '',
+      loginEmail: '',
       loginEmailRules: [
-        v => !!v || "Required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        v => !!v || 'Required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
       ],
       emailRules: [
-        v => !!v || "Required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        v => !!v || 'Required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
       ],
 
       show1: false,
       rules: {
-        required: value => !!value || "Required.",
-        min: v => (v && v.length >= 8) || "Min 8 characters"
+        required: value => !!value || 'Required.',
+        min: v => (v && v.length >= 8) || 'Min 8 characters'
       },
 
-      username: "",
-      emailAddress: ""
+      username: '',
+      emailAddress: ''
     };
   },
   methods: {
     register() {
       this.$store
-        .dispatch("register", {
+        .dispatch('register', {
           username: this.username,
           password: this.password,
           firstName: this.firstName,
@@ -128,7 +128,7 @@ export default {
           emailAddress: this.emailAddress
         })
         .then(() => {
-          this.$router.push({ name: "login-view" });
+          this.$router.push({ name: 'login-view' });
         });
     }
   }

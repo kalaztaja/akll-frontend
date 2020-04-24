@@ -42,22 +42,22 @@
 
 <script>
 export default {
-  name: "LoginView",
+  name: 'LoginView',
   data() {
     return {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     };
   },
   methods: {
     login() {
       this.$store
-        .dispatch("retrieveToken", {
+        .dispatch('retrieveToken', {
           username: this.username,
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: "front-page" });
+          this.$router.push({ name: 'front-page' });
         });
     }
   }

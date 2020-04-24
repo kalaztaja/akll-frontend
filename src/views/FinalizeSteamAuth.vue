@@ -63,52 +63,52 @@
 </template>
 
 <script>
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 export default {
-  name: "FinalizeSteamAuth",
+  name: 'FinalizeSteamAuth',
   data() {
     return {
-      firstName: "",
-      surname: "",
-      password: "",
-      email: "",
+      firstName: '',
+      surname: '',
+      password: '',
+      email: '',
       age: 0,
-      guild: "",
-      university: "",
-      status: ""
+      guild: '',
+      university: '',
+      status: ''
     };
   },
   created() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    const status = urlParams.get("status");
-    const accessToken = urlParams.get("accessToken");
-    const refreshToken = urlParams.get("refreshToken");
+    const status = urlParams.get('status');
+    const accessToken = urlParams.get('accessToken');
+    const refreshToken = urlParams.get('refreshToken');
 
-    this.$store.commit("setTokens", {
+    this.$store.commit('setTokens', {
       status,
       accessToken,
       refreshToken
     });
 
-    window.history.replaceState({}, document.title, "/akl/finalizeauth");
+    window.history.replaceState({}, document.title, '/akl/finalizeauth');
 
-    if (urlParams.get("status") === "OK" && accessToken) {
+    if (urlParams.get('status') === 'OK' && accessToken) {
       const tokenData = jwt_decode(accessToken);
-      if (!tokenData.roles.includes("unregistered")) {
-        window.history.pushState({}, "", "/akl");
+      if (!tokenData.roles.includes('unregistered')) {
+        window.history.pushState({}, '', '/akl');
         return;
       }
       this.status = status;
     } else {
-      window.history.pushState({}, "", "/akl");
+      window.history.pushState({}, '', '/akl');
     }
   },
   methods: {
     register() {
-      console.log("register");
-      this.$store.dispatch("registerWithSteam", {
+      console.log('register');
+      this.$store.dispatch('registerWithSteam', {
         firstName: this.firstName,
         surname: this.surname,
         age: this.age,

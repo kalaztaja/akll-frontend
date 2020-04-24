@@ -1,15 +1,15 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
-import { env } from "../../env";
-import userStore from "./user";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import { env } from '../../env';
+import userStore from './user';
 
 Vue.use(Vuex);
 axios.defaults.baseURL = env.backendUrl;
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem("access_token") || null,
+    token: localStorage.getItem('access_token') || null,
     user: null
   },
   getters: {
@@ -28,30 +28,30 @@ export default new Vuex.Store({
       state.token = null;
     },
     retrieveUserInfo(state, user) {
-      console.log("budum");
+      console.log('budum');
       state.user = user;
     }
   },
   actions: {
     destroyToken(context) {
       if (context.getters.loggedIn) {
-        localStorage.removeItem("access_token");
-        context.commit("destroyToken");
+        localStorage.removeItem('access_token');
+        context.commit('destroyToken');
         console.log(context.getters.loggedIn);
       }
     },
     retrieveToken(context, credentials) {
       return new Promise((resolve, reject) => {
         axios
-          .post("/api/token/", {
+          .post('/api/token/', {
             username: credentials.username,
             password: credentials.password
           })
           .then(response => {
             const token = response.data.access;
             console.log(response);
-            localStorage.setItem("access_token", token);
-            context.commit("retrieveToken", token);
+            localStorage.setItem('access_token', token);
+            context.commit('retrieveToken', token);
 
             resolve(response);
           })
@@ -64,7 +64,7 @@ export default new Vuex.Store({
     register(context, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("/users/", {
+          .post('/users/', {
             username: data.username,
             password: data.password,
             email: data.emailAddress,
@@ -84,12 +84,12 @@ export default new Vuex.Store({
     retrieveUserInfo(context) {
       if (context.state.token !== null) {
         return new Promise((resolve, reject) => {
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + context.state.token;
+          axios.defaults.headers.common['Authorization'] =
+            'Bearer ' + context.state.token;
           axios
-            .get("/user/")
+            .get('/user/')
             .then(response => {
-              context.commit("retrieveUserInfo", response.data);
+              context.commit('retrieveUserInfo', response.data);
               resolve(response);
             })
             .catch(error => {
@@ -102,10 +102,10 @@ export default new Vuex.Store({
     retrieveAllUsers(context) {
       if (context.state.token !== null) {
         return new Promise((resolve, reject) => {
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + context.state.token;
+          axios.defaults.headers.common['Authorization'] =
+            'Bearer ' + context.state.token;
           axios
-            .get("/users/")
+            .get('/users/')
             .then(response => {
               console.log(response);
               resolve(response);
@@ -120,10 +120,10 @@ export default new Vuex.Store({
     retrieveAllTeams(context) {
       if (context.state.token !== null) {
         return new Promise((resolve, reject) => {
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + context.state.token;
+          axios.defaults.headers.common['Authorization'] =
+            'Bearer ' + context.state.token;
           axios
-            .get("/teams/")
+            .get('/teams/')
             .then(response => {
               resolve(response);
             })
@@ -136,7 +136,7 @@ export default new Vuex.Store({
     registerTeam(context, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("/teams/", {
+          .post('/teams/', {
             team_name: data.team_name,
             tag: data.tag
           })
@@ -152,7 +152,7 @@ export default new Vuex.Store({
     retrieveAllPlayers() {
       return new Promise((resolve, reject) => {
         axios
-          .get("/players/")
+          .get('/players/')
           .then(response => {
             resolve(response);
           })
