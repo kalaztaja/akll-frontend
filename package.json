@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prettier": "prettier --write **/*.{ts,js,css,html}",
+    "cli-prettier": "prettier --write '**/*.{ts,js,css,html}'"
+ 
   },
   "dependencies": {
     "axios": "^0.19.2",

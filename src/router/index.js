@@ -22,10 +22,7 @@ const routes = [
   {
     path: "/users",
     name: "user-list-view",
-    component: UserListView,
-    meta: {
-      requiresAuth: true
-    }
+    component: UserListView
   },
   {
     path: "/teams",

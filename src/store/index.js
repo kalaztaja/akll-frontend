@@ -61,7 +61,6 @@ export default new Vuex.Store({
     },
     register(context, data) {
       return new Promise((resolve, reject) => {
-        console.log("badda bing");
         axios
           .post("/users/", {
             username: data.username,
@@ -134,7 +133,6 @@ export default new Vuex.Store({
     },
     registerTeam(context, data) {
       return new Promise((resolve, reject) => {
-        console.log("badda bing");
         axios
           .post("/teams/", {
             team_name: data.team_name,

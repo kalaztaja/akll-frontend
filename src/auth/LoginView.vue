@@ -1,28 +1,43 @@
 <template>
-  <form class="login-right" @submit.prevent>
-    <div class="h2">Login</div>
-    <div class="form-group">
-      <input
-        type="text"
-        id="username"
-        placeholder="Username"
-        v-model="username"
-      />
-      <label for="username">Username</label>
-    </div>
-    <div class="form-group">
-      <input
-        type="password"
-        id="Password"
-        placeholder="Password"
-        v-model="password"
-      />
-      <label for="Password">Password</label>
-    </div>
-    <div class="button-area">
-      <button class="btn btn-primary pull-right" @click="login()">Login</button>
-    </div>
-  </form>
+  <v-card outlined>
+    <v-form ref="loginModel" v-model="valid" lazy-validation>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <v-text-field
+              v-model="username"
+              maxlength="20"
+              label="Username"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="password"
+              browser-autocomplete="new-password"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              counter
+              @click:append="show1 = !show1"
+            ></v-text-field>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+            <v-btn
+              x-large
+              block
+              :disabled="!valid"
+              color="success"
+              @click="login"
+              >Login</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
