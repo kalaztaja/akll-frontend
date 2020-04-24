@@ -66,6 +66,9 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+            <a href="/aklapi/integration/steam/login">Register with Steam</a>
+          </v-col>
+          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
               x-large
               block

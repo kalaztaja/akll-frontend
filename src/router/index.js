@@ -4,6 +4,7 @@ import FrontPage from "../views/FrontPage.vue";
 import UserListView from "../views/UserListView.vue";
 import TeamListView from "../views/TeamListView.vue";
 import PlayerListView from "../views/PlayerListView.vue";
+import FinalizeSteamAuth from "../views/FinalizeSteamAuth";
 
 import UserProfileView from "../views/UserProfileView.vue";
 
@@ -62,6 +63,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/finalizeauth",
+    name: "finalize-auth-view",
+    component: FinalizeSteamAuth
   }
 ];
 
