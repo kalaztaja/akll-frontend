@@ -16,21 +16,19 @@ export default {
   components: { UserCard },
   data() {
     return {
-      users: [
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' }
-      ]
+      users: []
     };
   },
   created() {
-    this.$store.dispatch('retrieveAllUsers').then(response => {
-      this.users = response.data;
-    });
+    this.$store
+      .dispatch('getAllUsers')
+      .then(response => {
+        console.log(response);
+        this.users = response;
+      })
+      .catch(reject => {
+        console.error(reject);
+      });
   }
 };
 </script>

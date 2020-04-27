@@ -9,8 +9,7 @@ axios.defaults.baseURL = env.backendUrl;
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem('access_token') || null,
-    user: null
+    token: localStorage.getItem('access_token') || null
   },
   getters: {
     loggedIn(state) {
@@ -26,9 +25,6 @@ export default new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null;
-    },
-    retrieveUserInfo(state, user) {
-      state.user = user;
     }
   },
   actions: {
@@ -50,25 +46,6 @@ export default new Vuex.Store({
             localStorage.setItem('access_token', token);
             context.commit('retrieveToken', token);
 
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    },
-    register(context, data) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post('/users/', {
-            username: data.username,
-            password: data.password,
-            email: data.emailAddress,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            is_active: true
-          })
-          .then(response => {
             resolve(response);
           })
           .catch(error => {
