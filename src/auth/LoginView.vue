@@ -14,7 +14,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="password"
-              browser-autocomplete="new-password"
+              autocomplete="new-password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
@@ -46,7 +46,9 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      show1: false,
+      valid: true
     };
   },
   methods: {

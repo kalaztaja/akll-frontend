@@ -48,7 +48,7 @@ export default {
     return {
       drawerOpen: this.value,
       navItems: [
-        { title: 'Login', icon: 'mdi-login', to: '/login', unauth: true },
+        { title: 'Login', icon: 'mdi-send', to: '/login', unauth: true },
         { title: 'Logout', icon: 'mdi-logout', to: '/logout', unauth: false },
         {
           title: 'Users',
@@ -67,6 +67,12 @@ export default {
           icon: 'mdi-account-multiple',
           to: '/teams',
           unauth: null
+        },
+        {
+          title: 'Register',
+          icon: 'mdi-login',
+          to: '/register',
+          unauth: true
         }
       ]
     };

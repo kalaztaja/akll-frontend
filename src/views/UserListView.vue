@@ -2,7 +2,11 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs12 v-for="user in users" :key="user.username">
-        <user-card :username="user.username" :team="user.team" />
+        <user-card
+          :username="user.username"
+          :team="user.team"
+          :userId="user._id"
+        />
       </v-flex>
     </v-layout>
   </v-container>
@@ -23,8 +27,8 @@ export default {
     this.$store
       .dispatch('getAllUsers')
       .then(response => {
-        console.log(response);
-        this.users = response;
+        console.log(response.data);
+        this.users = response.data;
       })
       .catch(reject => {
         console.error(reject);

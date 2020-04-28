@@ -33,13 +33,10 @@ const userStore = {
       });
     },
     async getAllUsers() {
-      console.log('here');
       return new Promise((resolve, reject) => {
-        console.log('here2');
         axios
           .get('/user/all')
           .then(response => {
-            console.log(response);
             resolve(response);
           })
           .catch(error => {
@@ -50,18 +47,26 @@ const userStore = {
     async formRegister(context, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/user/create/', {
+          .post('/user/create', {
             username: data.username,
             password: data.password,
             email: data.emailAddress,
-            firstName: data.firstName,
-            surname: data.lastName,
             gameInfo: {
-              riotUsername: data.username,
-              rank: '',
-              role: ''
+              riotUsername: data.username
             }
           })
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    async getUserInfo(userId) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get('/user/' + userId + '/info')
           .then(response => {
             resolve(response);
           })

@@ -1,0 +1,52 @@
+<template>
+  <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs12 v-for="post in posts" :key="post.id">
+        <post-card :textObject="post" />
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import PostCard from '../components/PostCard.vue';
+import axios from 'axios';
+
+export default {
+  name: 'TextView',
+  components: { PostCard },
+  data() {
+    return {
+      posts: [
+        { id: 1, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
+        { id: 2, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
+        { id: 3, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
+        {
+          id: 4,
+          text:
+            'asdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmd',
+          title: 'W00'
+        },
+        {
+          id: 5,
+          text: 'asdaqweqwreqwrqwrqwrqwrwqrqwrrqwrqwrqwrdasdasdasdasd',
+          title: 'W00'
+        },
+        { id: 0, text: 'qweqweqweqwedasdasdasdasdasd', title: 'W00' }
+      ]
+    };
+  },
+  created() {
+    axios
+      .get('/text/all')
+      .then(response => {
+        this.posts = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+};
+</script>
+
+<style></style>
