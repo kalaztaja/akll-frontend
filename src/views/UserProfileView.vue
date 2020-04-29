@@ -3,7 +3,9 @@
     <v-layout row wrap>
       <v-flex>
         <v-card>
-          <v-card-title display-2>Welcome, {{ this.userId }}</v-card-title>
+          <v-card-title class="justify-center" display-1
+            >Welcome, {{ this.user.guild }}</v-card-title
+          >
         </v-card>
         <v-spacer></v-spacer>
         <v-form>
@@ -26,10 +28,11 @@ export default {
   created() {
     this.userId = this.$route.params.id;
     console.log(this.userId);
+    console.log('userobject' + this.user);
     console.log(typeof this.userId);
     this.$store.dispatch('getUserInfo', this.userId).then(response => {
       this.user = response.data;
-      console.log(this.user);
+      console.log('updated object' + this.user);
     });
   }
 };

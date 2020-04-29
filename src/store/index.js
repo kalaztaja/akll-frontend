@@ -38,7 +38,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios
           .post('/integration/login/', {
-            email: credentials.username,
+            email: credentials.email,
             password: credentials.password
           })
           .then(response => {

@@ -5,9 +5,9 @@
         <v-row>
           <v-col cols="12">
             <v-text-field
-              v-model="username"
-              maxlength="20"
-              label="Username"
+              v-model="email"
+              maxlength="30"
+              label="Email"
               required
             ></v-text-field>
           </v-col>
@@ -45,7 +45,7 @@ export default {
   name: 'LoginView',
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       show1: false,
       valid: true
@@ -55,11 +55,11 @@ export default {
     login() {
       this.$store
         .dispatch('retrieveToken', {
-          username: this.username,
+          email: this.email,
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: 'front-page' });
+          this.$router.push({ name: 'post-view' });
         });
     }
   }
