@@ -37,8 +37,8 @@ export default new Vuex.Store({
     retrieveToken(context, credentials) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/api/token/', {
-            username: credentials.username,
+          .post('/integration/login/', {
+            email: credentials.username,
             password: credentials.password
           })
           .then(response => {

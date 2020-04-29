@@ -47,7 +47,7 @@ const userStore = {
     async formRegister(context, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/user/create', {
+          .post('/user/create/', {
             username: data.username,
             password: data.password,
             email: data.emailAddress,
@@ -63,7 +63,7 @@ const userStore = {
           });
       });
     },
-    async getUserInfo(userId) {
+    getUserInfo(context, userId) {
       return new Promise((resolve, reject) => {
         axios
           .get('/user/' + userId + '/info')
