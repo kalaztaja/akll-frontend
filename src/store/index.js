@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import { env } from '../../env';
 import userStore from './user';
+import postStore from './post';
 
 Vue.use(Vuex);
 axios.defaults.baseURL = env.backendUrl;
@@ -131,6 +132,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    user: userStore
+    user: userStore,
+    post: postStore
   }
 });

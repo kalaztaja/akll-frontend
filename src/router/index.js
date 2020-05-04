@@ -12,6 +12,7 @@ import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 
 import PostView from '../views/PostView.vue';
+import CreatePostView from '../views/CreatePostView.vue';
 
 Vue.use(VueRouter);
 
@@ -66,6 +67,11 @@ const routes = [
     path: '/finalizeauth',
     name: 'finalize-auth-view',
     component: FinalizeSteamAuth
+  },
+  {
+    path: '/post/create',
+    name: 'create-post-view',
+    component: CreatePostView
   }
 ];
 
