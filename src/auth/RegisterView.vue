@@ -40,7 +40,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="password"
-              browser-autocomplete="new-password"
+              autocomplete="new-password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="[rules.required, rules.min]"
               :type="show1 ? 'text' : 'password'"
@@ -65,9 +65,17 @@
             ></v-text-field>
           </v-col>
           <v-spacer></v-spacer>
-          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
-            <a href="/aklapi/integration/steam/login">Register with Steam</a>
-          </v-col>
+          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12"
+            ><v-btn
+              x-large
+              block
+              :disabled="!valid"
+              color="success"
+              href="/aklapi/integration/steam/login"
+              >Register with Steam</v-btn
+            ></v-col
+          >
+          <v-spacer></v-spacer>
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
               x-large
@@ -113,19 +121,23 @@ export default {
         min: v => (v && v.length >= 8) || 'Min 8 characters'
       },
 
-      username: '',
-      emailAddress: ''
+      username: ''
     };
+  },
+  computed: {
+    passwordMatch() {
+      return () => this.password === this.verify || 'Password must match';
+    }
   },
   methods: {
     register() {
       this.$store
-        .dispatch('register', {
+        .dispatch('formRegister', {
           username: this.username,
           password: this.password,
           firstName: this.firstName,
           lastName: this.lastName,
-          emailAddress: this.emailAddress
+          emailAddress: this.email
         })
         .then(() => {
           this.$router.push({ name: 'login-view' });

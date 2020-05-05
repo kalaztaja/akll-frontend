@@ -31,7 +31,7 @@ export default {
           tag: this.tag
         })
         .then(() => {
-          this.$router.push({ name: 'front-page' });
+          this.$router.push({ name: 'post-view' });
         });
     }
   }

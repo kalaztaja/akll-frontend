@@ -2,7 +2,11 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs12 v-for="user in users" :key="user.username">
-        <user-card :username="user.username" :team="user.team" />
+        <user-card
+          :username="user.username"
+          :team="user.team"
+          :userId="user._id"
+        />
       </v-flex>
     </v-layout>
   </v-container>
@@ -16,19 +20,11 @@ export default {
   components: { UserCard },
   data() {
     return {
-      users: [
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' },
-        { username: 'jiri', team: 'jirin kakkoset' }
-      ]
+      users: []
     };
   },
   created() {
-    this.$store.dispatch('retrieveAllUsers').then(response => {
+    this.$store.dispatch('getAllUsers').then(response => {
       this.users = response.data;
     });
   }

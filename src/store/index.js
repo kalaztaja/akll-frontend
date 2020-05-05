@@ -3,14 +3,14 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import { env } from '../../env';
 import userStore from './user';
+import postStore from './post';
 
 Vue.use(Vuex);
 axios.defaults.baseURL = env.backendUrl;
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem('access_token') || null,
-    user: null
+    token: localStorage.getItem('access_token') || null
   },
   getters: {
     loggedIn(state) {
@@ -26,9 +26,6 @@ export default new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null;
-    },
-    retrieveUserInfo(state, user) {
-      state.user = user;
     }
   },
   actions: {
@@ -41,8 +38,8 @@ export default new Vuex.Store({
     retrieveToken(context, credentials) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/api/token/', {
-            username: credentials.username,
+          .post('/integration/login/', {
+            email: credentials.email,
             password: credentials.password
           })
           .then(response => {
@@ -50,25 +47,6 @@ export default new Vuex.Store({
             localStorage.setItem('access_token', token);
             context.commit('retrieveToken', token);
 
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    },
-    register(context, data) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post('/users/', {
-            username: data.username,
-            password: data.password,
-            email: data.emailAddress,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            is_active: true
-          })
-          .then(response => {
             resolve(response);
           })
           .catch(error => {
@@ -154,6 +132,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    user: userStore
+    user: userStore,
+    post: postStore
   }
 });

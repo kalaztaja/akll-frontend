@@ -1,5 +1,5 @@
 <template
-  ><v-card
+  ><v-card :to="redirectionURL"
     ><v-card-text>
       <div>{{ this.team }}</div>
       <p class="display-1 text--primary">
@@ -19,11 +19,16 @@ export default {
     },
     team: {
       type: String,
-      default: 'Not in a team'
+      default: ''
     },
     userId: {
-      type: Number,
+      type: String,
       default: null
+    }
+  },
+  computed: {
+    redirectionURL() {
+      return { path: '/user/' + this.userId, props: { id: this.userId } };
     }
   }
 };

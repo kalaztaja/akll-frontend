@@ -6,7 +6,7 @@
 export default {
   created() {
     this.$store.dispatch('destroyToken');
-    this.$router.push({ name: 'front-page' });
+    this.$router.push({ name: '' });
   }
 };
 </script>

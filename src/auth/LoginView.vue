@@ -5,16 +5,16 @@
         <v-row>
           <v-col cols="12">
             <v-text-field
-              v-model="username"
-              maxlength="20"
-              label="Username"
+              v-model="email"
+              maxlength="30"
+              label="Email"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <v-text-field
               v-model="password"
-              browser-autocomplete="new-password"
+              autocomplete="new-password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
@@ -45,19 +45,21 @@ export default {
   name: 'LoginView',
   data() {
     return {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      show1: false,
+      valid: true
     };
   },
   methods: {
     login() {
       this.$store
         .dispatch('retrieveToken', {
-          username: this.username,
+          email: this.email,
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: 'front-page' });
+          this.$router.push({ name: 'post-view' });
         });
     }
   }

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import FrontPage from '../views/FrontPage.vue';
 import UserListView from '../views/UserListView.vue';
 import TeamListView from '../views/TeamListView.vue';
 import PlayerListView from '../views/PlayerListView.vue';
@@ -12,13 +11,16 @@ import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 
+import PostView from '../views/PostView.vue';
+import CreatePostView from '../views/CreatePostView.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'front-page',
-    component: FrontPage
+    name: 'post-view',
+    component: PostView
   },
   {
     path: '/users',
@@ -57,17 +59,19 @@ const routes = [
     component: Logout
   },
   {
-    path: '/user/',
+    path: '/user/:id',
     name: 'user-profile-view',
-    component: UserProfileView,
-    meta: {
-      requiresAuth: true
-    }
+    component: UserProfileView
   },
   {
     path: '/finalizeauth',
     name: 'finalize-auth-view',
     component: FinalizeSteamAuth
+  },
+  {
+    path: '/post/create',
+    name: 'create-post-view',
+    component: CreatePostView
   }
 ];
 
