@@ -21,12 +21,9 @@ export default {
     };
   },
   created() {
-    axios
-      .get('/text/all')
-      .then(response => {
-        this.posts = response.data;
-      })
-      .catch(error => {});
+    axios.get('/text/all').then(response => {
+      this.posts = response.data;
+    });
   }
 };
 </script>

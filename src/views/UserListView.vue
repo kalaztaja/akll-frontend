@@ -24,14 +24,9 @@ export default {
     };
   },
   created() {
-    this.$store
-      .dispatch('getAllUsers')
-      .then(response => {
-        this.users = response.data;
-      })
-      .catch(reject => {
-        console.error(reject);
-      });
+    this.$store.dispatch('getAllUsers').then(response => {
+      this.users = response.data;
+    });
   }
 };
 </script>
