@@ -17,23 +17,7 @@ export default {
   components: { PostCard },
   data() {
     return {
-      posts: [
-        { id: 1, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
-        { id: 2, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
-        { id: 3, text: 'asdasdsadasdasdasdasdasdasdasd', title: 'W00' },
-        {
-          id: 4,
-          text:
-            'asdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmdasdasdsadaslaksdmalskdmnaslködmasldkömasdlköamsdlökasmd',
-          title: 'W00'
-        },
-        {
-          id: 5,
-          text: 'asdaqweqwreqwrqwrqwrqwrwqrqwrrqwrqwrqwrdasdasdasdasd',
-          title: 'W00'
-        },
-        { id: 0, text: 'qweqweqweqwedasdasdasdasdasd', title: 'W00' }
-      ]
+      posts: []
     };
   },
   created() {
