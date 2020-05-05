@@ -15,7 +15,6 @@ const postStore = {
             resolve(response);
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       });

@@ -27,12 +27,8 @@ export default {
   },
   created() {
     this.userId = this.$route.params.id;
-    console.log(this.userId);
-    console.log('userobject' + this.user);
-    console.log(typeof this.userId);
     this.$store.dispatch('getUserInfo', this.userId).then(response => {
       this.user = response.data;
-      console.log('updated object' + this.user);
     });
   }
 };

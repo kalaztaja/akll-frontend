@@ -27,7 +27,6 @@ export default {
     this.$store
       .dispatch('getAllUsers')
       .then(response => {
-        console.log(response.data);
         this.users = response.data;
       })
       .catch(reject => {
