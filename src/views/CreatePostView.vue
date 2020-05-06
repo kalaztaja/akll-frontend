@@ -42,8 +42,8 @@ export default {
       this.$store.dispatch('submitPost', {
         title: this.title,
         location: '/',
-        fiText: this.text,
-        enText: this.text
+        fiText: this.fiText,
+        enText: this.enText
       });
     }
   }

@@ -4,6 +4,8 @@ const postStore = {
   actions: {
     async submitPost(context, data) {
       return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] =
+          'Bearer ' + context.state.token;
         axios
           .post('/text/create', {
             title: data.title,

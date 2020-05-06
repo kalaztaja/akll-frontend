@@ -13,6 +13,14 @@ const userStore = {
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${tokens.accessToken}`;
+    },
+    setAllUsersArray(state, users) {
+      this.state.allUsersArray = users;
+    }
+  },
+  getters: {
+    getUserArray: state => {
+      return state.allUsersArray;
     }
   },
   actions: {
@@ -32,12 +40,17 @@ const userStore = {
           });
       });
     },
-    async getAllUsers() {
+    async getAllUsers(context) {
       return new Promise((resolve, reject) => {
         axios
           .get('/user/all')
           .then(response => {
-            resolve(response);
+            console.log(response);
+            console.log('alluserarray');
+            console.log(response.data);
+            console.log(typeof response.data);
+            context.commit('setAllUsersArray', response.data);
+            resolve(response.data);
           })
           .catch(error => {
             reject(error);
@@ -68,7 +81,9 @@ const userStore = {
         axios
           .get('/user/' + userId + '/info')
           .then(response => {
-            resolve(response);
+            console.log('we here');
+            console.log(response);
+            resolve(response.data);
           })
           .catch(error => {
             reject(error);
