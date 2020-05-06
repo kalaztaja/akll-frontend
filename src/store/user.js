@@ -45,10 +45,6 @@ const userStore = {
         axios
           .get('/user/all')
           .then(response => {
-            console.log(response);
-            console.log('alluserarray');
-            console.log(response.data);
-            console.log(typeof response.data);
             context.commit('setAllUsersArray', response.data);
             resolve(response.data);
           })
@@ -81,8 +77,6 @@ const userStore = {
         axios
           .get('/user/' + userId + '/info')
           .then(response => {
-            console.log('we here');
-            console.log(response);
             resolve(response.data);
           })
           .catch(error => {

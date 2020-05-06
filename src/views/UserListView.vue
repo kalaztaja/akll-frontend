@@ -25,8 +25,6 @@ export default {
   },
   created() {
     this.$store.dispatch('getAllUsers').then(response => {
-      console.log('here');
-      console.log(response);
       this.users = response;
     });
   }

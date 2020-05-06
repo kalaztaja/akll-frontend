@@ -46,7 +46,6 @@ export default {
   },
   created() {
     this.userId = this.$route.params.id;
-    console.log(this.userId);
     this.$store.dispatch('getUserInfo', this.userId).then(response => {
       this.user = response;
     });
