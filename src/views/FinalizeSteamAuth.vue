@@ -5,6 +5,14 @@
     <v-form>
       <v-text-field
         block
+        v-model="username"
+        type="text"
+        name="username"
+        label="Username"
+        required
+      />
+      <v-text-field
+        block
         v-model="firstName"
         type="text"
         name="firstName"
@@ -69,6 +77,7 @@ export default {
   name: 'FinalizeSteamAuth',
   data() {
     return {
+      username: '',
       firstName: '',
       surname: '',
       password: '',
@@ -85,13 +94,7 @@ export default {
     const status = urlParams.get('status');
     const accessToken = urlParams.get('accessToken');
     const refreshToken = urlParams.get('refreshToken');
-
-    this.$store.commit('setTokens', {
-      status,
-      accessToken,
-      refreshToken
-    });
-
+  
     window.history.replaceState({}, document.title, '/akl/finalizeauth');
 
     if (urlParams.get('status') === 'OK' && accessToken) {
@@ -100,7 +103,11 @@ export default {
         window.history.pushState({}, '', '/akl');
         return;
       }
-      this.status = status;
+      this.$store.commit('setTokens', {
+        status,
+        accessToken,
+        refreshToken
+      });
     } else {
       window.history.pushState({}, '', '/akl');
     }
@@ -108,6 +115,7 @@ export default {
   methods: {
     register() {
       this.$store.dispatch('registerWithSteam', {
+        username: this.username,
         firstName: this.firstName,
         surname: this.surname,
         age: this.age,

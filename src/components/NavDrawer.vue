@@ -48,31 +48,37 @@ export default {
     return {
       drawerOpen: this.value,
       navItems: [
-        { title: 'Login', icon: 'mdi-send', to: '/login', unauth: true },
-        { title: 'Logout', icon: 'mdi-logout', to: '/logout', unauth: false },
+        { title: 'Login', icon: 'mdi-send', to: '/login', roles: ['unauthorized'] },
+        { title: 'Logout', icon: 'mdi-logout', to: '/logout', roles: ['authorized'] },
         {
           title: 'Users',
           icon: 'mdi-book-account',
           to: '/users',
-          unauth: null
+          roles: ['all']
         },
         {
           title: 'Players',
           icon: 'mdi-account-hard-hat',
           to: '/players',
-          unauth: null
+          roles: ['all']
         },
         {
           title: 'Teams',
           icon: 'mdi-account-multiple',
           to: '/teams',
-          unauth: null
+          roles: ['all']
         },
         {
           title: 'Register',
           icon: 'mdi-login',
           to: '/register',
-          unauth: true
+          roles: ['unauthorized']
+        },
+        {
+          title: 'Seasons',
+          icon: 'mdi-account-multiple',
+          to: '/seasons',
+          roles: ['admin', 'moderator']
         }
       ]
     };
@@ -87,15 +93,15 @@ export default {
       return this.$store.getters.loggedIn;
     },
     filteredNavItems() {
-      if (this.loggedIn) {
-        return this.navItems.filter(
-          item => (item.unauth === false) | (item.unauth === null)
-        );
-      } else {
-        return this.navItems.filter(
-          item => (item.unauth === true) | (item.unauth === null)
-        );
-      }
+      return this.navItems.filter(
+        item => {
+          if (this.loggedIn) {
+            const { roles } = this.$store.getters.userInfo
+            return item.roles.some(role => roles.includes(role) || role === 'all' || role === 'authorized');
+          } 
+          return item.roles.some(role => role === 'all' || role === 'unauthorized')
+        }        
+      );
     }
   },
   methods: {
