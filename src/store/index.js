@@ -50,7 +50,7 @@ export default new Vuex.Store({
         });
       }
     },
-    
+
     registerTeam(context, data) {
       return new Promise((resolve, reject) => {
         axios

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'TeamView',
   state: {
@@ -13,7 +12,7 @@ export default {
   },
   computed: {
     team() {
-      return this.$store.state.team.currentTeam
+      return this.$store.state.team.currentTeam;
     }
   },
   beforeCreate() {

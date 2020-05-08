@@ -1,18 +1,16 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import moment from 'moment';
 
 if (localStorage.getItem('accessToken')) {
-  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+    'accessToken'
+  )}`;
 }
 
 const userStore = {
   state: {
     allUsersArray: []
   },
-  getters: {
-    
-  },
+  getters: {},
   mutations: {},
   actions: {
     async getAllUsers() {

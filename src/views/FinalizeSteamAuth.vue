@@ -94,7 +94,7 @@ export default {
     const status = urlParams.get('status');
     const accessToken = urlParams.get('accessToken');
     const refreshToken = urlParams.get('refreshToken');
-  
+
     window.history.replaceState({}, document.title, '/akl/finalizeauth');
 
     if (urlParams.get('status') === 'OK' && accessToken) {

@@ -4,13 +4,13 @@
       <button>Create Season</button>
     </div>
     <div v-for="season in seasons" :key="season._id">
-      {{ season.seasonName }} {{ season.seasonNumber }} {{ season.division }} {{ season.year }}
+      {{ season.seasonName }} {{ season.seasonNumber }} {{ season.division }}
+      {{ season.year }}
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'SeasonsView',
   state: {},
@@ -20,7 +20,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.dispatch('retrieveSeasons', { page: 0 });  
+    this.$store.dispatch('retrieveSeasons', { page: 0 });
   }
 };
 </script>

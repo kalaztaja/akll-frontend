@@ -48,8 +48,18 @@ export default {
     return {
       drawerOpen: this.value,
       navItems: [
-        { title: 'Login', icon: 'mdi-send', to: '/login', roles: ['unauthorized'] },
-        { title: 'Logout', icon: 'mdi-logout', to: '/logout', roles: ['authorized'] },
+        {
+          title: 'Login',
+          icon: 'mdi-send',
+          to: '/login',
+          roles: ['unauthorized']
+        },
+        {
+          title: 'Logout',
+          icon: 'mdi-logout',
+          to: '/logout',
+          roles: ['authorized']
+        },
         {
           title: 'Users',
           icon: 'mdi-book-account',
@@ -93,15 +103,18 @@ export default {
       return this.$store.getters.loggedIn;
     },
     filteredNavItems() {
-      return this.navItems.filter(
-        item => {
-          if (this.loggedIn) {
-            const { roles } = this.$store.getters.userInfo
-            return item.roles.some(role => roles.includes(role) || role === 'all' || role === 'authorized');
-          } 
-          return item.roles.some(role => role === 'all' || role === 'unauthorized')
-        }        
-      );
+      return this.navItems.filter(item => {
+        if (this.loggedIn) {
+          const { roles } = this.$store.getters.userInfo;
+          return item.roles.some(
+            role =>
+              roles.includes(role) || role === 'all' || role === 'authorized'
+          );
+        }
+        return item.roles.some(
+          role => role === 'all' || role === 'unauthorized'
+        );
+      });
     }
   },
   methods: {

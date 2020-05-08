@@ -11,7 +11,7 @@
       v-model="abbreviation"
       :rules="[rules.required, rules.max]"
       label="Tag"
-      counter=11
+      counter="11"
       required
     />
     <v-text-field
@@ -20,11 +20,7 @@
       label="Introduction"
       required
     />
-     <v-select
-      v-model="rank"
-      :items="ranks"
-      label="Rank"
-    />
+    <v-select v-model="rank" :items="ranks" label="Rank" />
     <button class="form-button" @click="registerTeam()">Register</button>
   </form>
 </template>

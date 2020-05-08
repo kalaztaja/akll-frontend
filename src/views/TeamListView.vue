@@ -2,10 +2,12 @@
   <div>
     <create-team />
     <div v-if="this.$store.getters.loggedIn">
-      <button v-on="() => this.state.show = true">Create team</button>
+      <button v-on="() => (this.state.show = true)">Create team</button>
     </div>
     <div v-for="team in teams" :key="team.teamName">
-      <router-link :to="'/teams/' + team._id" >{{ team.teamName }} {{ team.abbreviation }}</router-link>
+      <router-link :to="'/teams/' + team._id"
+        >{{ team.teamName }} {{ team.abbreviation }}</router-link
+      >
     </div>
   </div>
 </template>
@@ -23,7 +25,7 @@ export default {
   },
   computed: {
     teams() {
-      return this.$store.state.team.teams
+      return this.$store.state.team.teams;
     }
   },
   created() {

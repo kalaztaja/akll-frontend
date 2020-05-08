@@ -5,16 +5,16 @@ import moment from 'moment';
 const authStore = {
   state: {
     token: localStorage.getItem('accessToken') || '',
-    refreshToken: localStorage.getItem('refreshToken') || '',
+    refreshToken: localStorage.getItem('refreshToken') || ''
   },
   getters: {
-    userInfo: (state) => {
+    userInfo: state => {
       if (state.token) {
         return jwt_decode(state.token);
       }
       return {};
     },
-    loggedIn: (state) => {
+    loggedIn: state => {
       if (state.token) {
         const tokenData = jwt_decode(state.refreshToken);
         const expDate = moment.unix(tokenData.exp);
@@ -22,7 +22,7 @@ const authStore = {
       }
       return false;
     },
-    isTokenValid: (state) => {
+    isTokenValid: state => {
       if (state.token) {
         const tokenData = jwt_decode(state.token);
         const expDate = moment.unix(tokenData.exp);
@@ -81,7 +81,7 @@ const authStore = {
           });
       });
     },
-    
+
     async login(context, credentials) {
       const res = await axios.post('/integration/login', credentials);
       if (res.status === 200) {
@@ -89,7 +89,6 @@ const authStore = {
       } else {
         throw new Error('invalidCredentials');
       }
-      
     }
   }
 };

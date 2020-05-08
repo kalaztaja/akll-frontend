@@ -7,12 +7,14 @@ const seasonStore = {
   mutations: {
     addSeasons(state, seasons) {
       state.seasons.push(...seasons);
-    },
+    }
   },
   actions: {
     async retrieveSeasons(context, query) {
       if (!context.state.seasons.length) {
-        const res = await axios.get(`/season/all?page=${query.page}&pageSize=20`);
+        const res = await axios.get(
+          `/season/all?page=${query.page}&pageSize=20`
+        );
         context.commit('addSeasons', res.data);
       }
     },

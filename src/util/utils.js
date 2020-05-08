@@ -14,7 +14,7 @@ export const checkTokensOnRequest = config => {
     return config;
   }
   const { token, refreshToken } = store.state.auth;
-  
+
   if (token && isTokenValid(token)) {
     config.headers.Authorization = `Bearer ${token}`;
   } else if (refreshToken && isTokenValid(refreshToken)) {
@@ -24,4 +24,4 @@ export const checkTokensOnRequest = config => {
     store.commit('clearSession');
   }
   return config;
-}
+};

@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-axios.interceptors.request.use(checkTokensOnRequest, (error) => {
+axios.interceptors.request.use(checkTokensOnRequest, error => {
   return Promise.reject(error);
 });
 
