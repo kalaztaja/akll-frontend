@@ -18,7 +18,7 @@ export const checkTokensOnRequest = config => {
   if (token && isTokenValid(token)) {
     config.headers.Authorization = `Bearer ${token}`;
   } else if (refreshToken && isTokenValid(refreshToken)) {
-    console.log('using refreshToken!');
+    // console.log('using refreshToken!');
     config.headers.Authorization = `Bearer ${refreshToken}`;
   } else {
     store.commit('clearSession');

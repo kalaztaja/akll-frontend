@@ -22,7 +22,7 @@ const teamStore = {
     },
     async createTeam(context, formData) {
       const res = await axios.post('/team/create', formData);
-      console.log(res);
+      // console.log(res);
     },
     async retrieveTeam(context, id) {
       const res = await axios.get(`/team/${id}/info`);
