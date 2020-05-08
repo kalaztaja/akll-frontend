@@ -19,7 +19,7 @@ const seasonStore = {
       }
     },
     async createSeason(context, formData) {
-      const res = await axios.post('/team/create', formData);
+      await axios.post('/team/create', formData);
       // console.log(res);
     }
   }
