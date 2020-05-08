@@ -5,7 +5,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch('destroyToken');
+    this.$store.commit('clearSession');
     this.$router.push({ name: '' });
   }
 };
