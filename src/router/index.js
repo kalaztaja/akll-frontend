@@ -15,6 +15,7 @@ import Logout from '../auth/Logout.vue';
 
 import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
+import PostDetailView from '../views/PostDetailView.vue';
 
 Vue.use(VueRouter);
 
@@ -66,7 +67,7 @@ const routes = [
     component: Logout
   },
   {
-    path: '/user/:id',
+    path: '/user/:username',
     name: 'user-profile-view',
     component: UserProfileView
   },
@@ -79,6 +80,16 @@ const routes = [
     path: '/post/create',
     name: 'create-post-view',
     component: CreatePostView
+  },
+  {
+    path: '/post/edit/:id',
+    name: 'post-edit-view',
+    component: CreatePostView
+  },
+  {
+    path: '/post/:id',
+    name: 'post-detail-view',
+    component: PostDetailView
   },
   {
     path: '/seasons',

@@ -39,14 +39,14 @@ export default {
   name: 'UserProfileView',
   data() {
     return {
-      userId: '',
+      username: '',
       userArray: [],
       user: {}
     };
   },
   created() {
-    this.userId = this.$route.params.id;
-    this.$store.dispatch('getUserInfo', this.userId).then(response => {
+    this.username = this.$route.params.username;
+    this.$store.dispatch('getUserInfo', this.username).then(response => {
       this.user = response;
     });
   }

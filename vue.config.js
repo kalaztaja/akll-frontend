@@ -3,5 +3,8 @@ module.exports = {
   publicPath: '/akl/',
   devServer: {
     disableHostCheck: true
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 };

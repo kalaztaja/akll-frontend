@@ -26,10 +26,10 @@ const userStore = {
           });
       });
     },
-    getUserInfo(context, userId) {
+    getUserInfo(context, username) {
       return new Promise((resolve, reject) => {
         axios
-          .get('/user/' + userId + '/info')
+          .get('/username/' + username)
           .then(response => {
             resolve(response.data);
           })

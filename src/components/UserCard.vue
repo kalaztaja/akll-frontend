@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     redirectionURL() {
-      return { path: '/user/' + this.userId, props: { id: this.userId } };
+      return { path: '/user/' + this.username, props: { id: this.username } };
     }
   }
 };

@@ -15,7 +15,6 @@ axios.defaults.baseURL = env.backendUrl;
 
 export default new Vuex.Store({
   state: {},
-  mutations: {},
   actions: {
     retrieveUserInfo(context) {
       if (context.state.token !== null) {

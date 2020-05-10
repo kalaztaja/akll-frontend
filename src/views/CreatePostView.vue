@@ -34,17 +34,57 @@ export default {
     return {
       title: '',
       fiText: '',
-      enText: ''
+      enText: '',
+      editMode: false
     };
   },
   methods: {
     submit() {
-      this.$store.dispatch('submitPost', {
-        title: this.title,
-        location: '/',
-        fiText: this.fiText,
-        enText: this.enText
-      });
+      if (this.editMode === false) {
+        this.$store
+          .dispatch('submitPost', {
+            title: this.title,
+            location: '/',
+            fiText: this.fiText,
+            enText: this.enText
+          })
+          .then(() => {
+            this.$router.push({ name: 'post-view' });
+          })
+          .catch(() => {
+            //TODO
+          });
+      } else {
+        this.$store
+          .dispatch('updatePost', {
+            title: this.title,
+            location: '/',
+            fiText: this.fiText,
+            enText: this.enText,
+            id: this.PostId
+          })
+          .then(() => {
+            this.$router.push({ name: 'post-view' });
+          });
+      }
+    }
+  },
+  created() {
+    this.PostId = this.$route.params.id;
+    if (this.PostId !== '') {
+      this.$store
+        .dispatch('getPostId', {
+          id: this.PostId
+        })
+        .then(response => {
+          this.title = response.title;
+          this.fiText = response.fiText;
+          this.enText = response.enText;
+          this.editMode = true;
+        })
+        .catch(() => {
+          //TODO
+        });
     }
   }
 };
