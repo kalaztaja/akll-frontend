@@ -54,7 +54,7 @@ export default {
   methods: {
     login() {
       this.$store
-        .dispatch('retrieveToken', {
+        .dispatch('login', {
           email: this.email,
           password: this.password
         })

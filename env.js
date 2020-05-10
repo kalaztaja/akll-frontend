@@ -2,7 +2,7 @@
 
 const env = {
   // root to backend
-  backendUrl: 'http://127.0.0.1/api'
+  backendUrl: 'https://varjola.dy.fi/aklapi'
 };
 
 // uncomment next line in env.js
