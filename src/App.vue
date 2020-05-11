@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <v-card class="overflow-hidden" tile flex height="100%">
+    <v-card class="overflow-hidden" tile flex height="100%" color="f7f7f7">
       <nav-bar />
+      <alert-bar />
       <v-content>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
@@ -15,11 +16,13 @@
 
 <script>
 import NavBar from './components/NavBar.vue';
+import AlertBar from './components/AlertBar.vue';
 
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
+    AlertBar
   }
 };
 </script>

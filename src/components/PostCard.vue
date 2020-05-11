@@ -1,5 +1,5 @@
 <template>
-  <v-card dark :to="redirectURL">
+  <v-card :to="redirectURL">
     <v-row justify="center" no-gutters>
       <v-card-title>{{ this.textObject.title }}</v-card-title>
       <v-spacer></v-spacer>

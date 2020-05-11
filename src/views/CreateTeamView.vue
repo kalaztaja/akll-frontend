@@ -1,28 +1,32 @@
 <template>
-  <form class="Register-team" @submit.prevent>
-    <div class="h2">Register your team</div>
-    <v-text-field
-      v-model="teamName"
-      :rules="[rules.required]"
-      label="Team name"
-      required
-    />
-    <v-text-field
-      v-model="abbreviation"
-      :rules="[rules.required, rules.max]"
-      label="Tag"
-      counter="11"
-      required
-    />
-    <v-text-field
-      v-model="introductionText"
-      :rules="[rules.required]"
-      label="Introduction"
-      required
-    />
-    <v-select v-model="rank" :items="ranks" label="Rank" />
-    <button class="form-button" @click="registerTeam()">Register</button>
-  </form>
+  <v-card>
+    <v-form class="Register-team" @submit.prevent>
+      <v-container>
+        <div display-2>Register your team</div>
+        <v-text-field
+          v-model="teamName"
+          :rules="[rules.required]"
+          label="Team name"
+          required
+        />
+        <v-text-field
+          v-model="abbreviation"
+          :rules="[rules.required, rules.max]"
+          label="Tag"
+          counter="11"
+          required
+        />
+        <v-text-field
+          v-model="introductionText"
+          :rules="[rules.required]"
+          label="Introduction"
+          required
+        />
+        <v-select v-model="rank" :items="ranks" label="Rank" />
+        <button class="form-button" @click="registerTeam()">Register</button>
+      </v-container>
+    </v-form>
+  </v-card>
 </template>
 
 <script>

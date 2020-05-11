@@ -131,6 +131,7 @@ export default {
   },
   methods: {
     register() {
+      this.$store.dispatch('startLoading');
       this.$store
         .dispatch('formRegister', {
           username: this.username,
@@ -142,6 +143,8 @@ export default {
         .then(() => {
           this.$router.push({ name: 'login-view' });
         });
+
+      this.$store.dispatch('stopLoading');
     }
   }
 };

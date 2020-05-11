@@ -15,9 +15,11 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch('startLoading');
     this.$store.dispatch('retrieveAllPlayers').then(response => {
       this.players = response.data;
     });
+    this.$store.dispatch('stopLoading');
   }
 };
 </script>
