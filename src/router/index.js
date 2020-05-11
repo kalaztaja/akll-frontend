@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import UserListView from '../views/UserListView.vue';
+
 import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
+import CreateTeamView from '../views/CreateTeamView.vue';
+
 import PlayerListView from '../views/PlayerListView.vue';
 import FinalizeSteamAuth from '../views/FinalizeSteamAuth';
 import SeasonsView from '../views/SeasonsView';
@@ -34,6 +37,11 @@ const routes = [
     path: '/teams',
     name: 'team-list-view',
     component: TeamListView
+  },
+  {
+    path: '/teams/create',
+    name: 'team-create-view',
+    component: CreateTeamView
   },
   {
     path: '/teams/:id',

@@ -1,24 +1,44 @@
 <template>
-  <div>
-    <create-team />
-    <div v-if="this.$store.getters.loggedIn">
-      <button v-on="() => (this.state.show = true)">Create team</button>
-    </div>
-    <div v-for="team in teams" :key="team.teamName">
-      <router-link :to="'/teams/' + team._id"
-        >{{ team.teamName }} {{ team.abbreviation }}</router-link
-      >
-    </div>
-  </div>
+  <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex>
+        <v-row align="center">
+          <v-col>
+            <p id="title" class="text-left; font-weight-medium">Teams</p>
+          </v-col>
+          <v-col align="end">
+            <v-btn
+              v-if="this.$store.getters.loggedIn"
+              to="/teams/create"
+              v-on="() => (this.state.show = true)"
+              color="secondary"
+              >Create team</v-btn
+            >
+          </v-col>
+        </v-row>
+        <v-divider id="divider"></v-divider>
+
+        <v-row>
+          <v-col v-for="team in teams" :key="team.teamName" no-gutters>
+            <team-card
+              :teamName="team.teamName"
+              :teamTag="team.abbreviation"
+              :teamId="team._id"
+            ></team-card>
+          </v-col>
+        </v-row>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-import CreateTeamViewVue from './CreateTeamView.vue';
+import TeamCard from '../components/TeamCard.vue';
 
 export default {
   name: 'TeamListView',
   components: {
-    CreateTeam: CreateTeamViewVue
+    TeamCard
   },
   state: {
     show: false
@@ -34,4 +54,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#title {
+  font-size: 1.2em;
+  margin-bottom: 0px;
+  vertical-align: middle;
+}
+#divider {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+</style>
