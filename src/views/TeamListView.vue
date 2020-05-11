@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #title {
   font-size: 1.2em;
   margin-bottom: 0px;

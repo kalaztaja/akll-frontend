@@ -67,12 +67,6 @@ export default {
           roles: ['all']
         },
         {
-          title: 'Players',
-          icon: 'mdi-account-hard-hat',
-          to: '/players',
-          roles: ['all']
-        },
-        {
           title: 'Teams',
           icon: 'mdi-account-multiple',
           to: '/teams',
