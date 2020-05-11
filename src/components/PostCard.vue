@@ -6,7 +6,7 @@
       <v-btn :to="editUrl">Edit </v-btn></v-row
     >
     <v-spacer></v-spacer>
-    <v-card-text v-if="FiMode">
+    <v-card-text v-if="fiMode">
       <p class="text" v-if="FiLang">
         {{ this.textObject.fiText }}
       </p>
@@ -33,7 +33,7 @@ export default {
     }
   },
   computed: {
-    FiMode() {
+    fiMode() {
       return this.$store.getters.IsFiLang;
     },
     editUrl() {

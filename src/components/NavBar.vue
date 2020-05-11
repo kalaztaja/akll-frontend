@@ -61,13 +61,13 @@ export default {
   },
   watch: {
     notificationType(newValue) {
-      if (newValue === '2') {
+      if (newValue === 2) {
         this.barColor = 'red darken-2';
-      } else if (newValue === '') {
+      } else if (newValue === null) {
         this.barColor = 'f7f7f7';
-      } else if (newValue === '0') {
+      } else if (newValue === 0) {
         this.barColor = 'green darken-1';
-      } else if (newValue === '1') {
+      } else if (newValue === 1) {
         this.barColor = 'light-blue darken-1';
       }
     }

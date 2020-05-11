@@ -14,29 +14,13 @@ const userStore = {
   mutations: {},
   actions: {
     async getAllUsers(context) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/user/all')
-          .then(response => {
-            context.commit('setAllUsersArray', response.data);
-            resolve(response.data);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      const res = axios.get('/user/all');
+      context.commit('setAllUsersArray', res.data);
+      return res.data;
     },
     getUserInfo(context, username) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/username/' + username)
-          .then(response => {
-            resolve(response.data);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      const res = axios.get('/username/' + username);
+      return res.data;
     }
   }
 };

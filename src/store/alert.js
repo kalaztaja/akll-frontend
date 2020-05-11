@@ -1,7 +1,7 @@
 const alertStore = {
   state: {
     alertText: '',
-    alertType: '',
+    alertType: null,
     loading: false
   },
   mutations: {
@@ -11,20 +11,20 @@ const alertStore = {
       //Type 2 = alert
       //Type 3 = custom
 
-      state.alertType = '2';
+      state.alertType = 2;
       state.alertText = text;
     },
     clearErrorText(state) {
       state.alertText = '';
-      state.alertType = '';
+      state.alertType = null;
     },
     setInfo(state, text) {
       state.alertText = text;
-      state.alertType = '1';
+      state.alertType = 1;
     },
     setSuccess(state, text) {
       state.alertText = text;
-      state.alertType = '0';
+      state.alertType = 0;
     },
     setLoading(state) {
       state.loading = true;

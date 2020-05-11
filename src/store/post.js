@@ -4,8 +4,6 @@ const postStore = {
   actions: {
     async submitPost(context, data) {
       return new Promise((resolve, reject) => {
-        axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + context.state.token;
         axios
           .post('/text/create', {
             title: data.title,
@@ -22,37 +20,12 @@ const postStore = {
       });
     },
     async getPostId(context, data) {
-      return new Promise((resolve, reject) => {
-        axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + context.state.token;
-        axios
-          .get('/text/' + data.id + '/info')
-          .then(response => {
-            resolve(response.data);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      const res = axios.get('/text/' + data.id + '/info');
+      return res.data;
     },
     async updatePost(context, data) {
-      return new Promise((resolve, reject) => {
-        axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + context.state.token;
-        axios
-          .put('/text/' + data.id + '/update', {
-            title: data.title,
-            location: data.location,
-            fiText: data.fiText,
-            enText: data.enText
-          })
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      const res = axios.put('/text/' + data.id + '/update', data);
+      return res.data;
     }
   }
 };

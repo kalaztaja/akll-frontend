@@ -61,7 +61,7 @@ export default {
             location: '/',
             fiText: this.fiText,
             enText: this.enText,
-            id: this.PostId
+            _id: this.PostId
           })
           .then(() => {
             this.$router.push({ name: 'post-view' });
