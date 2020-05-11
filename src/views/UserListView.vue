@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-row align="center" md>
         <v-col>
-          <p id="title" class="text-left; font-weight-medium">Users</p>
+          <p id="title" class="display-1">Users</p>
         </v-col>
         <v-col align="end" justify-content>
           <v-text-field

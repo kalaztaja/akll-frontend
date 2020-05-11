@@ -4,7 +4,7 @@
       <v-flex>
         <v-row align="center">
           <v-col>
-            <p id="title" class="text-left; font-weight-medium">Teams</p>
+            <p id="title" class="text-left display-1">Teams</p>
           </v-col>
           <v-col align="end">
             <v-btn

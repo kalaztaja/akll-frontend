@@ -2,28 +2,48 @@
   <v-card>
     <v-form class="Register-team" @submit.prevent>
       <v-container>
-        <div display-2>Register your team</div>
-        <v-text-field
-          v-model="teamName"
-          :rules="[rules.required]"
-          label="Team name"
-          required
-        />
-        <v-text-field
-          v-model="abbreviation"
-          :rules="[rules.required, rules.max]"
-          label="Tag"
-          counter="11"
-          required
-        />
-        <v-text-field
-          v-model="introductionText"
-          :rules="[rules.required]"
-          label="Introduction"
-          required
-        />
-        <v-select v-model="rank" :items="ranks" label="Rank" />
-        <button class="form-button" @click="registerTeam()">Register</button>
+        <v-row align="center">
+          <v-col cols="12">
+            <p class="display-1 text-center">Register your team</p>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="teamName"
+              :rules="[rules.required]"
+              label="Team name"
+              required
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="abbreviation"
+              :rules="[rules.required, rules.max]"
+              label="Tag"
+              counter="11"
+              required
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="introductionText"
+              :rules="[rules.required]"
+              label="Introduction"
+              required
+            />
+          </v-col>
+          <v-col cols="6">
+            <v-select v-model="rank" :items="ranks" label="Rank" />
+          </v-col>
+          <v-col cols="6" align="end">
+            <v-btn
+              color="success"
+              class="form-button"
+              @click="registerTeam()"
+              align="end"
+              >Register</v-btn
+            >
+          </v-col>
+        </v-row>
       </v-container>
     </v-form>
   </v-card>
