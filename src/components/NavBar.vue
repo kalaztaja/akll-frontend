@@ -2,7 +2,7 @@
   <v-container>
     <v-app-bar id="bar" app clipped-right :color="barColor">
       <v-btn depressed to="/" active-class="no-active" :color="barColor">
-        <v-icon class="grey--text" color="grey darken-3">mdi-home</v-icon>
+        <v-icon class="grey--text" color="white">mdi-home</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
 
@@ -10,7 +10,7 @@
         v-if="loading === false"
         collapse="true"
         align-center
-        color="grey darken-3"
+        color="white"
         class="font-weight-medium"
       >
         <span>AKL</span>
@@ -18,7 +18,7 @@
       <v-progress-circular
         v-if="loading === true"
         indeterminate
-        color="grey darken-3"
+        color="white"
       />
       <v-spacer></v-spacer>
       <v-btn
@@ -27,7 +27,7 @@
         @click.native="drawer = !drawer"
         :color="barColor"
       >
-        <v-icon class="grey--text" color="grey darken-3">mdi-menu</v-icon>
+        <v-icon class="grey--text" color="white">mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
     <nav-drawer :value="drawer" app temporary @opened="drawerEvent($event)" />
@@ -64,7 +64,7 @@ export default {
       if (newValue === 2) {
         this.barColor = 'red darken-2';
       } else if (newValue === null) {
-        this.barColor = 'f7f7f7';
+        this.barColor = '#272727';
       } else if (newValue === 0) {
         this.barColor = 'green darken-1';
       } else if (newValue === 1) {
@@ -77,7 +77,7 @@ export default {
 
 <style>
 .v-btn--active.no-active::before {
-  color: #f7f7f7;
+  color: #272727;
 }
 #bar,
 #bar .v-btn {

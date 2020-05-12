@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-card class="overflow-hidden" tile flex height="100%" color="f7f7f7">
+    <v-card class="overflow-hidden" tile flex height="100%" dark>
       <nav-bar />
       <alert-bar />
-      <v-content>
+      <v-content dark>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <router-view />

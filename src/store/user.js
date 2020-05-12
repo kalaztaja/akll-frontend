@@ -11,15 +11,19 @@ const userStore = {
     allUsersArray: []
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    setAllUsersArray(state, array) {
+      state.allUsersArray = array;
+    }
+  },
   actions: {
     async getAllUsers(context) {
-      const res = axios.get('/user/all');
+      const res = await axios.get('/user/all');
       context.commit('setAllUsersArray', res.data);
       return res.data;
     },
-    getUserInfo(context, username) {
-      const res = axios.get('/username/' + username);
+    async getUserInfo(context, username) {
+      const res = await axios.get('/username/' + username);
       return res.data;
     }
   }
