@@ -1,10 +1,19 @@
 <template>
-  <v-card dark>
-    <v-card-title>{{ this.textObject.title }}</v-card-title>
+  <v-card :to="redirectURL">
+    <v-row justify="center" no-gutters>
+      <v-card-title>{{ this.textObject.title }}</v-card-title>
+      <v-spacer></v-spacer>
+      <v-btn :to="editUrl">Edit </v-btn></v-row
+    >
     <v-spacer></v-spacer>
-    <v-card-text>
+    <v-card-text v-if="fiMode">
+      <p class="text" v-if="FiLang">
+        {{ this.textObject.fiText }}
+      </p>
+    </v-card-text>
+    <v-card-text v-else>
       <p class="text">
-        {{ this.textObject.text }}
+        {{ this.textObject.fiText }}
       </p>
     </v-card-text>
   </v-card>
@@ -17,6 +26,29 @@ export default {
     textObject: {
       type: Object,
       default: null
+    },
+    FiLang: {
+      type: Boolean,
+      deafult: true
+    }
+  },
+  computed: {
+    fiMode() {
+      return this.$store.getters.IsFiLang;
+    },
+    editUrl() {
+      return '/post/edit/' + this.textObject._id;
+    },
+    redirectURL() {
+      return '/post/' + this.textObject._id;
+    }
+  },
+  actions: {
+    redirectToDetails() {
+      this.$router.push({
+        name: 'post-detail-view',
+        params: { postId: this.textObject.id }
+      });
     }
   }
 };

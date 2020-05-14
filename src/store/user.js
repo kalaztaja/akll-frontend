@@ -11,31 +11,20 @@ const userStore = {
     allUsersArray: []
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    setAllUsersArray(state, array) {
+      state.allUsersArray = array;
+    }
+  },
   actions: {
-    async getAllUsers() {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/user/all')
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+    async getAllUsers(context) {
+      const res = await axios.get('/user/all');
+      context.commit('setAllUsersArray', res.data);
+      return res.data;
     },
-    getUserInfo(context, userId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/user/' + userId + '/info')
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+    async getUserInfo(context, username) {
+      const res = await axios.get('/user/username/' + username);
+      return res.data;
     }
   }
 };

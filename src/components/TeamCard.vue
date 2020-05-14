@@ -1,9 +1,9 @@
 <template
   ><v-card :to="redirectionURL"
     ><v-card-text>
-      <div>{{ this.team }}</div>
+      <div>{{ this.teamTag }}</div>
       <p class="display-1 text--primary">
-        {{ this.username }}
+        {{ this.teamName }}
       </p>
     </v-card-text>
   </v-card>
@@ -11,24 +11,24 @@
 
 <script>
 export default {
-  name: 'UserCard',
+  name: 'TeamCard',
   props: {
-    username: {
-      type: String,
-      default: 'NoName'
-    },
-    team: {
+    teamName: {
       type: String,
       default: ''
     },
-    userId: {
+    teamTag: {
+      type: String,
+      default: ''
+    },
+    teamId: {
       type: String,
       default: null
     }
   },
   computed: {
     redirectionURL() {
-      return { path: '/user/' + this.username, props: { id: this.username } };
+      return { path: '/teams/' + this.teamId, props: { id: this.teamId } };
     }
   }
 };

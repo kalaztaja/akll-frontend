@@ -1,28 +1,63 @@
 <template>
-  <form class="Register-team" @submit.prevent>
-    <div class="h2">Register your team</div>
-    <v-text-field
-      v-model="teamName"
-      :rules="[rules.required]"
-      label="Team name"
-      required
-    />
-    <v-text-field
-      v-model="abbreviation"
-      :rules="[rules.required, rules.max]"
-      label="Tag"
-      counter="11"
-      required
-    />
-    <v-text-field
-      v-model="introductionText"
-      :rules="[rules.required]"
-      label="Introduction"
-      required
-    />
-    <v-select v-model="rank" :items="ranks" label="Rank" />
-    <button class="form-button" @click="registerTeam()">Register</button>
-  </form>
+  <v-card>
+    <v-form class="Register-team" @submit.prevent>
+      <v-container>
+        <v-row align="center">
+          <v-col cols="12">
+            <p class="display-1 text-center">Register your team</p>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="teamName"
+              :rules="[rules.required]"
+              label="Team name"
+              required
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="abbreviation"
+              :rules="[rules.required, rules.max]"
+              label="Tag"
+              counter="11"
+              required
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-model="introductionText"
+              :rules="[rules.required]"
+              label="Introduction"
+              required
+            />
+          </v-col>
+          <v-col cols="6">
+            <v-select
+              v-model="rank"
+              :items="ranks"
+              label="Rank"
+              :disabled="lockcs"
+            />
+          </v-col>
+          <v-col cols="5">
+            <v-radio-group v-model="lockcs" row label="Team's game">
+              <v-radio label="LoL" v-bind:value="true"></v-radio>
+              <v-radio label="CS:GO" v-bind:value="false"></v-radio>
+            </v-radio-group>
+          </v-col>
+          <v-col cols="6" align="end">
+            <v-btn
+              color="success"
+              class="form-button"
+              @click="registerTeam()"
+              align="end"
+              >Register</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
@@ -40,7 +75,8 @@ export default {
         required: value => !!value || 'Required.',
         max: v => (v && v.length <= 11) || 'Too long'
       },
-      ranks: CS_RANKS
+      ranks: CS_RANKS,
+      lockcs: false
     };
   },
   methods: {

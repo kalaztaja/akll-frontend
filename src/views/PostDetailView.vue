@@ -1,8 +1,4 @@
-<template>
-  <div>
-    <p>jee</p>
-  </div>
-</template>
+<template> <v-card></v-card></template>
 
 <script>
 export default {};

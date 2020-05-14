@@ -1,7 +1,7 @@
 <template>
   <v-card outlined>
     <v-form ref="loginModel" v-model="valid" lazy-validation>
-      <v-container>
+      <v-container v-on:keyup.enter="login">
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -53,14 +53,20 @@ export default {
   },
   methods: {
     login() {
+      this.$store.dispatch('startLoading');
       this.$store
         .dispatch('login', {
           email: this.email,
           password: this.password
         })
         .then(() => {
+          this.$store.dispatch('setAlertSuccess', 'Logged in!');
           this.$router.push({ name: 'post-view' });
+        })
+        .catch(() => {
+          this.$store.dispatch('setAlertError', 'Incorrect email or password');
         });
+      this.$store.dispatch('stopLoading');
     }
   }
 };
