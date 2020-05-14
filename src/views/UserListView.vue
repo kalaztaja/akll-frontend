@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.v-text-field__slot >>> input {
+.v-text-field__slot.input {
   text-align: right;
 }
 </style>

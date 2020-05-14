@@ -22,7 +22,7 @@
           height
         ></v-textarea
       ></v-form>
-      <v-btn color="success" :right="right" @click="submit">Submit</v-btn>
+      <v-btn color="success" @click="submit">Submit</v-btn>
     </v-container>
   </v-content>
 </template>

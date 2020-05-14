@@ -23,7 +23,7 @@ const userStore = {
       return res.data;
     },
     async getUserInfo(context, username) {
-      const res = await axios.get('/username/' + username);
+      const res = await axios.get('/user/username/' + username);
       return res.data;
     }
   }
