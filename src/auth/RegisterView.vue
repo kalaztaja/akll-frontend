@@ -1,6 +1,10 @@
 <template>
   <v-card>
-    <v-form ref="registerForm" v-model="valid" lazy-validation>
+    <div v-if="!linked">
+      Sinulla ei ole vielä AKL-tunnusta liitettynä Steam tiliisi. Täytä tämä
+      lomake luodaksesi AKL-tunnuksen.
+    </div>
+    <v-form ref="registerForm" v-model="valid" lazy-validation v-if="!success">
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -65,17 +69,6 @@
             ></v-text-field>
           </v-col>
           <v-spacer></v-spacer>
-          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12"
-            ><v-btn
-              x-large
-              block
-              :disabled="!valid"
-              color="success"
-              href="/aklapi/integration/steam/login"
-              >Register with Steam</v-btn
-            ></v-col
-          >
-          <v-spacer></v-spacer>
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
               x-large
@@ -83,16 +76,28 @@
               :disabled="!valid"
               color="success"
               @click="register"
-              >Register</v-btn
             >
+              Register
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
+    <v-container v-else>
+      <h2>Tunnus luotu.</h2>
+      Lähetimme sähköpostiisi varmistusviestin. Seuraa sähköpostin ohjeita
+      varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
+      <a @click="resendVerification">Klikkaa tästä</a>
+      lähettääksesi uuden viestin.
+      <v-spacer></v-spacer>
+      <a href="/akl">Etusivulle</a>
+    </v-container>
   </v-card>
 </template>
 
 <script>
+import jwt_decode from 'jwt-decode';
+
 export default {
   name: 'RegisterView',
   data() {
@@ -104,6 +109,7 @@ export default {
       email: '',
       password: '',
       verify: '',
+      linked: true,
       loginPassword: '',
       loginEmail: '',
       loginEmailRules: [
@@ -120,7 +126,7 @@ export default {
         required: value => !!value || 'Required.',
         min: v => (v && v.length >= 8) || 'Min 8 characters'
       },
-
+      success: false,
       username: ''
     };
   },
@@ -141,10 +147,41 @@ export default {
           emailAddress: this.email
         })
         .then(() => {
-          this.$router.push({ name: 'login-view' });
+          this.success = true;
         });
 
       this.$store.dispatch('stopLoading');
+    },
+
+    async resendVerification(e) {
+      e.preventDefault();
+      this.$store.dispatch('resendVerificationEmail');
+    }
+  },
+  created() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const status = urlParams.get('status');
+    const linked = urlParams.get('linked') === 'true';
+    const accessToken = urlParams.get('accessToken');
+    const refreshToken = urlParams.get('refreshToken');
+
+    window.history.replaceState({}, document.title, '/akl/register');
+
+    if ((status === 'OK' || status === 'CREATED') && accessToken) {
+      const tokenData = jwt_decode(accessToken);
+
+      if (!tokenData.roles.includes('unregistered')) {
+        window.history.pushState({}, '', '/akl');
+        return;
+      }
+
+      this.linked = linked;
+      this.$store.commit('setTokens', {
+        status,
+        accessToken,
+        refreshToken
+      });
     }
   }
 };

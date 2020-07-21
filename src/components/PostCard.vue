@@ -3,8 +3,8 @@
     <v-row justify="center" no-gutters>
       <v-card-title>{{ this.textObject.title }}</v-card-title>
       <v-spacer></v-spacer>
-      <v-btn :to="editUrl">Edit </v-btn></v-row
-    >
+      <v-btn :to="editUrl">Edit</v-btn>
+    </v-row>
     <v-spacer></v-spacer>
     <v-card-text v-if="fiMode">
       <p class="text" v-if="FiLang">

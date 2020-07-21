@@ -1,8 +1,8 @@
 <template>
   <v-content>
     <v-container>
-      <v-form fluid
-        ><v-text-field v-model="title" label="Title" full-width></v-text-field>
+      <v-form fluid>
+        <v-text-field v-model="title" label="Title" full-width></v-text-field>
         <v-spacer></v-spacer>
         <v-textarea
           v-model="fiText"
@@ -20,8 +20,8 @@
           counter
           full-width
           height
-        ></v-textarea
-      ></v-form>
+        ></v-textarea>
+      </v-form>
       <v-btn color="success" @click="submit">Submit</v-btn>
     </v-container>
   </v-content>

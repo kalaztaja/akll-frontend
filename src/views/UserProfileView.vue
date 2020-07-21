@@ -5,8 +5,8 @@
         <div v-if="this.user.username !== undefined">
           <v-card>
             <v-spacer></v-spacer>
-            <v-card-title class="justify-center display-3"
-              >{{ this.user.username }}
+            <v-card-title class="justify-center display-3">
+              {{ this.user.username }}
             </v-card-title>
             <v-spacer></v-spacer>
             <v-card-text class="display-1">
@@ -26,7 +26,7 @@
           </v-card>
           <v-spacer></v-spacer>
           <v-form v-if="this.user.email !== undefined">
-            <v-card class="pa-2" outlined tile> </v-card>
+            <v-card class="pa-2" outlined tile></v-card>
           </v-form>
         </div>
       </v-flex>
