@@ -46,22 +46,6 @@ const authStore = {
     }
   },
   actions: {
-    async registerWithSteam(context, formData) {
-      const res = await axios.post('/user/register/complete', formData);
-      context.state.commit('setTokens', res.data);
-    },
-    register(context, formData) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post('/user/create/', formData)
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    },
     async formRegister(context, data) {
       return new Promise((resolve, reject) => {
         axios
@@ -74,6 +58,7 @@ const authStore = {
             }
           })
           .then(response => {
+            context.commit('setTokens', response.data);
             resolve(response);
           })
           .catch(error => {
@@ -89,6 +74,27 @@ const authStore = {
       } else {
         throw new Error('invalidCredentials');
       }
+    },
+
+    async verifyEmail(context, token) {
+      const res = await axios.get(`/user/confirm?token=${token}`);
+      if (res.status !== 200) {
+        throw new Error('invalidToken');
+      }
+    },
+
+    async resendVerificationEmail(context) {
+      const res = await axios.post(
+        `/user/${context.getters.userInfo._id}/send-verification`
+      );
+      if (res.status !== 200) {
+        throw new Error('verificationSendError');
+      }
+    },
+
+    async startSteamLinking() {
+      // needs work
+      // const res = await axios.get(`/user/link/steam`);
     }
   }
 };

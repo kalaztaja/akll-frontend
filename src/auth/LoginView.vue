@@ -24,15 +24,25 @@
             ></v-text-field>
           </v-col>
           <v-spacer></v-spacer>
-          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+          <v-col class="d-flex flex-column justify-space-between flex-sm-row">
             <v-btn
               x-large
-              block
+              class="mb-4"
+              inlineblock
+              color="success"
+              href="/aklapi/integration/steam/login"
+            >
+              Login with Steam
+            </v-btn>
+            <v-btn
+              x-large
+              inlineblock
               :disabled="!valid"
               color="success"
               @click="login"
-              >Login</v-btn
             >
+              Login
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>

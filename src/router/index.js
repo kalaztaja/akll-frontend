@@ -14,6 +14,7 @@ import UserProfileView from '../views/UserProfileView.vue';
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
+import VerifyView from '../auth/VerifyView';
 
 import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
@@ -61,6 +62,14 @@ const routes = [
     component: RegisterView,
     meta: {
       requiresVisitor: true
+    }
+  },
+  {
+    path: '/verifyemail',
+    name: 'verifyemail-view',
+    component: VerifyView,
+    meta: {
+      // requiresVisitor: true
     }
   },
   {

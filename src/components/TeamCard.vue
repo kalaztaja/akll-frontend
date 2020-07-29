@@ -1,6 +1,6 @@
-<template
-  ><v-card :to="redirectionURL"
-    ><v-card-text>
+<template>
+  <v-card :to="redirectionURL">
+    <v-card-text>
       <div>{{ this.teamTag }}</div>
       <p class="display-1 text--primary">
         {{ this.teamName }}

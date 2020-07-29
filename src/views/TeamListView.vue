@@ -12,8 +12,9 @@
               to="/teams/create"
               v-on="() => (this.state.show = true)"
               color="secondary"
-              >Create team</v-btn
             >
+              Create team
+            </v-btn>
           </v-col>
         </v-row>
         <v-divider id="divider"></v-divider>
