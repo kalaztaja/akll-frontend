@@ -1,4 +1,4 @@
-<template><v-card></v-card></template>
+<template><v-card /></template>
 
 <script>
 export default {};

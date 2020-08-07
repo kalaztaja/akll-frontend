@@ -13,7 +13,7 @@
               :rules="[rules.required]"
               label="Username"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12" sm="6" md="6">
             <v-text-field
@@ -22,7 +22,7 @@
               label="First Name"
               maxlength="20"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12" sm="6" md="6">
             <v-text-field
@@ -31,7 +31,7 @@
               label="Last Name"
               maxlength="20"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -39,7 +39,7 @@
               :rules="emailRules"
               label="E-mail"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -53,7 +53,7 @@
               hint="At least 8 characters"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -66,9 +66,9 @@
               label="Confirm Password"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
               x-large
@@ -89,7 +89,7 @@
       varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
       <a @click="resendVerification">Klikkaa tästä</a>
       lähettääksesi uuden viestin.
-      <v-spacer></v-spacer>
+      <v-spacer />
       <a href="/akl">Etusivulle</a>
     </v-container>
   </v-card>

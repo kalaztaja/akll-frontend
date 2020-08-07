@@ -9,7 +9,7 @@
               maxlength="30"
               label="Email"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -21,9 +21,9 @@
               label="Password"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-col class="d-flex flex-column justify-space-between flex-sm-row">
             <v-btn
               x-large

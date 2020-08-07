@@ -4,11 +4,11 @@
       <v-flex>
         <div v-if="this.user.username !== undefined">
           <v-card>
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-card-title class="justify-center display-3">
               {{ this.user.username }}
             </v-card-title>
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-card-text class="display-1">
               University: {{ this.user.university }}
             </v-card-text>
@@ -19,14 +19,14 @@
               <v-subheader>Past teams</v-subheader>
               <v-list-item v-for="i in this.user.previousTeams" :key="i">
                 <v-list-item-content>
-                  <v-list-item-title v-text="i.text"></v-list-item-title>
+                  <v-list-item-title v-text="i.text" />
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-card>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-form v-if="this.user.email !== undefined">
-            <v-card class="pa-2" outlined tile></v-card>
+            <v-card class="pa-2" outlined tile />
           </v-form>
         </div>
       </v-flex>

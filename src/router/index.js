@@ -6,8 +6,9 @@ import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
 import CreateTeamView from '../views/CreateTeamView.vue';
 
-import FinalizeSteamAuth from '../views/FinalizeSteamAuth';
 import SeasonsView from '../views/SeasonsView';
+import SeasonView from '../views/SeasonView';
+import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
 
@@ -83,11 +84,6 @@ const routes = [
     component: UserProfileView
   },
   {
-    path: '/finalizeauth',
-    name: 'finalize-auth-view',
-    component: FinalizeSteamAuth
-  },
-  {
     path: '/post/create',
     name: 'create-post-view',
     component: CreatePostView
@@ -104,8 +100,24 @@ const routes = [
   },
   {
     path: '/seasons',
-    name: 'seasons-view',
+    name: 'seasons-list-view',
     component: SeasonsView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/create',
+    name: 'season-create-view',
+    component: SeasonCreateView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/:id',
+    name: 'season-view',
+    component: SeasonView,
     meta: {
       requiresAuth: true
     }

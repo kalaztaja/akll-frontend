@@ -4,7 +4,7 @@
       <v-btn depressed to="/" active-class="no-active" :color="barColor">
         <v-icon class="grey--text" color="white">mdi-home</v-icon>
       </v-btn>
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-toolbar-title
         v-if="loading === false"
@@ -20,7 +20,7 @@
         indeterminate
         color="white"
       />
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn
         :ripple="false"
         depressed

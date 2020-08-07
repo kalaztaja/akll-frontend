@@ -41,8 +41,8 @@
           </v-col>
           <v-col cols="5">
             <v-radio-group v-model="lockcs" row label="Team's game">
-              <v-radio label="LoL" v-bind:value="true"></v-radio>
-              <v-radio label="CS:GO" v-bind:value="false"></v-radio>
+              <v-radio label="LoL" v-bind:value="true" />
+              <v-radio label="CS:GO" v-bind:value="false" />
             </v-radio-group>
           </v-col>
           <v-col cols="6" align="end">

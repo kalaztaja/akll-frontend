@@ -17,7 +17,7 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-divider id="divider"></v-divider>
+        <v-divider id="divider" />
 
         <v-row>
           <v-col v-for="team in teams" :key="team.teamName" no-gutters>
@@ -25,7 +25,7 @@
               :teamName="team.teamName"
               :teamTag="team.abbreviation"
               :teamId="team._id"
-            ></team-card>
+            />
           </v-col>
         </v-row>
       </v-flex>
