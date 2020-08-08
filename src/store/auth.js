@@ -5,7 +5,8 @@ import moment from 'moment';
 const authStore = {
   state: {
     token: localStorage.getItem('accessToken') || '',
-    refreshToken: localStorage.getItem('refreshToken') || ''
+    refreshToken: localStorage.getItem('refreshToken') || '',
+    fullUserInfo: null
   },
   getters: {
     userInfo: state => {
@@ -43,6 +44,9 @@ const authStore = {
       state.refreshToken = null;
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
+    },
+    setFullUserInfo(state, userInfo) {
+      state.fullUserInfo = userInfo;
     }
   },
   actions: {
@@ -90,6 +94,12 @@ const authStore = {
       if (res.status !== 200) {
         throw new Error('verificationSendError');
       }
+    },
+
+    async getFullUserInfo(context) {
+      if (!context.getters.loggedIn) return;
+      const res = await axios.get(`/user/id/${context.getters.userInfo._id}`);
+      context.commit('setFullUserInfo', res.data);
     },
 
     async startSteamLinking() {

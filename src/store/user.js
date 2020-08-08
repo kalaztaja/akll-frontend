@@ -25,6 +25,10 @@ const userStore = {
     async getUserInfo(context, username) {
       const res = await axios.get('/user/username/' + username);
       return res.data;
+    },
+    async getUserInfoById(context, id) {
+      const res = await axios.get(`/user/id/${id}`);
+      return res.data;
     }
   }
 };

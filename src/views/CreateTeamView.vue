@@ -39,12 +39,6 @@
               :disabled="lockcs"
             />
           </v-col>
-          <v-col cols="5">
-            <v-radio-group v-model="lockcs" row label="Team's game">
-              <v-radio label="LoL" v-bind:value="true" />
-              <v-radio label="CS:GO" v-bind:value="false" />
-            </v-radio-group>
-          </v-col>
           <v-col cols="6" align="end">
             <v-btn
               color="success"
@@ -63,6 +57,7 @@
 
 <script>
 import { CS_RANKS } from '../util/constants';
+import { env } from '../../env';
 
 export default {
   name: 'TeamRegisterView',
@@ -87,6 +82,7 @@ export default {
           teamName: this.teamName,
           abbreviation: this.abbreviation,
           introductionText: this.introductionText,
+          game: env.game,
           rank: this.rank
         })
         .then(() => {
