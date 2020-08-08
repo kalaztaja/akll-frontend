@@ -5,6 +5,7 @@ import UserListView from '../views/UserListView.vue';
 import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
 import CreateTeamView from '../views/CreateTeamView.vue';
+import SeasonApplyView from '../views/SeasonApplyView';
 
 import SeasonsView from '../views/SeasonsView';
 import SeasonView from '../views/SeasonView';
@@ -110,6 +111,14 @@ const routes = [
     path: '/seasons/create',
     name: 'season-create-view',
     component: SeasonCreateView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/apply',
+    name: 'season-apply-view',
+    component: SeasonApplyView,
     meta: {
       requiresAuth: true
     }

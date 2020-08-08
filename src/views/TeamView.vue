@@ -4,14 +4,29 @@
     <h3>{{ team.abbreviation }}</h3>
     <p>{{ team.introductionText }}</p>
 
+    <confirm-dialog
+      buttonText="Leave team"
+      dialogText="leave this team"
+      :callback="leaveTeam"
+      v-if="isInThisTeam"
+    />
+    <h3>Members</h3>
     <div v-for="member in members" :key="member._id">
-      <team-user-card :user="member" />
+      <team-user-card :user="member" :isOwner="isOwner" />
     </div>
     <v-btn
-      v-if="this.$store.getters.loggedIn && !isInTeam"
+      v-if="this.$store.getters.loggedIn && !isInAnyTeam"
       @click="openApplicationForm()"
     >
       Apply for team
+    </v-btn>
+    <v-btn
+      v-if="isOwner"
+      @click="openSeasonApplicationForm()"
+      :disabled="team.members.length < 5"
+      :to="applyUrl"
+    >
+      Apply for season
     </v-btn>
     <v-form v-if="showApplicationForm" @submit.prevent>
       <v-col cols="12">
@@ -76,10 +91,11 @@
 
 <script>
 import TeamUserCard from '../components/TeamUserCard';
+import ConfirmDialog from '../components/ConfirmDialog';
 
 export default {
   name: 'TeamView',
-  components: { TeamUserCard },
+  components: { TeamUserCard, ConfirmDialog },
   data() {
     return {
       showApplicationForm: false,
@@ -116,6 +132,12 @@ export default {
         userId: appli.user,
         accepted
       });
+      const i = this.applicationUsers.findIndex(u => u.id === appli.user);
+      this.applicationUsers.splice(i, 1);
+    },
+
+    async leaveTeam() {
+      await this.$store.dispatch('leaveTeam');
     }
   },
   computed: {
@@ -133,11 +155,21 @@ export default {
         this.$store.state.team.currentTeam.captain
       );
     },
-    isInTeam() {
+    isInThisTeam() {
+      return this.$store.state.team.currentTeam.members.includes(
+        this.$store.getters.userInfo._id
+      );
+    },
+
+    isInAnyTeam() {
       if (this.$store.getters.loggedIn && this.$store.state.auth.fullUserInfo) {
         return this.$store.state.auth.fullUserInfo.currentTeams.length > 0;
       }
       return false;
+    },
+
+    applyUrl() {
+      return { path: '/seasons/apply' };
     }
   },
   async beforeCreate() {

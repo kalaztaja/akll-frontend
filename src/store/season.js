@@ -44,6 +44,12 @@ const seasonStore = {
       const res = await axios.get(`/season/${id}/info`);
       context.commit('setCurrentSeason', res.data);
       return res.data;
+    },
+
+    async applyForSeason(context, data) {
+      const res = await axios.post(`/season/${data.id}/applications/apply`, {
+        applicationText: data.applicationText
+      });
     }
   }
 };
