@@ -52,7 +52,6 @@ export default {
 
   methods: {
     async sendApplication() {
-      console.log(this.seasonId);
       this.$store.dispatch('applyForSeason', {
         applicationText: this.applicationText,
         id: this.seasonId

@@ -1,10 +1,8 @@
-// copy this to env.js
-
+// fill in these parameters in .env file
 const env = {
-  // root to backend
-  backendUrl: 'https://varjola.dy.fi/aklapi',
-  game: 'Counter-Strike: Global Offensive'
+  backendUrl: process.env.VUE_APP_BACKEND_URL,
+  game: process.env.VUE_APP_GAME,
+  gaPropertyId: process.env.VUE_APP_GA_PROPERTY_ID
 };
 
-// uncomment next line in env.js
 export { env };

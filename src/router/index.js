@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import UserListView from '../views/UserListView.vue';
+import ga from 'vue-ga';
 
 import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
@@ -12,6 +12,7 @@ import SeasonView from '../views/SeasonView';
 import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
+import UserListView from '../views/UserListView.vue';
 
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
@@ -21,6 +22,7 @@ import VerifyView from '../auth/VerifyView';
 import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
+import { env } from '../../env';
 
 Vue.use(VueRouter);
 
@@ -138,5 +140,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+ga(router, env.gaPropertyId);
 
 export default router;

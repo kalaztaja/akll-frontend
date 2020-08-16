@@ -47,7 +47,7 @@ const seasonStore = {
     },
 
     async applyForSeason(context, data) {
-      const res = await axios.post(`/season/${data.id}/applications/apply`, {
+      await axios.post(`/season/${data.id}/applications/apply`, {
         applicationText: data.applicationText
       });
     }
