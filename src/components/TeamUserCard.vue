@@ -56,7 +56,6 @@ export default {
   methods: {
     kickPlayer() {
       this.dialog = false;
-      console.log('halo', this.user.id);
       this.$store.dispatch('kickPlayer', this.user.id);
     }
   },
