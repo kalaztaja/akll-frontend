@@ -56,15 +56,15 @@ export default {
   methods: {
     kickPlayer() {
       this.dialog = false;
-      this.$store.dispatch('kickPlayer', this.user.id);
+      this.$store.dispatch('kickPlayer', this.user._id);
     }
   },
 
   computed: {
     redirectionURL() {
       return {
-        path: `/user/${this.user.username}`,
-        props: { id: this.user.username }
+        path: `/user/${this.user._id}`,
+        props: { id: this.user._id }
       };
     }
   }

@@ -1,17 +1,24 @@
 <template>
   <v-card>
-    <v-container v-if="success">
-      <h2>Tunnus on aktivoitu</h2>
-      <div>Voit nyt käyttää tunnustasi.</div>
-      <div>
-        AKL:ää varten sinun pitää linkittää steamtilisi. Voit tehdä sen
-        <a @click="linkSteam">tästä.</a>
+    <v-container>
+      <div v-if="success">
+        <h2>Tunnus on aktivoitu</h2>
+        <div>Voit nyt käyttää tunnustasi ja luoda tiimin.</div>
+        <div v-if="game === 'csgo'">
+          AKL:ää varten sinun pitää linkittää steamtilisi. Voit tehdä sen
+          <router-link :to="userPage">Omasta profiilistasi.</router-link>
+        </div>
+      </div>
+      <div v-if="error">
+        <h2>Jokin meni mönkään.</h2>
+        <div>Yritä uudestaan hetken päästä</div>
       </div>
     </v-container>
   </v-card>
 </template>
 
 <script>
+import { env } from '../../env';
 export default {
   name: 'RegisterView',
   data() {
@@ -21,22 +28,16 @@ export default {
     };
   },
 
-  methods: {
-    async verifyEmail() {
-      this.$store.dispatch('startLoading');
-      try {
-        await this.$store.dispatch('verifyEmail', {
-          token: this.token
-        });
-        this.success = true;
-      } catch (error) {
-        this.success = false;
-        this.error = true;
-      }
-
-      this.$store.dispatch('stopLoading');
+  computed: {
+    game() {
+      return env.game;
     },
+    userPage() {
+      return `/user/${this.$store.getters.userInfo._id}`
+    }
+  },
 
+  methods: {
     async linkSteam(e) {
       e.preventDefault();
       this.$store.dispatch('startSteamLinking');
@@ -47,7 +48,13 @@ export default {
 
     const token = urlParams.get('token');
     if (token) {
-      await this.$store.dispatch('verifyEmail', token);
+      try {
+        await this.$store.dispatch('verifyEmail', token);
+        this.success = true;
+      } catch (err) {
+        this.success = false;
+        this.error = true;
+      }
     }
   }
 };

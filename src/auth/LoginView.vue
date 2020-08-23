@@ -51,6 +51,8 @@
 </template>
 
 <script>
+// import jwt_decode from 'jwt-decode';
+
 export default {
   name: 'LoginView',
   data() {
@@ -58,7 +60,8 @@ export default {
       email: '',
       password: '',
       show1: false,
-      valid: true
+      valid: true,
+      steamUrl: ''
     };
   },
   methods: {
@@ -70,6 +73,9 @@ export default {
           password: this.password
         })
         .then(() => {
+          this.$store.dispatch('getFullUserInfo');
+        })
+        .then(() => {
           this.$store.dispatch('setAlertSuccess', 'Logged in!');
           this.$router.push({ name: 'post-view' });
         })
@@ -77,6 +83,33 @@ export default {
           this.$store.dispatch('setAlertError', 'Incorrect email or password');
         });
       this.$store.dispatch('stopLoading');
+    }
+  },
+
+  async created() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const linked = urlParams.get('linked') === 'true';
+    const status = urlParams.get('status');
+    const accessToken = urlParams.get('accessToken');
+    const refreshToken = urlParams.get('refreshToken');
+    const steamToken = urlParams.get('steamRegistrationToken');
+
+    if (status === 'OK' || status === 'CREATED') {
+      if (accessToken) {
+        // const tokenData = jwt_decode(accessToken);
+
+        await this.$store.commit('setTokens', {
+          status,
+          accessToken,
+          refreshToken,
+          linked
+        });
+
+        this.$router.push('/');
+      } else if (steamToken) {
+        this.$router.push({ name: 'register-view', params: { steamToken } });
+      }
     }
   }
 };

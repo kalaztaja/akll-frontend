@@ -61,12 +61,6 @@ export default {
           roles: ['authorized']
         },
         {
-          title: 'Users',
-          icon: 'mdi-book-account',
-          to: '/users',
-          roles: ['all']
-        },
-        {
           title: 'Teams',
           icon: 'mdi-account-multiple',
           to: '/teams',
@@ -96,6 +90,7 @@ export default {
     loggedIn() {
       return this.$store.getters.loggedIn;
     },
+
     filteredNavItems() {
       return this.navItems.filter(item => {
         if (this.loggedIn) {
@@ -114,6 +109,36 @@ export default {
   methods: {
     onInput(isOpen) {
       this.$emit('opened', isOpen);
+    }
+  },
+
+  async created() {
+    await this.$store.dispatch('getFullUserInfo');
+    if (this.loggedIn) {
+      this.navItems.push({
+        title: 'My profile',
+        icon: 'mdi-account',
+        to: {
+          name: 'user-profile-view',
+          params: {
+            id: this.$store.getters.userInfo._id
+          }
+        },
+        roles: ['authorized']
+      });
+    }
+    if (this.$store.state.auth.fullUserInfo.currentTeams.length) {
+      this.navItems.push({
+        title: 'My team',
+        icon: 'mdi-account',
+        to: {
+          name: 'team-view',
+          params: {
+            id: this.$store.state.auth.fullUserInfo.currentTeams[0]._id
+          }
+        },
+        roles: ['authorized']
+      });
     }
   }
 };

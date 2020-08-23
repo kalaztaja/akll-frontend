@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <div v-if="!linked">
+    <div v-if="steamToken && !success">
       Sinulla ei ole vielä AKL-tunnusta liitettynä Steam tiliisi. Täytä tämä
       lomake luodaksesi AKL-tunnuksen.
     </div>
@@ -26,10 +26,10 @@
           </v-col>
           <v-col cols="12" sm="6" md="6">
             <v-text-field
-              v-model="lastName"
+              v-model="surname"
               :rules="[rules.required]"
-              label="Last Name"
-              maxlength="20"
+              label="Surname"
+              maxlength="40"
               required
             />
           </v-col>
@@ -68,6 +68,16 @@
               @click:append="show1 = !show1"
             />
           </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="university" label="University" />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="guild" label="Guild" />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="age" label="Age" type="number" />
+          </v-col>
+
           <v-spacer />
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
@@ -90,26 +100,29 @@
       <a @click="resendVerification">Klikkaa tästä</a>
       lähettääksesi uuden viestin.
       <v-spacer />
-      <a href="/akl">Etusivulle</a>
+      <router-link to="/">Etusivulle</router-link>
     </v-container>
   </v-card>
 </template>
 
 <script>
-import jwt_decode from 'jwt-decode';
-
 export default {
   name: 'RegisterView',
+  props: {
+    steamToken: {
+      type: String,
+      default: null
+    }
+  },
   data() {
     return {
       valid: true,
 
       firstName: '',
-      lastName: '',
+      surname: '',
       email: '',
       password: '',
       verify: '',
-      linked: true,
       loginPassword: '',
       loginEmail: '',
       loginEmailRules: [
@@ -127,7 +140,10 @@ export default {
         min: v => (v && v.length >= 8) || 'Min 8 characters'
       },
       success: false,
-      username: ''
+      username: '',
+      university: '',
+      guild: '',
+      age: 18
     };
   },
   computed: {
@@ -136,19 +152,23 @@ export default {
     }
   },
   methods: {
-    register() {
+    async register() {
       this.$store.dispatch('startLoading');
-      this.$store
-        .dispatch('formRegister', {
-          username: this.username,
-          password: this.password,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          emailAddress: this.email
-        })
-        .then(() => {
-          this.success = true;
-        });
+      const formData = {
+        username: this.username,
+        password: this.password,
+        firstName: this.firstName,
+        surname: this.surname,
+        email: this.email,
+        university: this.university,
+        guild: this.guild,
+        age: this.age
+      };
+
+      if (this.steamToken) formData.steamRegistrationToken = this.steamToken;
+
+      await this.$store.dispatch('formRegister', formData);
+      this.success = true;
 
       this.$store.dispatch('stopLoading');
     },
@@ -159,30 +179,7 @@ export default {
     }
   },
   created() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const status = urlParams.get('status');
-    const linked = urlParams.get('linked') === 'true';
-    const accessToken = urlParams.get('accessToken');
-    const refreshToken = urlParams.get('refreshToken');
-
-    window.history.replaceState({}, document.title, '/akl/register');
-
-    if ((status === 'OK' || status === 'CREATED') && accessToken) {
-      const tokenData = jwt_decode(accessToken);
-
-      if (!tokenData.roles.includes('unregistered')) {
-        window.history.pushState({}, '', '/akl');
-        return;
-      }
-
-      this.linked = linked;
-      this.$store.commit('setTokens', {
-        status,
-        accessToken,
-        refreshToken
-      });
-    }
+    console.log('register', this.steamToken);
   }
 };
 </script>

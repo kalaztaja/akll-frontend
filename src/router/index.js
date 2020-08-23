@@ -32,11 +32,11 @@ const routes = [
     name: 'post-view',
     component: PostView
   },
-  {
+  /*{
     path: '/users',
     name: 'user-list-view',
     component: UserListView
-  },
+  },*/
   {
     path: '/teams',
     name: 'team-list-view',
@@ -64,9 +64,7 @@ const routes = [
     path: '/register',
     name: 'register-view',
     component: RegisterView,
-    meta: {
-      requiresVisitor: true
-    }
+    props: true
   },
   {
     path: '/verifyemail',
@@ -82,7 +80,7 @@ const routes = [
     component: Logout
   },
   {
-    path: '/user/:username',
+    path: '/user/:id',
     name: 'user-profile-view',
     component: UserProfileView
   },

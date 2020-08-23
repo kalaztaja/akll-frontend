@@ -7,11 +7,14 @@
             <p id="title" class="text-left display-1">Teams</p>
           </v-col>
           <v-col align="end">
+            <div v-if="!canCreateOrJoinTeam">
+              {{ createTeamTooltip }}
+            </div>
             <v-btn
-              v-if="this.$store.getters.loggedIn"
               to="/teams/create"
               v-on="() => (this.state.show = true)"
               color="secondary"
+              :disabled="!canCreateOrJoinTeam"
             >
               Create team
             </v-btn>
@@ -35,6 +38,7 @@
 
 <script>
 import TeamCard from '../components/TeamCard.vue';
+import { canCreateOrJoinTeam, createTeamTooltip } from '../util/utils';
 
 export default {
   name: 'TeamListView',
@@ -47,6 +51,13 @@ export default {
   computed: {
     teams() {
       return this.$store.state.team.teams;
+    },
+    canCreateOrJoinTeam() {
+      console.log(canCreateOrJoinTeam());
+      return canCreateOrJoinTeam();
+    },
+    createTeamTooltip() {
+      return createTeamTooltip();
     }
   },
   created() {

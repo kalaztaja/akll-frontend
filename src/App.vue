@@ -23,10 +23,6 @@ export default {
   components: {
     NavBar,
     AlertBar
-  },
-
-  async beforeCreate() {
-    await this.$store.dispatch('getFullUserInfo');
   }
 };
 </script>

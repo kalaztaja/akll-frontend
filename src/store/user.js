@@ -29,6 +29,10 @@ const userStore = {
     async getUserInfoById(context, id) {
       const res = await axios.get(`/user/id/${id}`);
       return res.data;
+    },
+    async startSteamLinking() {
+      const res = await axios.get('user/link/steam');
+      return res.data;
     }
   }
 };

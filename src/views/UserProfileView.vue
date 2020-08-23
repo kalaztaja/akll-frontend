@@ -1,54 +1,89 @@
 <template>
   <v-container fluid text-xs-center>
     <v-layout row wrap>
-      <v-flex>
-        <div v-if="this.user.username !== undefined">
-          <v-card>
-            <v-spacer />
-            <v-card-title class="justify-center display-3">
-              {{ this.user.username }}
-            </v-card-title>
-            <v-spacer />
-            <v-card-text class="display-1">
-              University: {{ this.user.university }}
-            </v-card-text>
-            <v-card-text class="display-1">
-              Guild: {{ this.user.guild }}
-            </v-card-text>
-            <v-list v-if="this.user.previousTeams.length !== 0">
-              <v-subheader>Past teams</v-subheader>
-              <v-list-item v-for="i in this.user.previousTeams" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title v-text="i.text" />
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card>
+      <div v-if="user">
+        <v-card>
           <v-spacer />
-          <v-form v-if="this.user.email !== undefined">
-            <v-card class="pa-2" outlined tile />
-          </v-form>
-        </div>
-      </v-flex>
+          <v-card-title class="justify-center display-3">
+            {{ user.username }}
+          </v-card-title>
+          <v-card-subtitle class="text-subtitle-1" v-if="user.firstName">
+            {{ user.firstName }} {{ user.surname }}
+          </v-card-subtitle>
+          <div v-if="user.steam">
+            <a :href="user.steam.profileUrl">
+              <img :src="user.steam.avatar" />
+            </a>
+          </div>
+          <v-spacer />
+          <v-card-text>University: {{ user.university }}</v-card-text>
+          <v-card-text>Guild: {{ user.guild }}</v-card-text>
+          <v-list v-if="this.user.previousTeams.length !== 0">
+            <v-subheader>Past teams</v-subheader>
+            <v-list-item v-for="i in user.previousTeams" :key="i">
+              <v-list-item-content>
+                <v-list-item-title v-text="i.text" />
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <v-spacer />
+          <div class="text-body-1" v-if="isOwner">
+            <v-card-text v-if="game === 'csgo' && !user.steam">
+              Et ole vielä linkittänyt Steam-tiliäsi.
+              <v-btn @click="startSteamLinking">
+                Link Steam account
+              </v-btn>
+            </v-card-text>
+
+            <v-card-text v-if="!user.emailConfirmed">
+              Et ole vielä vahvistanut sähköpostiasi. Voit lähettää tästä uuden
+              vahvistusviestin
+              <v-btn @click="resendVerification">Lähetä</v-btn>
+            </v-card-text>
+          </div>
+        </v-card>
+      </div>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { env } from '../../env';
+
 export default {
   name: 'UserProfileView',
   data() {
     return {
-      username: '',
       userArray: [],
       user: {}
     };
   },
-  created() {
-    this.username = this.$route.params.username;
-    this.$store.dispatch('getUserInfo', this.username).then(response => {
-      this.user = response;
-    });
+
+  computed: {
+    isOwner() {
+      return this.$store.getters.userInfo._id === this.$route.params.id;
+    },
+    game() {
+      return env.game;
+    }
+  },
+
+  methods: {
+    async resendVerification() {
+      this.$store.dispatch('resendVerificationEmail');
+    },
+
+    async startSteamLinking() {
+      const data = await this.$store.dispatch('startSteamLinking');
+      // somehow the data converts to an array ???
+      window.location.href = data[0].url;
+    }
+  },
+
+  async created() {
+    const id = this.$route.params.id;
+    this.user = await this.$store.dispatch('getUserInfoById', id);
   }
 };
 </script>

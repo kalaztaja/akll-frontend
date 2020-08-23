@@ -1,7 +1,6 @@
 <template>
   <v-container>
-    <h1>{{ team.teamName }}</h1>
-    <h3>{{ team.abbreviation }}</h3>
+    <h1>{{ team.teamName }} ({{ team.abbreviation }})</h1>
     <p>{{ team.introductionText }}</p>
 
     <confirm-dialog
@@ -11,7 +10,7 @@
       v-if="isInThisTeam"
     />
     <h3>Members</h3>
-    <div v-for="member in members" :key="member._id">
+    <div v-for="member in team.members" :key="member._id">
       <team-user-card :user="member" :isOwner="isOwner" />
     </div>
     <v-btn
@@ -145,10 +144,6 @@ export default {
       return this.$store.state.team.currentTeam;
     },
 
-    members() {
-      return this.$store.state.team.currentTeamUsers;
-    },
-
     isOwner() {
       return (
         this.$store.getters.userInfo._id ===
@@ -156,8 +151,9 @@ export default {
       );
     },
     isInThisTeam() {
-      return this.$store.state.team.currentTeam.members.includes(
-        this.$store.getters.userInfo._id
+      if (!Object.keys(this.$store.state.team.currentTeam).length) return false;
+      return this.$store.state.team.currentTeam.members.find(
+        mem => mem._id === this.$store.getters.userInfo._id
       );
     },
 
@@ -174,7 +170,7 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch('retrieveTeam', this.$route.params.id);
-    await this.$store.dispatch('getAllTeamMembers');
+    // await this.$store.dispatch('getAllTeamMembers');
   }
 };
 </script>
