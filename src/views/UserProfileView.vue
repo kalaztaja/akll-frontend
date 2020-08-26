@@ -18,7 +18,7 @@
           <v-spacer />
           <v-card-text>University: {{ user.university }}</v-card-text>
           <v-card-text>Guild: {{ user.guild }}</v-card-text>
-          <v-list v-if="this.user.previousTeams.length !== 0">
+          <v-list>
             <v-subheader>Past teams</v-subheader>
             <v-list-item v-for="i in user.previousTeams" :key="i">
               <v-list-item-content>

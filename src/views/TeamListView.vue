@@ -12,7 +12,6 @@
             </div>
             <v-btn
               to="/teams/create"
-              v-on="() => (this.state.show = true)"
               color="secondary"
               :disabled="!canCreateOrJoinTeam"
             >
@@ -53,7 +52,6 @@ export default {
       return this.$store.state.team.teams;
     },
     canCreateOrJoinTeam() {
-      console.log(canCreateOrJoinTeam());
       return canCreateOrJoinTeam();
     },
     createTeamTooltip() {

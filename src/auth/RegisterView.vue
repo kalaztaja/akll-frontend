@@ -177,9 +177,6 @@ export default {
       e.preventDefault();
       this.$store.dispatch('resendVerificationEmail');
     }
-  },
-  created() {
-    console.log('register', this.steamToken);
   }
 };
 </script>

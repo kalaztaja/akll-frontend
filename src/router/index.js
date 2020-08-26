@@ -45,7 +45,8 @@ const routes = [
   {
     path: '/teams/create',
     name: 'team-create-view',
-    component: CreateTeamView
+    component: CreateTeamView,
+    alias: '/teams/edit'
   },
   {
     path: '/teams/:id',

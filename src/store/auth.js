@@ -31,6 +31,12 @@ const authStore = {
         return moment().isBefore(expDate);
       }
       return false;
+    },
+    isSteamLinked: state => {
+      if (state.fullUserInfo) {
+        return !!state.fullUserInfo.steam;
+      }
+      return false;
     }
   },
   mutations: {
@@ -88,11 +94,6 @@ const authStore = {
       if (!context.getters.loggedIn) return;
       const res = await axios.get(`/user/id/${context.getters.userInfo._id}`);
       context.commit('setFullUserInfo', res.data);
-    },
-
-    async startSteamLinking() {
-      // needs work
-      // const res = await axios.get(`/user/link/steam`);
     },
 
     async getSteamLink() {

@@ -34,6 +34,13 @@ const teamStore = {
       await axios.post('/team/create', formData);
       // console.log(res);
     },
+    async editTeam(context, formData) {
+      await axios.post(
+        `/team/${context.state.currentTeam.id}/update`,
+        formData
+      );
+    },
+
     async retrieveTeam(context, id) {
       const res = await axios.get(`/team/${id}/info`);
       context.commit('setCurrentTeam', { ...res.data, id });

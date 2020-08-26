@@ -1,32 +1,39 @@
 <template>
-  <v-container>
+  <v-container class="team-container">
     <h1>{{ team.teamName }} ({{ team.abbreviation }})</h1>
     <p>{{ team.introductionText }}</p>
 
-    <confirm-dialog
-      buttonText="Leave team"
-      dialogText="leave this team"
-      :callback="leaveTeam"
-      v-if="isInThisTeam"
-    />
     <h3>Members</h3>
-    <div v-for="member in team.members" :key="member._id">
-      <team-user-card :user="member" :isOwner="isOwner" />
+    <div class="mb-4" v-for="member in team.members" :key="member._id">
+      <team-user-card
+        :user="member"
+        :isOwner="isOwner"
+        :isCaptain="member._id === team.captain._id"
+      />
     </div>
-    <v-btn
-      v-if="this.$store.getters.loggedIn && !isInAnyTeam"
-      @click="openApplicationForm()"
-    >
-      Apply for team
-    </v-btn>
-    <v-btn
-      v-if="isOwner"
-      @click="openSeasonApplicationForm()"
-      :disabled="team.members.length < 5"
-      :to="applyUrl"
-    >
-      Apply for season
-    </v-btn>
+    <v-row class="toolbar mb-4">
+      <v-btn
+        v-if="this.$store.getters.loggedIn && !isInAnyTeam"
+        @click="openApplicationForm()"
+      >
+        Apply for team
+      </v-btn>
+      <confirm-dialog
+        buttonText="Leave team"
+        dialogText="leave this team"
+        :callback="leaveTeam"
+        v-if="isInThisTeam"
+      />
+      <v-btn :to="editUrl" v-if="isOwner">Edit teaminfo</v-btn>
+      <v-btn
+        v-if="isOwner"
+        @click="openSeasonApplicationForm()"
+        :disabled="team.members.length < 5"
+        :to="applyUrl"
+      >
+        Apply for season
+      </v-btn>
+    </v-row>
     <v-form v-if="showApplicationForm" @submit.prevent>
       <v-col cols="12">
         <v-text-field
@@ -54,17 +61,13 @@
           {{ showApplications ? 'mdi-menu-up' : 'mdi-menu-down' }}
         </v-icon>
       </v-btn>
-      <v-list
-        two-line
-        v-if="
-          showApplications &&
-            applicationUsers.length === team.applications.length
-        "
-      >
-        <v-list-item v-for="(appli, i) in team.applications" :key="appli._id">
+      <v-list two-line v-if="showApplications">
+        <v-list-item v-for="appli in team.applications" :key="appli._id">
           <v-list-item-content>
             <v-list-item-title>
-              {{ applicationUsers[i].username }}
+              <router-link :to="`/user/${appli.user._id}`">
+                {{ appli.user.username }}
+              </router-link>
             </v-list-item-title>
             <v-list-item-subtitle>
               {{ appli.applicationText }}
@@ -112,11 +115,6 @@ export default {
     },
 
     async toggleApplications() {
-      if (this.applicationUsers.length !== this.team.applications.length) {
-        this.applicationUsers = await this.$store.dispatch(
-          'getApplicationUsers'
-        );
-      }
       this.showApplications = !this.showApplications;
     },
 
@@ -124,11 +122,12 @@ export default {
       await this.$store.dispatch('sendApplication', {
         applicationText: this.applicationText
       });
+      this.showApplicationForm = false;
     },
 
     async handleApplication(appli, accepted) {
       await this.$store.dispatch('handleApplication', {
-        userId: appli.user,
+        userId: appli.user._id,
         accepted
       });
       const i = this.applicationUsers.findIndex(u => u.id === appli.user);
@@ -145,9 +144,10 @@ export default {
     },
 
     isOwner() {
+      if (!this.$store.state.team.currentTeam.captain) return false;
       return (
         this.$store.getters.userInfo._id ===
-        this.$store.state.team.currentTeam.captain
+        this.$store.state.team.currentTeam.captain._id
       );
     },
     isInThisTeam() {
@@ -166,6 +166,13 @@ export default {
 
     applyUrl() {
       return { path: '/seasons/apply' };
+    },
+
+    editUrl() {
+      return {
+        name: 'team-create-view',
+        params: { team: this.team }
+      };
     }
   },
   async beforeCreate() {
@@ -175,4 +182,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.toolbar .v-btn {
+  margin-left: 16px;
+}
+.team-container h1 {
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+.team-container h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+</style>

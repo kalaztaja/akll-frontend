@@ -4,7 +4,7 @@
       <div v-if="success">
         <h2>Tunnus on aktivoitu</h2>
         <div>Voit nyt käyttää tunnustasi ja luoda tiimin.</div>
-        <div v-if="game === 'csgo'">
+        <div v-if="game === 'csgo' && !isSteamLinked">
           AKL:ää varten sinun pitää linkittää steamtilisi. Voit tehdä sen
           <router-link :to="userPage">Omasta profiilistasi.</router-link>
         </div>
@@ -32,8 +32,13 @@ export default {
     game() {
       return env.game;
     },
+
     userPage() {
-      return `/user/${this.$store.getters.userInfo._id}`
+      return `/user/${this.$store.getters.userInfo._id}`;
+    },
+
+    isSteamLinked() {
+      return this.$store.getters.isSteamLinked;
     }
   },
 

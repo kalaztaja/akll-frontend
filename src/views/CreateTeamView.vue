@@ -32,21 +32,16 @@
             />
           </v-col>
           <v-col cols="6">
-            <v-select
-              v-model="rank"
-              :items="ranks"
-              label="Rank"
-              :disabled="lockcs"
-            />
+            <v-select v-model="rank" :items="ranks" label="Rank" />
           </v-col>
           <v-col cols="6" align="end">
             <v-btn
               color="success"
               class="form-button"
-              @click="registerTeam()"
+              @click="registerOrEditTeam()"
               align="end"
             >
-              Register
+              Send
             </v-btn>
           </v-col>
         </v-row>
@@ -63,6 +58,7 @@ export default {
   name: 'TeamRegisterView',
   data() {
     return {
+      editmode: false,
       teamName: '',
       abbreviation: '',
       introductionText: '',
@@ -71,23 +67,44 @@ export default {
         required: value => !!value || 'Required.',
         max: v => (v && v.length <= 11) || 'Too long'
       },
-      ranks: CS_RANKS,
-      lockcs: false
+      ranks: CS_RANKS
     };
   },
   methods: {
-    registerTeam() {
-      this.$store
-        .dispatch('createTeam', {
-          teamName: this.teamName,
-          abbreviation: this.abbreviation,
-          introductionText: this.introductionText,
-          game: env.game,
-          rank: this.rank
-        })
-        .then(() => {
-          this.$router.push({ name: 'post-view' });
-        });
+    async registerOrEditTeam() {
+      const data = {
+        teamName: this.teamName,
+        abbreviation: this.abbreviation,
+        introductionText: this.introductionText,
+        game: env.game,
+        rank: this.rank
+      };
+      if (this.editmode) {
+        await this.$store.dispatch('editTeam', data);
+        this.$router.go(-1);
+      } else {
+        await this.$store.dispatch('createTeam', data);
+      }
+    },
+
+    setTeam() {
+      const {
+        teamName,
+        abbreviation,
+        introductionText,
+        rank
+      } = this.$route.params.team;
+
+      this.teamName = teamName;
+      this.abbreviation = abbreviation;
+      this.introductionText = introductionText;
+      this.rank = rank;
+      this.editmode = true;
+    }
+  },
+  created() {
+    if (this.$route.params.team) {
+      this.setTeam();
     }
   }
 };
