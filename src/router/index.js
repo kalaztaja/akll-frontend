@@ -12,12 +12,14 @@ import SeasonView from '../views/SeasonView';
 import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
-import UserListView from '../views/UserListView.vue';
+// import UserListView from '../views/UserListView.vue';
+import UserEditView from '../views/UserEditView';
 
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 import VerifyView from '../auth/VerifyView';
+import ResetPasswordView from '../auth/ResetPasswordView';
 
 import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
@@ -62,6 +64,14 @@ const routes = [
     }
   },
   {
+    path: '/reset-password',
+    name: 'reset-password-view',
+    component: ResetPasswordView,
+    meta: {
+      requiresVisitor: true
+    }
+  },
+  {
     path: '/register',
     name: 'register-view',
     component: RegisterView,
@@ -84,6 +94,14 @@ const routes = [
     path: '/user/:id',
     name: 'user-profile-view',
     component: UserProfileView
+  },
+  {
+    path: '/user/:id/edit',
+    name: 'user-edit-view',
+    component: UserEditView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/post/create',

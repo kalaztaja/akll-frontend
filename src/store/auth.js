@@ -106,6 +106,20 @@ const authStore = {
       if (res.status !== 200) {
         throw new Error('Login failed');
       }
+    },
+
+    async sendPasswordReset(context, data) {
+      const res = await axios.post('/user/send-reset-password', data);
+      if (res.status === 404) {
+        throw new Error('UserNotFound');
+      }
+    },
+
+    async resetPassword(context, data) {
+      const res = await axios.post('/user/reset-password', data);
+      if (res.status !== 200) {
+        throw new Error('Error');
+      }
     }
   }
 };
