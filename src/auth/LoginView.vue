@@ -18,9 +18,14 @@
           />
         </v-col>
         <v-spacer />
-        <div>
+        <div class="mb-4">
           <router-link class="mx-3" to="/reset-password">
             Unohditko salasanasi?
+          </router-link>
+        </div>
+        <div class="mb-4">
+          <router-link class="mx-3" to="/register">
+            Luo uusi tunnus tästä!
           </router-link>
         </div>
         <v-spacer />

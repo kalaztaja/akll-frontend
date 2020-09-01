@@ -81,9 +81,12 @@ export default {
       };
       if (this.editmode) {
         await this.$store.dispatch('editTeam', data);
+        this.$store.dispatch('setAlertSuccess', 'Tiedot päivitetty!');
         this.$router.go(-1);
       } else {
         await this.$store.dispatch('createTeam', data);
+        this.$store.dispatch('setAlertSuccess', 'Tiimi luotu!');
+        this.$router.go(-1);
       }
     },
 

@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="main-container">
     <v-container>
       <div v-if="success">
         <h2>Tunnus on aktivoitu</h2>
@@ -65,4 +65,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.main-container {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

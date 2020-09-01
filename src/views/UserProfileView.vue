@@ -44,7 +44,7 @@
             style="flex-basis: 50%;"
             v-if="!user.emailConfirmed"
           >
-            <v-btn class="link-btn">
+            <v-btn class="link-btn" @click="resendVerification">
               Lähetä vahvistusviesti
             </v-btn>
           </div>
@@ -52,11 +52,11 @@
 
         <div class="d-flex mb-4" v-if="game === 'csgo'">
           <div class="link-info">
-            <span>Steamtili yhdistetty:</span>
+            <span>Steam-tili yhdistetty:</span>
             <v-icon>{{ user.steam ? 'mdi-check' : 'mdi-alert-circle' }}</v-icon>
           </div>
           <div class="d-flex" style="flex-basis: 50%;" v-if="!user.steam">
-            <v-btn class="link-btn">
+            <v-btn class="link-btn" @click="startSteamLinking">
               Linkitä Steam-tili
             </v-btn>
           </div>
@@ -73,6 +73,7 @@
           v-if="showPasswordChange"
           :userId="user._id"
           :successCallback="togglePasswordChange"
+          class="mb-4"
         />
         <v-btn class="mb-4" block @click="toggleEmailChange">
           Vaihda sähköpostiosoite
@@ -131,12 +132,12 @@ export default {
   methods: {
     async resendVerification() {
       this.$store.dispatch('resendVerificationEmail');
+      this.$store.dispatch('setAlertSuccess', 'Uusi varmistusviesti lähetetty');
     },
 
     async startSteamLinking() {
       const data = await this.$store.dispatch('startSteamLinking');
-      // somehow the data converts to an array ???
-      window.location.href = data[0].url;
+      window.location.href = data.url;
     },
 
     togglePasswordChange() {

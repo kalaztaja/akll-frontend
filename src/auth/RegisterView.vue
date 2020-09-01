@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="main-container">
     <div v-if="steamToken && !success">
       Sinulla ei ole vielä AKL-tunnusta liitettynä Steam tiliisi. Täytä tämä
       lomake luodaksesi AKL-tunnuksen.
@@ -181,4 +181,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.main-container {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
