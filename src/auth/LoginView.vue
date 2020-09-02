@@ -9,7 +9,7 @@
               maxlength="30"
               label="Email"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -21,18 +21,28 @@
               label="Password"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
-          <v-spacer></v-spacer>
-          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+          <v-spacer />
+          <v-col class="d-flex flex-column justify-space-between flex-sm-row">
             <v-btn
               x-large
-              block
+              class="mb-4"
+              inlineblock
+              color="success"
+              href="/aklapi/integration/steam/login"
+            >
+              Login with Steam
+            </v-btn>
+            <v-btn
+              x-large
+              inlineblock
               :disabled="!valid"
               color="success"
               @click="login"
-              >Login</v-btn
             >
+              Login
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -41,6 +51,8 @@
 </template>
 
 <script>
+// import jwt_decode from 'jwt-decode';
+
 export default {
   name: 'LoginView',
   data() {
@@ -48,7 +60,8 @@ export default {
       email: '',
       password: '',
       show1: false,
-      valid: true
+      valid: true,
+      steamUrl: ''
     };
   },
   methods: {
@@ -60,6 +73,9 @@ export default {
           password: this.password
         })
         .then(() => {
+          this.$store.dispatch('getFullUserInfo');
+        })
+        .then(() => {
           this.$store.dispatch('setAlertSuccess', 'Logged in!');
           this.$router.push({ name: 'home-view' });
         })
@@ -67,6 +83,33 @@ export default {
           this.$store.dispatch('setAlertError', 'Incorrect email or password');
         });
       this.$store.dispatch('stopLoading');
+    }
+  },
+
+  async created() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const linked = urlParams.get('linked') === 'true';
+    const status = urlParams.get('status');
+    const accessToken = urlParams.get('accessToken');
+    const refreshToken = urlParams.get('refreshToken');
+    const steamToken = urlParams.get('steamRegistrationToken');
+
+    if (status === 'OK' || status === 'CREATED') {
+      if (accessToken) {
+        // const tokenData = jwt_decode(accessToken);
+
+        await this.$store.commit('setTokens', {
+          status,
+          accessToken,
+          refreshToken,
+          linked
+        });
+
+        this.$router.push('/');
+      } else if (steamToken) {
+        this.$router.push({ name: 'register-view', params: { steamToken } });
+      }
     }
   }
 };

@@ -1,6 +1,6 @@
-<template
-  ><v-card :to="redirectionURL"
-    ><v-card-text>
+<template>
+  <v-card :to="redirectionURL">
+    <v-card-text>
       <div>{{ this.team }}</div>
       <p class="display-1 text--primary">
         {{ this.username }}
@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     redirectionURL() {
-      return { path: '/user/' + this.username, props: { id: this.username } };
+      return { path: '/user/' + this.userId, props: { id: this.userId } };
     }
   }
 };

@@ -5,8 +5,9 @@
     :multi-line="true"
     :timeout="timeout"
     :bottom="true"
-    >{{ storeText }}
-    <v-btn dark text @click="snackbar = false">Close </v-btn>
+  >
+    {{ storeText }}
+    <v-btn dark text @click="snackbar = false">Close</v-btn>
   </v-snackbar>
 </template>
 

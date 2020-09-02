@@ -5,7 +5,9 @@ import moment from 'moment';
 const authStore = {
   state: {
     token: localStorage.getItem('accessToken') || '',
-    refreshToken: localStorage.getItem('refreshToken') || ''
+    refreshToken: localStorage.getItem('refreshToken') || '',
+    linked: true,
+    fullUserInfo: null
   },
   getters: {
     userInfo: state => {
@@ -35,51 +37,26 @@ const authStore = {
     setTokens(state, tokens) {
       state.token = tokens.accessToken;
       state.refreshToken = tokens.refreshToken;
+      state.linked = tokens.linked;
       localStorage.setItem('accessToken', tokens.accessToken);
       localStorage.setItem('refreshToken', tokens.refreshToken);
     },
     clearSession(state) {
       state.token = null;
       state.refreshToken = null;
+      state.linked = true;
+      state.fullUserInfo = null;
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
+    },
+    setFullUserInfo(state, userInfo) {
+      state.fullUserInfo = userInfo;
     }
   },
   actions: {
-    async registerWithSteam(context, formData) {
-      const res = await axios.post('/user/register/complete', formData);
-      context.state.commit('setTokens', res.data);
-    },
-    register(context, formData) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post('/user/create/', formData)
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    },
     async formRegister(context, data) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post('/user/create/', {
-            username: data.username,
-            password: data.password,
-            email: data.emailAddress,
-            gameInfo: {
-              riotUsername: data.username
-            }
-          })
-          .then(response => {
-            resolve(response);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      const res = await axios.post('/user/create/', data);
+      context.commit('setTokens', res.data);
     },
 
     async login(context, credentials) {
@@ -88,6 +65,45 @@ const authStore = {
         context.commit('setTokens', res.data);
       } else {
         throw new Error('invalidCredentials');
+      }
+    },
+
+    async verifyEmail(context, token) {
+      const res = await axios.get(`/user/confirm?token=${token}`);
+      if (res.status !== 200) {
+        throw new Error('invalidToken');
+      }
+    },
+
+    async resendVerificationEmail(context) {
+      const res = await axios.post(
+        `/user/${context.getters.userInfo._id}/send-verification`
+      );
+      if (res.status !== 200) {
+        throw new Error('verificationSendError');
+      }
+    },
+
+    async getFullUserInfo(context) {
+      if (!context.getters.loggedIn) return;
+      const res = await axios.get(`/user/id/${context.getters.userInfo._id}`);
+      context.commit('setFullUserInfo', res.data);
+    },
+
+    async startSteamLinking() {
+      // needs work
+      // const res = await axios.get(`/user/link/steam`);
+    },
+
+    async getSteamLink() {
+      const res = await axios.get('/integration/steam/login');
+      return res.data;
+    },
+
+    async finalizeSteamLogin(context, params) {
+      const res = await axios.get(`/integration/steam/login/verify${params}`);
+      if (res.status !== 200) {
+        throw new Error('Login failed');
       }
     }
   }

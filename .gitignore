@@ -13,8 +13,13 @@ node_modules/
 /dist/
 
 # local env files
+.env
 .env.local
 .env.*.local
+
+# akll specific envs
+.env.akl
+.env.all
 
 # Log files
 npm-debug.log*
@@ -29,4 +34,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-

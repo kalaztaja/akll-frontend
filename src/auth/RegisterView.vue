@@ -1,6 +1,10 @@
 <template>
   <v-card>
-    <v-form ref="registerForm" v-model="valid" lazy-validation>
+    <div v-if="steamToken && !success">
+      Sinulla ei ole vielä AKL-tunnusta liitettynä Steam tiliisi. Täytä tämä
+      lomake luodaksesi AKL-tunnuksen.
+    </div>
+    <v-form ref="registerForm" v-model="valid" lazy-validation v-if="!success">
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -9,7 +13,7 @@
               :rules="[rules.required]"
               label="Username"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12" sm="6" md="6">
             <v-text-field
@@ -18,16 +22,16 @@
               label="First Name"
               maxlength="20"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12" sm="6" md="6">
             <v-text-field
-              v-model="lastName"
+              v-model="surname"
               :rules="[rules.required]"
-              label="Last Name"
-              maxlength="20"
+              label="Surname"
+              maxlength="40"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -35,7 +39,7 @@
               :rules="emailRules"
               label="E-mail"
               required
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -49,7 +53,7 @@
               hint="At least 8 characters"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -62,20 +66,19 @@
               label="Confirm Password"
               counter
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
           </v-col>
-          <v-spacer></v-spacer>
-          <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12"
-            ><v-btn
-              x-large
-              block
-              :disabled="!valid"
-              color="success"
-              href="/aklapi/integration/steam/login"
-              >Register with Steam</v-btn
-            ></v-col
-          >
-          <v-spacer></v-spacer>
+          <v-col cols="12">
+            <v-text-field v-model="university" label="University" />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="guild" label="Guild" />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="age" label="Age" type="number" />
+          </v-col>
+
+          <v-spacer />
           <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
             <v-btn
               x-large
@@ -83,24 +86,40 @@
               :disabled="!valid"
               color="success"
               @click="register"
-              >Register</v-btn
             >
+              Register
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
+    <v-container v-else>
+      <h2>Tunnus luotu.</h2>
+      Lähetimme sähköpostiisi varmistusviestin. Seuraa sähköpostin ohjeita
+      varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
+      <a @click="resendVerification">Klikkaa tästä</a>
+      lähettääksesi uuden viestin.
+      <v-spacer />
+      <router-link to="/">Etusivulle</router-link>
+    </v-container>
   </v-card>
 </template>
 
 <script>
 export default {
   name: 'RegisterView',
+  props: {
+    steamToken: {
+      type: String,
+      default: null
+    }
+  },
   data() {
     return {
       valid: true,
 
       firstName: '',
-      lastName: '',
+      surname: '',
       email: '',
       password: '',
       verify: '',
@@ -120,8 +139,11 @@ export default {
         required: value => !!value || 'Required.',
         min: v => (v && v.length >= 8) || 'Min 8 characters'
       },
-
-      username: ''
+      success: false,
+      username: '',
+      university: '',
+      guild: '',
+      age: 18
     };
   },
   computed: {
@@ -130,23 +152,33 @@ export default {
     }
   },
   methods: {
-    register() {
+    async register() {
       this.$store.dispatch('startLoading');
-      this.$store
-        .dispatch('formRegister', {
-          username: this.username,
-          password: this.password,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          emailAddress: this.email
-        })
-        .then(() => {
-          this.$router.push({ name: 'login-view' });
-        });
+      const formData = {
+        username: this.username,
+        password: this.password,
+        firstName: this.firstName,
+        surname: this.surname,
+        email: this.email,
+        university: this.university,
+        guild: this.guild,
+        age: this.age
+      };
+
+      if (this.steamToken) formData.steamRegistrationToken = this.steamToken;
+
+      await this.$store.dispatch('formRegister', formData);
+      this.success = true;
 
       this.$store.dispatch('stopLoading');
+    },
+
+    async resendVerification(e) {
+      e.preventDefault();
+      this.$store.dispatch('resendVerificationEmail');
     }
-  }
+  },
+  created() {}
 };
 </script>
 

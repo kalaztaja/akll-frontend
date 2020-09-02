@@ -1,23 +1,27 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import UserListView from '../views/UserListView.vue';
+import ga from 'vue-ga';
 
 import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
 import CreateTeamView from '../views/CreateTeamView.vue';
+import SeasonApplyView from '../views/SeasonApplyView';
 
-import FinalizeSteamAuth from '../views/FinalizeSteamAuth';
 import SeasonsView from '../views/SeasonsView';
+import SeasonView from '../views/SeasonView';
+import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
 
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
+import VerifyView from '../auth/VerifyView';
 
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
 import HomePageView from '../views/HomePageView.vue';
+import { env } from '../../env';
 
 Vue.use(VueRouter);
 
@@ -27,11 +31,11 @@ const routes = [
     name: 'home-view',
     component: HomePageView
   },
-  {
+  /*{
     path: '/users',
     name: 'user-list-view',
     component: UserListView
-  },
+  },*/
   {
     path: '/teams',
     name: 'team-list-view',
@@ -59,8 +63,14 @@ const routes = [
     path: '/register',
     name: 'register-view',
     component: RegisterView,
+    props: true
+  },
+  {
+    path: '/verifyemail',
+    name: 'verifyemail-view',
+    component: VerifyView,
     meta: {
-      requiresVisitor: true
+      // requiresVisitor: true
     }
   },
   {
@@ -69,14 +79,9 @@ const routes = [
     component: Logout
   },
   {
-    path: '/user/:username',
+    path: '/user/:id',
     name: 'user-profile-view',
     component: UserProfileView
-  },
-  {
-    path: '/finalizeauth',
-    name: 'finalize-auth-view',
-    component: FinalizeSteamAuth
   },
   {
     path: '/post/create',
@@ -95,8 +100,32 @@ const routes = [
   },
   {
     path: '/seasons',
-    name: 'seasons-view',
+    name: 'seasons-list-view',
     component: SeasonsView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/create',
+    name: 'season-create-view',
+    component: SeasonCreateView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/apply',
+    name: 'season-apply-view',
+    component: SeasonApplyView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/seasons/:id',
+    name: 'season-view',
+    component: SeasonView,
     meta: {
       requiresAuth: true
     }
@@ -108,5 +137,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+ga(router, env.gaPropertyId);
 
 export default router;

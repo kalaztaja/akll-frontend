@@ -1,6 +1,6 @@
 module.exports = {
   transpileDependencies: ['vuetify'],
-  publicPath: '/akl/',
+  publicPath: '/',
   devServer: {
     disableHostCheck: true
   },

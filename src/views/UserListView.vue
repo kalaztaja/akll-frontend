@@ -6,10 +6,7 @@
           <p id="title" class="display-1">Users</p>
         </v-col>
         <v-col align="end" justify-content>
-          <v-text-field
-            v-model="userSearchWord"
-            placeholder="Search user"
-          ></v-text-field>
+          <v-text-field v-model="userSearchWord" placeholder="Search user" />
         </v-col>
       </v-row>
 

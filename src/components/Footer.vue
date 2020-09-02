@@ -10,7 +10,7 @@
               <h4 class="logo-full-bottom">Kynäriliiga</h4>
             </div>
           </v-col>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-col>
             <v-btn
               href="https://t3g.fi"
