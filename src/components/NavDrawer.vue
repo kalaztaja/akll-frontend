@@ -5,7 +5,7 @@
     absolute
     temporary
     right
-    app
+    style="position:fixed; top:0; right:0; overflow-y:scroll;"
     color="dark"
   >
     <v-list-item>

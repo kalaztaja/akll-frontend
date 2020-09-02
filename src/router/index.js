@@ -12,16 +12,15 @@ import SeasonView from '../views/SeasonView';
 import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
-import UserListView from '../views/UserListView.vue';
 
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 import VerifyView from '../auth/VerifyView';
 
-import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
+import HomePageView from '../views/HomePageView.vue';
 import { env } from '../../env';
 
 Vue.use(VueRouter);
@@ -29,8 +28,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'post-view',
-    component: PostView
+    name: 'home-view',
+    component: HomePageView
   },
   /*{
     path: '/users',

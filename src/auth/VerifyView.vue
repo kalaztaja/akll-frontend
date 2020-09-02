@@ -33,7 +33,7 @@ export default {
       return env.game;
     },
     userPage() {
-      return `/user/${this.$store.getters.userInfo._id}`
+      return `/user/${this.$store.getters.userInfo._id}`;
     }
   },
 

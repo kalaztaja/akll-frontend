@@ -53,7 +53,7 @@ export default {
       return this.$store.state.team.teams;
     },
     canCreateOrJoinTeam() {
-      console.log(canCreateOrJoinTeam());
+      //console.log(canCreateOrJoinTeam());
       return canCreateOrJoinTeam();
     },
     createTeamTooltip() {
