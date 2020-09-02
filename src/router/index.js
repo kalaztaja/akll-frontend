@@ -15,17 +15,17 @@ import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 
-import PostView from '../views/PostView.vue';
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
+import HomePageView from '../views/HomePageView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'post-view',
-    component: PostView
+    name: 'home-view',
+    component: HomePageView
   },
   {
     path: '/users',
