@@ -83,7 +83,7 @@ export default {
         })
         .then(() => {
           this.$store.dispatch('setAlertSuccess', 'Logged in!');
-          this.$router.push({ name: 'post-view' });
+          this.$router.push({ name: 'home-view' });
         })
         .catch(() => {
           this.$store.dispatch('setAlertError', 'Incorrect email or password');
