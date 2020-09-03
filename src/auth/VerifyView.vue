@@ -1,15 +1,17 @@
 <template>
   <v-card class="main-container">
     <v-container>
-      <div v-if="success">
-        <h2>Tunnus on aktivoitu</h2>
+      <div v-if="!success">
+        <h2 class="text-center display-1 mb-4">Tunnus on aktivoitu</h2>
         <div>Voit nyt käyttää tunnustasi ja luoda tiimin.</div>
         <div v-if="game === 'csgo' && !isSteamLinked">
           AKL:ää varten sinun pitää linkittää steamtilisi. Voit tehdä sen
-          <router-link :to="userPage">Omasta profiilistasi.</router-link>
+          <router-link :to="userPage">omasta profiilistasi.</router-link>
         </div>
+        <v-spacer />
+        <v-btn class="mt-6" to="/">Etusivulle</v-btn>
       </div>
-      <div v-if="error">
+      <div v-if="!error">
         <h2>Jokin meni mönkään.</h2>
         <div>Yritä uudestaan hetken päästä</div>
       </div>

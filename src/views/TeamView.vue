@@ -125,6 +125,10 @@ export default {
         applicationText: this.applicationText
       });
       this.showApplicationForm = false;
+      this.$store.dispatch(
+        'setAlertSuccess',
+        'Hakemus lähetetty onnistuneesti!'
+      );
     },
 
     async handleApplication(appli, accepted) {

@@ -25,10 +25,8 @@ const teamStore = {
   },
   actions: {
     async retrieveTeams(context, query) {
-      if (!context.state.teams.length) {
-        const res = await axios.get(`/team/all?page=${query.page}&pageSize=20`);
-        context.commit('addTeams', res.data);
-      }
+      const res = await axios.get(`/team/all?page=${query.page}&pageSize=20`);
+      context.commit('addTeams', res.data);
     },
     async createTeam(context, formData) {
       await axios.post('/team/create', formData);

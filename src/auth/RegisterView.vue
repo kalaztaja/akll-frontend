@@ -94,13 +94,15 @@
       </v-container>
     </v-form>
     <v-container v-else>
-      <h2>Tunnus luotu.</h2>
-      Lähetimme sähköpostiisi varmistusviestin. Seuraa sähköpostin ohjeita
-      varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
-      <a @click="resendVerification">Klikkaa tästä</a>
-      lähettääksesi uuden viestin.
+      <h2 class="text-center display-1 mb-4">Tunnus luotu.</h2>
+      <div class="mb-6">
+        Lähetimme sähköpostiisi varmistusviestin. Seuraa sähköpostin ohjeita
+        varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
+        <a @click="resendVerification">Klikkaa tästä</a>
+        lähettääksesi uuden viestin.
+      </div>
       <v-spacer />
-      <router-link to="/">Etusivulle</router-link>
+      <v-btn to="/">Etusivulle</v-btn>
     </v-container>
   </v-card>
 </template>

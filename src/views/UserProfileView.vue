@@ -17,18 +17,16 @@
         </div>
       </div>
       <v-spacer />
-      <v-card-text>University: {{ user.university }}</v-card-text>
-      <v-card-text>Guild: {{ user.guild }}</v-card-text>
-      <v-list>
-        <v-subheader>Nykyinen tiimi</v-subheader>
-        <v-list-item v-for="team in user.currentTeams" :key="team._id">
-          <v-list-item-content>
-            <router-link :to="`/teams/${team._id}`">
-              {{ team.teamName }}
-            </router-link>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <v-card-text class="meta-text">
+        University: {{ user.university }}
+      </v-card-text>
+      <v-card-text class="meta-text">Guild: {{ user.guild }}</v-card-text>
+      <v-card-text class="meta-text" v-if="user.currentTeams">
+        Nykyinen tiimi:
+        <router-link :to="`/teams/${user.currentTeams[0]._id}`">
+          {{ user.currentTeams[0].teamName }}
+        </router-link>
+      </v-card-text>
       <v-spacer />
       <div class="text-body-1 pa-4" v-if="isOwner">
         <h2 class="mb-4">Tunnuksen hallinta</h2>
@@ -180,5 +178,9 @@ export default {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+}
+.meta-text {
+  color: white;
+  font-size: 24px;
 }
 </style>
