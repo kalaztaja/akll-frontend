@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md>
+  <v-container grid-list-md class="main-container">
     <v-layout row wrap>
       <v-flex>
         <v-row align="center">
@@ -12,7 +12,6 @@
             </div>
             <v-btn
               to="/teams/create"
-              v-on="() => (this.state.show = true)"
               color="secondary"
               :disabled="!canCreateOrJoinTeam"
             >
@@ -31,6 +30,14 @@
             />
           </v-col>
         </v-col>
+        <v-btn v-if="page > 0" class="float-left" @click="prevPage">
+          <v-icon>mdi-arrow-left</v-icon>
+          Prev page
+        </v-btn>
+        <v-btn v-if="canGoRight" class="float-right" @click="nextPage">
+          Next page
+          <v-icon>mdi-arrow-right</v-icon>
+        </v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -40,28 +47,54 @@
 import TeamCard from '../components/TeamCard.vue';
 import { canCreateOrJoinTeam, createTeamTooltip } from '../util/utils';
 
+const PAGE_SIZE = 20;
+
 export default {
   name: 'TeamListView',
   components: {
     TeamCard
   },
-  state: {
-    show: false
+  data() {
+    return {
+      show: false,
+      page: 0
+    };
+  },
+  methods: {
+    nextPage() {
+      this.page += 1;
+      if (this.$store.state.team.teams.length % PAGE_SIZE === 0) {
+        this.$store.dispatch('retrieveTeams', { page: this.page });
+      }
+    },
+
+    prevPage() {
+      this.page -= 1;
+    }
   },
   computed: {
     teams() {
-      return this.$store.state.team.teams;
+      return this.$store.state.team.teams.slice(
+        this.page * PAGE_SIZE,
+        (this.page + 1) * PAGE_SIZE
+      );
     },
     canCreateOrJoinTeam() {
-      //console.log(canCreateOrJoinTeam());
       return canCreateOrJoinTeam();
     },
     createTeamTooltip() {
       return createTeamTooltip();
+    },
+    canGoRight() {
+      return (
+        (this.page + 1) * PAGE_SIZE - this.$store.state.team.teams.length <= 0
+      );
     }
   },
   created() {
-    this.$store.dispatch('retrieveTeams', { page: 0 });
+    if (this.$store.state.team.teams.length < (this.page + 1) * PAGE_SIZE) {
+      this.$store.dispatch('retrieveTeams', { page: 0 });
+    }
   }
 };
 </script>
@@ -75,5 +108,11 @@ export default {
 #divider {
   margin-bottom: 10px;
   margin-top: 10px;
+}
+.main-container {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

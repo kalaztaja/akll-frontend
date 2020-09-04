@@ -31,6 +31,12 @@ const authStore = {
         return moment().isBefore(expDate);
       }
       return false;
+    },
+    isSteamLinked: state => {
+      if (state.fullUserInfo) {
+        return !!state.fullUserInfo.steam;
+      }
+      return false;
     }
   },
   mutations: {
@@ -90,11 +96,6 @@ const authStore = {
       context.commit('setFullUserInfo', res.data);
     },
 
-    async startSteamLinking() {
-      // needs work
-      // const res = await axios.get(`/user/link/steam`);
-    },
-
     async getSteamLink() {
       const res = await axios.get('/integration/steam/login');
       return res.data;
@@ -104,6 +105,20 @@ const authStore = {
       const res = await axios.get(`/integration/steam/login/verify${params}`);
       if (res.status !== 200) {
         throw new Error('Login failed');
+      }
+    },
+
+    async sendPasswordReset(context, data) {
+      const res = await axios.post('/user/send-reset-password', data);
+      if (res.status === 404) {
+        throw new Error('UserNotFound');
+      }
+    },
+
+    async resetPassword(context, data) {
+      const res = await axios.post('/user/reset-password', data);
+      if (res.status !== 200) {
+        throw new Error('Error');
       }
     }
   }

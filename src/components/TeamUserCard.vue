@@ -1,12 +1,13 @@
 <template>
   <v-card class="d-flex">
     <v-card-text>
-      <router-link :to="redirectionURL" class="display-1 text--primary">
+      <router-link :to="redirectionURL" class="team-username text--primary">
         {{ user.username }}
       </router-link>
+      <v-icon v-if="isCaptain" dark right>mdi-crown-outline</v-icon>
     </v-card-text>
     <v-card-actions>
-      <v-dialog v-model="dialog" width="500" v-if="isOwner">
+      <v-dialog v-model="dialog" width="500" v-if="isOwner && !isCaptain">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="red" v-bind="attrs" v-on="on">
             Kick
@@ -44,6 +45,10 @@ export default {
     isOwner: {
       type: Boolean,
       default: false
+    },
+    isCaptain: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -71,4 +76,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.team-username {
+  font-size: 24px;
+}
+</style>

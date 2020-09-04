@@ -12,11 +12,13 @@ import SeasonView from '../views/SeasonView';
 import SeasonCreateView from '../views/SeasonCreateView';
 
 import UserProfileView from '../views/UserProfileView.vue';
+import UserEditView from '../views/UserEditView';
 
 import LoginView from '../auth/LoginView.vue';
 import RegisterView from '../auth/RegisterView.vue';
 import Logout from '../auth/Logout.vue';
 import VerifyView from '../auth/VerifyView';
+import ResetPasswordView from '../auth/ResetPasswordView';
 
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
@@ -44,7 +46,8 @@ const routes = [
   {
     path: '/teams/create',
     name: 'team-create-view',
-    component: CreateTeamView
+    component: CreateTeamView,
+    alias: '/teams/edit'
   },
   {
     path: '/teams/:id',
@@ -55,6 +58,14 @@ const routes = [
     path: '/login',
     name: 'login-view',
     component: LoginView,
+    meta: {
+      requiresVisitor: true
+    }
+  },
+  {
+    path: '/reset-password',
+    name: 'reset-password-view',
+    component: ResetPasswordView,
     meta: {
       requiresVisitor: true
     }
@@ -82,6 +93,14 @@ const routes = [
     path: '/user/:id',
     name: 'user-profile-view',
     component: UserProfileView
+  },
+  {
+    path: '/user/:id/edit',
+    name: 'user-edit-view',
+    component: UserEditView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/post/create',

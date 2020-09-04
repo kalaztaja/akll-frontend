@@ -33,6 +33,12 @@ const userStore = {
     async startSteamLinking() {
       const res = await axios.get('user/link/steam');
       return res.data;
+    },
+    async editUserInfo(context, userData) {
+      const res = await axios.post(`/user/${userData.id}/update`, userData);
+      if (res.status !== 200) {
+        throw new Error();
+      }
     }
   }
 };

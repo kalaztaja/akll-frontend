@@ -1,9 +1,9 @@
 <template>
   <v-card class="flex mb-4" :to="redirectionURL">
     <v-card-title>
-      {{ this.season.seasonName }} {{ this.season.seasonNumber }}
+      {{ season.seasonName }} {{ season.seasonNumber }}
     </v-card-title>
-    <v-card-text>{{ this.season.game }}</v-card-text>
+    <v-card-text>{{ season.game }}</v-card-text>
     <v-btn>
       <router-link :to="editURL">jotain</router-link>
     </v-btn>

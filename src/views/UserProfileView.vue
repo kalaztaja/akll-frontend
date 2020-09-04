@@ -1,62 +1,112 @@
 <template>
-  <v-container fluid text-xs-center>
-    <v-layout row wrap>
-      <div v-if="user">
-        <v-card>
-          <v-spacer />
-          <v-card-title class="justify-center display-3">
+  <v-container fluid>
+    <v-card block v-if="user" class="main-container">
+      <div class="d-flex justify-space-between flex-column flex-sm-row">
+        <div>
+          <v-card-title class="display-3">
             {{ user.username }}
           </v-card-title>
           <v-card-subtitle class="text-subtitle-1" v-if="user.firstName">
             {{ user.firstName }} {{ user.surname }}
           </v-card-subtitle>
-          <div v-if="user.steam">
-            <a :href="user.steam.profileUrl">
-              <img :src="user.steam.avatar" />
-            </a>
-          </div>
-          <v-spacer />
-          <v-card-text>University: {{ user.university }}</v-card-text>
-          <v-card-text>Guild: {{ user.guild }}</v-card-text>
-          <v-list v-if="this.user.previousTeams.length !== 0">
-            <v-subheader>Past teams</v-subheader>
-            <v-list-item v-for="i in user.previousTeams" :key="i">
-              <v-list-item-content>
-                <v-list-item-title v-text="i.text" />
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-
-          <v-spacer />
-          <div class="text-body-1" v-if="isOwner">
-            <v-card-text v-if="game === 'csgo' && !user.steam">
-              Et ole vielä linkittänyt Steam-tiliäsi.
-              <v-btn @click="startSteamLinking">
-                Link Steam account
-              </v-btn>
-            </v-card-text>
-
-            <v-card-text v-if="!user.emailConfirmed">
-              Et ole vielä vahvistanut sähköpostiasi. Voit lähettää tästä uuden
-              vahvistusviestin
-              <v-btn @click="resendVerification">Lähetä</v-btn>
-            </v-card-text>
-          </div>
-        </v-card>
+        </div>
+        <div v-if="user.steam">
+          <a :href="user.steam.profileUrl">
+            <img class="avatar" :src="user.steam.avatar" />
+          </a>
+        </div>
       </div>
-    </v-layout>
+      <v-spacer />
+      <v-card-text class="meta-text">
+        University: {{ user.university }}
+      </v-card-text>
+      <v-card-text class="meta-text">Guild: {{ user.guild }}</v-card-text>
+      <v-card-text class="meta-text" v-if="user.currentTeams">
+        Nykyinen tiimi:
+        <router-link :to="`/teams/${user.currentTeams[0]._id}`">
+          {{ user.currentTeams[0].teamName }}
+        </router-link>
+      </v-card-text>
+      <v-spacer />
+      <div class="text-body-1 pa-4" v-if="isOwner">
+        <h2 class="mb-4">Tunnuksen hallinta</h2>
+        <div class="d-flex mb-4">
+          <div class="link-info">
+            <span>Sähköposti vahvistettu:</span>
+            <v-icon>
+              {{ user.emailConfirmed ? 'mdi-check' : 'mdi-alert-circle' }}
+            </v-icon>
+          </div>
+          <div
+            class="d-flex"
+            style="flex-basis: 50%;"
+            v-if="!user.emailConfirmed"
+          >
+            <v-btn class="link-btn" @click="resendVerification">
+              Lähetä vahvistusviesti
+            </v-btn>
+          </div>
+        </div>
+
+        <div class="d-flex mb-4" v-if="game === 'csgo'">
+          <div class="link-info">
+            <span>Steam-tili yhdistetty:</span>
+            <v-icon>{{ user.steam ? 'mdi-check' : 'mdi-alert-circle' }}</v-icon>
+          </div>
+          <div class="d-flex" style="flex-basis: 50%;" v-if="!user.steam">
+            <v-btn class="link-btn" @click="startSteamLinking">
+              Linkitä Steam-tili
+            </v-btn>
+          </div>
+        </div>
+
+        <v-btn class="mb-4" block :to="userEditUrl">Muokkaa tietojasi</v-btn>
+        <v-btn class="mb-4" block @click="togglePasswordChange">
+          Vaihda salasana
+          <v-icon dark right>
+            {{ showPasswordChange ? 'mdi-menu-up' : 'mdi-menu-down' }}
+          </v-icon>
+        </v-btn>
+        <password-change
+          v-if="showPasswordChange"
+          :userId="user._id"
+          :successCallback="togglePasswordChange"
+          class="mb-4"
+        />
+        <v-btn class="mb-4" block @click="toggleEmailChange">
+          Vaihda sähköpostiosoite
+          <v-icon dark right>
+            {{ showEmailChange ? 'mdi-menu-up' : 'mdi-menu-down' }}
+          </v-icon>
+        </v-btn>
+        <email-change
+          v-if="showEmailChange"
+          :userId="user._id"
+          :successCallback="toggleEmailChange"
+        />
+      </div>
+    </v-card>
   </v-container>
 </template>
 
 <script>
 import { env } from '../../env';
 
+import PasswordChange from '../components/PasswordChange';
+import EmailChange from '../components/EmailChange';
+
 export default {
   name: 'UserProfileView',
+  components: {
+    PasswordChange,
+    EmailChange
+  },
   data() {
     return {
       userArray: [],
-      user: {}
+      user: {},
+      showPasswordChange: false,
+      showEmailChange: false
     };
   },
 
@@ -66,18 +116,34 @@ export default {
     },
     game() {
       return env.game;
+    },
+    userEditUrl() {
+      return {
+        name: 'user-edit-view',
+        params: {
+          user: this.user
+        }
+      };
     }
   },
 
   methods: {
     async resendVerification() {
       this.$store.dispatch('resendVerificationEmail');
+      this.$store.dispatch('setAlertSuccess', 'Uusi varmistusviesti lähetetty');
     },
 
     async startSteamLinking() {
       const data = await this.$store.dispatch('startSteamLinking');
-      // somehow the data converts to an array ???
-      window.location.href = data[0].url;
+      window.location.href = data.url;
+    },
+
+    togglePasswordChange() {
+      this.showPasswordChange = !this.showPasswordChange;
+    },
+
+    toggleEmailChange() {
+      this.showEmailChange = !this.showEmailChange;
     }
   },
 
@@ -88,4 +154,33 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.main-container {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.avatar {
+  width: 150px;
+  height: 150px;
+}
+.spacer {
+  border-bottom: 1px solid darkgrey;
+}
+.link-info {
+  justify-content: space-between;
+  display: flex;
+  flex-basis: 50%;
+  line-height: 36px;
+}
+.link-btn {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.meta-text {
+  color: white;
+  font-size: 24px;
+}
+</style>

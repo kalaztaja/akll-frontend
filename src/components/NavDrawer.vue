@@ -109,12 +109,17 @@ export default {
   methods: {
     onInput(isOpen) {
       this.$emit('opened', isOpen);
-    }
-  },
+    },
 
-  async created() {
-    await this.$store.dispatch('getFullUserInfo');
-    if (this.loggedIn) {
+    addUserNavItems(mutation) {
+      if (mutation.type === 'setTokens') {
+        this.addUserProfileItem();
+      } else if (mutation.type === 'setFullUserInfo') {
+        this.addCurrentTeamItem;
+      }
+    },
+
+    addUserProfileItem() {
       this.navItems.push({
         title: 'My profile',
         icon: 'mdi-account',
@@ -126,20 +131,32 @@ export default {
         },
         roles: ['authorized']
       });
+    },
+    addCurrentTeamItem() {
+      if (this.$store.state.auth.fullUserInfo.currentTeams.length) {
+        this.navItems.push({
+          title: 'My team',
+          icon: 'mdi-account',
+          to: {
+            name: 'team-view',
+            params: {
+              id: this.$store.state.auth.fullUserInfo.currentTeams[0]._id
+            }
+          },
+          roles: ['authorized']
+        });
+      }
     }
-    if (this.$store.state.auth.fullUserInfo.currentTeams.length) {
-      this.navItems.push({
-        title: 'My team',
-        icon: 'mdi-account',
-        to: {
-          name: 'team-view',
-          params: {
-            id: this.$store.state.auth.fullUserInfo.currentTeams[0]._id
-          }
-        },
-        roles: ['authorized']
-      });
+  },
+
+  async created() {
+    await this.$store.dispatch('getFullUserInfo');
+    if (this.$store.getters.loggedIn) {
+      this.addUserProfileItem();
+      this.addCurrentTeamItem();
     }
+
+    this.$store.subscribe(this.addUserNavItems, { prepend: true });
   }
 };
 </script>
