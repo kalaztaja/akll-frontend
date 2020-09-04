@@ -2,7 +2,8 @@
   <v-container>
     <div v-if="!passwordChange">
       <h1>Unohditko salasanasi?</h1>
-      Kirjoita sähköpostisiosoittesi ja lähetämme sinulle salasanan nollaus linkin.
+      Kirjoita sähköpostisiosoittesi ja lähetämme sinulle salasanan nollaus
+      linkin.
       <v-form lazy-validation>
         <v-text-field v-model="email" maxlength="50" label="Email" required />
         <v-btn x-large inlineblock color="success" @click="sendResetPassword">
