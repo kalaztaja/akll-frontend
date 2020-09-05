@@ -1,23 +1,28 @@
 <template>
-  <v-footer class="footer" padless>
+  <v-footer :class="[isCsgo ? 'akl-footer' : 'all-footer']" padless>
     <v-layout>
       <v-flex>
         <v-row justify="center" align="center" no-gutters class="extra-row">
           <v-col text-center justify="center" align="center">
-            <div class="logo">
+            <div v-if="isCsgo" class="logo">
               <h3 class="logo-short">AKL</h3>
               <h4 class="logo-full-top">Akateeminen</h4>
               <h4 class="logo-full-bottom">Kynäriliiga</h4>
+            </div>
+            <div v-else>
+              <v-img
+                src="@/assets/ALLMainLogo.png"
+                max-height="80px"
+                max-width="220px"
+              />
             </div>
           </v-col>
           <v-spacer />
           <v-col>
             <v-btn
               href="https://t3g.fi"
-              active-class="no-active"
-              :color="'#272727'"
               depressed
-              class="t3g-button"
+              :class="[isCsgo ? 'akl-t3g-button' : 'all-t3g-button']"
             >
               <strong>Organized by T3G</strong>
             </v-btn>
@@ -29,12 +34,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'Footer',
+  props: {
+    isCsgo: {
+      type: Boolean,
+      default: true
+    }
+  }
+};
 </script>
 
 <style scoped>
-.footer {
+.akl-footer {
   background-color: #272727 !important;
+}
+.all-footer {
+  background-color: #f5f5f5 !important;
 }
 .logo {
   position: relative;
@@ -71,5 +87,12 @@ export default {};
 .extra-row {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+}
+.akl-t3g-button {
+  color: #272727;
+}
+.all-t3g-button {
+  color: black;
+  background-color: #f5f5f5 !important;
 }
 </style>

@@ -1,8 +1,15 @@
 <template>
   <v-container>
     <v-app-bar id="bar" app clipped-right :color="barColor">
-      <v-btn depressed to="/" active-class="no-active" :color="barColor">
-        <v-icon class="grey--text" color="white">mdi-home</v-icon>
+      <v-btn
+        depressed
+        to="/"
+        :color="barColor"
+        :active-class="isCsgo ? 'no-active' : 'all-no-active'"
+      >
+        <v-icon>
+          mdi-home
+        </v-icon>
       </v-btn>
       <v-spacer />
 
@@ -13,16 +20,23 @@
         color="white"
         class="font-weight-medium "
       >
-        <div class="logo">
+        <div v-if="isCsgo" class="logo">
           <h1 class="logo-short">AKL</h1>
-          <h4 class="logo-full-top">Akateeminen</h4>
-          <h4 class="logo-full-bottom">Kynäriliiga</h4>
+        </div>
+        <div v-else class="all-logo">
+          <v-img
+            src="@/assets/ALLLogo.png"
+            height="88px"
+            width="88px"
+            class="logo-holder"
+          />
         </div>
       </v-toolbar-title>
+
       <v-progress-circular
         v-if="loading === true"
         indeterminate
-        color="white"
+        :color="isCsgo ? 'white' : 'black'"
       />
       <v-spacer />
       <v-btn
@@ -31,10 +45,18 @@
         @click.native="drawer = !drawer"
         :color="barColor"
       >
-        <v-icon class="grey--text" color="white">mdi-menu</v-icon>
+        <v-icon>
+          mdi-menu
+        </v-icon>
       </v-btn>
     </v-app-bar>
-    <nav-drawer :value="drawer" app temporary @opened="drawerEvent($event)" />
+    <nav-drawer
+      :value="drawer"
+      app
+      temporary
+      @opened="drawerEvent($event)"
+      v-bind:isCsgo="isCsgo"
+    />
   </v-container>
 </template>
 
@@ -45,6 +67,12 @@ export default {
   name: 'NavBar',
   components: {
     NavDrawer
+  },
+  props: {
+    isCsgo: {
+      type: Boolean,
+      default: true
+    }
   },
   data: () => ({
     drawer: false,
@@ -68,7 +96,12 @@ export default {
       if (newValue === 2) {
         this.barColor = 'red darken-2';
       } else if (newValue === null) {
-        this.barColor = '#272727';
+        //Button background if the bar has no status
+        if (this.isCsgo) {
+          this.barColor = '#272727';
+        } else {
+          this.barColor = '#f5f5f5';
+        }
       } else if (newValue === 0) {
         this.barColor = 'green darken-1';
       } else if (newValue === 1) {
@@ -83,6 +116,9 @@ export default {
 .v-btn--active.no-active::before {
   color: #272727;
 }
+.v-btn--active.all-no-active::before {
+  color: #f5f5f5;
+}
 #bar,
 #bar .v-btn {
   -moz-transition: all 0.5s ease-in-out;
@@ -90,12 +126,16 @@ export default {
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-.logo {
+.logo,
+.all-logo {
   position: relative;
   display: inline-block;
   cursor: default;
   height: 50px;
   margin-top: 3px;
+}
+.logo-holder {
+  padding-bottom: 10px;
 }
 .logo-short {
   font-family: 'Raleway';

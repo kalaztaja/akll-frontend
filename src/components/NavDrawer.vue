@@ -9,9 +9,15 @@
     color="dark"
   >
     <v-list-item>
-      <v-list-item-content>
+      <v-list-item-content v-if="isCsgo">
         <v-list-item-title class="title">AKL</v-list-item-title>
         <v-list-item-subtitle>Akateeminen kynäriliiga</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-list-item-content v-else>
+        <v-list-item-title class="title">ALL</v-list-item-title>
+        <v-list-item-subtitle>
+          Akateeminen Legendojen Liiga
+        </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
@@ -42,6 +48,10 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    isCsgo: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
