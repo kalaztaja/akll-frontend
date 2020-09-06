@@ -36,6 +36,18 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <div>
+        <v-btn-toggle v-model="toggle_exclusive" mandatory>
+          <v-btn @click="swapLanguage('fi')">
+            FI
+          </v-btn>
+          <v-btn @click="swapLanguage('en')">
+            EN
+          </v-btn>
+        </v-btn-toggle>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -86,7 +98,8 @@ export default {
           to: '/seasons',
           roles: ['admin', 'moderator']
         }
-      ]
+      ],
+      toggle_exclusive: undefined
     };
   },
   watch: {
@@ -154,6 +167,10 @@ export default {
           roles: ['authorized']
         });
       }
+    },
+    swapLanguage(targetLanguage) {
+      this.$i18n.locale = targetLanguage;
+      window.localStorage.setItem('Language', targetLanguage);
     }
   },
 

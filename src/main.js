@@ -45,7 +45,7 @@ axios.interceptors.request.use(checkTokensOnRequest, error => {
 });
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: window.localStorage.language || 'en',
   fallbackLocale: 'en',
   messages
 });

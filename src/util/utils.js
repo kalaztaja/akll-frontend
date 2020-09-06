@@ -47,18 +47,18 @@ export const canCreateOrJoinTeam = () => {
 
 export const createTeamTooltip = () => {
   if (!store.getters.loggedIn) {
-    return this.$i18n.t('YouHaveToLogin');
+    return 'You have to login';
   }
   const { fullUserInfo } = store.state.auth;
 
   if (!fullUserInfo) return '';
 
   if (!fullUserInfo.registrationComplete) {
-    return this.$i18n.t('YouHaveToFinishYourAccount');
+    return 'You have to finish your account';
   } else if (!fullUserInfo.emailConfirmed) {
-    return this.$i18n.t('YouHaveToVerifyYourEmail');
+    return 'You have to verify your email';
   } else if (env.game === 'csgo' && !fullUserInfo.steam) {
-    return this.$i18n.t('YouHaveToLinkYourSteam');
+    return 'You have to link your steam';
   }
   return '';
 };
