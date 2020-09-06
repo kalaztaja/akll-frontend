@@ -40,10 +40,10 @@
       <div>
         <v-btn-toggle v-model="toggle_exclusive" mandatory>
           <v-btn @click="swapLanguage('fi')">
-            FI
+            EN
           </v-btn>
           <v-btn @click="swapLanguage('en')">
-            EN
+            FI
           </v-btn>
         </v-btn-toggle>
       </div>
