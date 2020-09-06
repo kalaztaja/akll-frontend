@@ -90,7 +90,10 @@ export default {
     }
   },
   created() {
-    if (this.$store.state.team.teams.length < (this.page + 1) * PAGE_SIZE) {
+    if (
+      this.$store.state.team.teams.length === 0 ||
+      this.$store.state.team.teams.length % PAGE_SIZE === 0
+    ) {
       this.$store.dispatch('retrieveTeams', { page: 0 });
     }
   }

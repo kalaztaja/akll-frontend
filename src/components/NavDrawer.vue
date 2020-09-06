@@ -39,10 +39,10 @@
     <template v-slot:append>
       <div>
         <v-btn-toggle v-model="toggle_exclusive" mandatory>
-          <v-btn @click="swapLanguage('fi')">
+          <v-btn @click="swapLanguage('en')">
             EN
           </v-btn>
-          <v-btn @click="swapLanguage('en')">
+          <v-btn @click="swapLanguage('fi')">
             FI
           </v-btn>
         </v-btn-toggle>
@@ -52,16 +52,13 @@
 </template>
 
 <script>
+import { env } from '../../env';
 export default {
   name: 'NavDrawer',
   props: {
     value: {
       type: Boolean,
       default: false
-    },
-    isCsgo: {
-      type: Boolean,
-      default: true
     }
   },
   data() {
@@ -110,6 +107,10 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.loggedIn;
+    },
+
+    isCsgo() {
+      return env.game === 'csgo';
     },
 
     filteredNavItems() {

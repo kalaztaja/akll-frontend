@@ -21,7 +21,10 @@
       <v-card-text class="meta-text">
         {{ $t('Guild') }}: {{ user.guild }}
       </v-card-text>
-      <v-card-text class="meta-text" v-if="user.currentTeams">
+      <v-card-text
+        class="meta-text"
+        v-if="user.currentTeams && user.currentTeams.length"
+      >
         {{ $t('CurrentTeam') }}:
         <router-link :to="`/teams/${user.currentTeams[0]._id}`">
           {{ user.currentTeams[0].teamName }}

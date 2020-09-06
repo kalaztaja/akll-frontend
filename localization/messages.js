@@ -1,8 +1,8 @@
 const messages = {
   en: {
     //NAV DRAWER
-    AKLTitle: 'Academic Legends´ League',
-    ALLTitle: 'Academic counter-strike League',
+    AKLTitle: 'Academic Counter-Strike League',
+    ALLTitle: 'Academic Legends´ League',
     Login: 'Login',
     Logout: 'Logout',
     Register: 'Register',
@@ -163,8 +163,8 @@ const messages = {
   ////////////////////////////// FI /////////////////////////////////
   fi: {
     //NAV DRAWER
-    AKLTitle: 'Akateeminen Legendojen Liiga',
-    ALLTitle: 'Akateeminen Kynäriliiga',
+    AKLTitle: 'Akateeminen Kynäriliiga',
+    ALLTitle: 'Akateeminen Legendojen Liiga',
     Login: 'Kirjaudu',
     Logout: 'Kirjaudu ulos',
     Register: 'Rekisteröidy',
