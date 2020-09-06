@@ -3,10 +3,13 @@
     <v-layout row wrap>
       <v-row align="center" md>
         <v-col>
-          <p id="title" class="display-1">Users</p>
+          <p id="title" class="display-1">{{ $t('Users') }}</p>
         </v-col>
         <v-col align="end" justify-content>
-          <v-text-field v-model="userSearchWord" placeholder="Search user" />
+          <v-text-field
+            v-model="userSearchWord"
+            :placeholder="$t('SearchUser')"
+          />
         </v-col>
       </v-row>
 

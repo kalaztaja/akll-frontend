@@ -4,13 +4,13 @@
       <v-container>
         <v-row align="center">
           <v-col cols="12">
-            <p class="display-1 text-center">Create new season</p>
+            <p class="display-1 text-center">{{ $t('CreateNewSeason') }}</p>
           </v-col>
           <v-col cols="12">
             <v-text-field
               v-model="seasonName"
               :rules="[rules.required]"
-              label="Season name"
+              :label="$t('SeasonName')"
               required
             />
           </v-col>
@@ -18,7 +18,7 @@
             <v-text-field
               v-model="seasonNumber"
               :rules="[rules.required]"
-              label="Season number"
+              :label="$t('SeasonNumber')"
               type="number"
               required
             />
@@ -27,7 +27,7 @@
             <v-text-field
               v-model="division"
               :rules="[rules.required]"
-              label="Division"
+              :label="$t('Division')"
               required
             />
           </v-col>
@@ -35,18 +35,18 @@
             <v-text-field
               v-model="informationText"
               :rules="[rules.required]"
-              label="Information"
+              :label="$t('Information')"
               required
             />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="challongeUri" label="Challonge Uri" />
+            <v-text-field v-model="challongeUri" :label="$t('ChallongeUri')" />
           </v-col>
           <v-col cols="4">
-            <v-text-field v-model="year" label="Year" type="number" />
+            <v-text-field v-model="year" :label="$t('Year')" type="number" />
           </v-col>
           <v-col cols="4">
-            <v-checkbox v-model="hidden" class="mx-2" label="Hidden" />
+            <v-checkbox v-model="hidden" class="mx-2" :label="$t('Hidden')" />
           </v-col>
           <v-col cols="4" align="end">
             <v-btn
@@ -55,7 +55,7 @@
               @click="createOrEditSeason()"
               align="end"
             >
-              Register
+              {{ $t('Register') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -87,8 +87,8 @@ export default {
       hidden: false,
       challongeUri: '',
       rules: {
-        required: value => !!value || 'Required.',
-        max: v => (v && v.length <= 11) || 'Too long'
+        required: value => !!value || this.$i18n.t('Required'),
+        max: v => (v && v.length <= 11) || this.$i18n.t('TooLong')
       }
     };
   },

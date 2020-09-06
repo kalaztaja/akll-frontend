@@ -11,13 +11,11 @@
     <v-list-item>
       <v-list-item-content v-if="isCsgo">
         <v-list-item-title class="title">AKL</v-list-item-title>
-        <v-list-item-subtitle>Akateeminen kynäriliiga</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ $t('AKLTitle') }}</v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-content v-else>
         <v-list-item-title class="title">ALL</v-list-item-title>
-        <v-list-item-subtitle>
-          Akateeminen Legendojen Liiga
-        </v-list-item-subtitle>
+        <v-list-item-subtitle>{{ $t('ALLTitle') }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
@@ -59,31 +57,31 @@ export default {
       drawerOpen: this.value,
       navItems: [
         {
-          title: 'Login',
+          title: this.$i18n.t('Login'),
           icon: 'mdi-send',
           to: '/login',
           roles: ['unauthorized']
         },
         {
-          title: 'Logout',
+          title: this.$i18n.t('Logout'),
           icon: 'mdi-logout',
           to: '/logout',
           roles: ['authorized']
         },
         {
-          title: 'Teams',
+          title: this.$i18n.t('Teams'),
           icon: 'mdi-account-multiple',
           to: '/teams',
           roles: ['all']
         },
         {
-          title: 'Register',
+          title: this.$i18n.t('Register'),
           icon: 'mdi-login',
           to: '/register',
           roles: ['unauthorized']
         },
         {
-          title: 'Seasons',
+          title: this.$i18n.t('Seasons'),
           icon: 'mdi-account-multiple',
           to: '/seasons',
           roles: ['admin', 'moderator']

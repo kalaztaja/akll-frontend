@@ -4,13 +4,13 @@
       <v-container>
         <v-row align="center">
           <v-col cols="12">
-            <p class="display-1 text-center">Register your team</p>
+            <p class="display-1 text-center">{{ $t('RegisterTeam') }}</p>
           </v-col>
           <v-col cols="12">
             <v-text-field
               v-model="teamName"
               :rules="[rules.required]"
-              label="Team name"
+              :label="$t('TeamName')"
               required
             />
           </v-col>
@@ -18,7 +18,7 @@
             <v-text-field
               v-model="abbreviation"
               :rules="[rules.required, rules.max]"
-              label="Tag"
+              :label="$t('Tag')"
               counter="11"
               required
             />
@@ -27,12 +27,12 @@
             <v-text-field
               v-model="introductionText"
               :rules="[rules.required]"
-              label="Introduction"
+              :label="$t('Introduction')"
               required
             />
           </v-col>
           <v-col cols="6">
-            <v-select v-model="rank" :items="ranks" label="Rank" />
+            <v-select v-model="rank" :items="ranks" :label="$t('Rank')" />
           </v-col>
           <v-col cols="6" align="end">
             <v-btn
@@ -64,8 +64,8 @@ export default {
       introductionText: '',
       rank: '',
       rules: {
-        required: value => !!value || 'Required.',
-        max: v => (v && v.length <= 11) || 'Too long'
+        required: value => !!value || this.$i18n.t('Required'),
+        max: v => (v && v.length <= 11) || this.$i18n.t('TooLong')
       },
       ranks: CS_RANKS
     };
@@ -81,11 +81,14 @@ export default {
       };
       if (this.editmode) {
         await this.$store.dispatch('editTeam', data);
-        this.$store.dispatch('setAlertSuccess', 'Tiedot päivitetty!');
+        this.$store.dispatch(
+          'setAlertSuccess',
+          this.$i18n.t('InformationUpdated')
+        );
         this.$router.replace('/teams');
       } else {
         await this.$store.dispatch('createTeam', data);
-        this.$store.dispatch('setAlertSuccess', 'Tiimi luotu!');
+        this.$store.dispatch('setAlertSuccess', this.$i18n.t('TeamCreated'));
         this.$router.replace('/teams');
       }
     },

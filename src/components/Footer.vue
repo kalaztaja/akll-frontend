@@ -24,7 +24,7 @@
               depressed
               :class="[isCsgo ? 'akl-t3g-button' : 'all-t3g-button']"
             >
-              <strong>Organized by T3G</strong>
+              <strong>{{ $t('OrganizedBy') }} T3G</strong>
             </v-btn>
           </v-col>
         </v-row>

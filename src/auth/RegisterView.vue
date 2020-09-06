@@ -1,8 +1,7 @@
 <template>
   <v-card class="main-container">
     <div v-if="steamToken && !success">
-      Sinulla ei ole vielä AKL-tunnusta liitettynä Steam tiliisi. Täytä tämä
-      lomake luodaksesi AKL-tunnuksen.
+      {{ $t('RegisterSteamProfileText') }}
     </div>
     <v-form ref="registerForm" v-model="valid" lazy-validation v-if="!success">
       <v-container>
@@ -11,7 +10,7 @@
             <v-text-field
               v-model="username"
               :rules="[rules.required]"
-              label="Username"
+              :label="$t('Username')"
               required
             />
           </v-col>
@@ -19,7 +18,7 @@
             <v-text-field
               v-model="firstName"
               :rules="[rules.required]"
-              label="First Name"
+              :label="$t('FirstName')"
               maxlength="20"
               required
             />
@@ -28,7 +27,7 @@
             <v-text-field
               v-model="surname"
               :rules="[rules.required]"
-              label="Surname"
+              :label="$t('Surname')"
               maxlength="40"
               required
             />
@@ -37,7 +36,7 @@
             <v-text-field
               v-model="email"
               :rules="emailRules"
-              label="E-mail"
+              :label="$t('Email')"
               required
             />
           </v-col>
@@ -49,7 +48,7 @@
               :rules="[rules.required, rules.min]"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
-              label="Password"
+              :label="$t('Password')"
               hint="At least 8 characters"
               counter
               @click:append="show1 = !show1"
@@ -63,19 +62,19 @@
               :rules="[rules.required, passwordMatch]"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
-              label="Confirm Password"
+              :label="$t('ConfirmPassword')"
               counter
               @click:append="show1 = !show1"
             />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="university" label="University" />
+            <v-text-field v-model="university" :label="$t('University')" />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="guild" label="Guild" />
+            <v-text-field v-model="guild" :label="$t('Guild')" />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="age" label="Age" type="number" />
+            <v-text-field v-model="age" :label="$t('Age')" type="number" />
           </v-col>
 
           <v-spacer />
@@ -87,19 +86,18 @@
               color="success"
               @click="register"
             >
-              Register
+              {{ $t('Register') }}
             </v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
     <v-container v-else>
-      <h2 class="text-center display-1 mb-4">Tunnus luotu.</h2>
+      <h2 class="text-center display-1 mb-4">{{ $t('AccountCreated') }}</h2>
       <div class="mb-6">
-        Lähetimme sähköpostiisi varmistusviestin. Seuraa sähköpostin ohjeita
-        varmistaaksesi tunnuksen. Etkö saanut varmistusviestiä?
-        <a @click="resendVerification">Klikkaa tästä</a>
-        lähettääksesi uuden viestin.
+        {{ $t('EmailConfMessage') }}
+        <a @click="resendVerification">{{ $t('ClickHere') }}</a>
+        {{ $t('EmailConfMessage2') }}
       </div>
       <v-spacer />
       <v-btn to="/">Etusivulle</v-btn>
@@ -129,17 +127,17 @@ export default {
       loginEmail: '',
       loginEmailRules: [
         v => !!v || 'Required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        v => /.+@.+\..+/.test(v) || this.$i18n.t('EmailMustBeValid')
       ],
       emailRules: [
         v => !!v || 'Required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        v => /.+@.+\..+/.test(v) || this.$i18n.t('EmailMustBeValid')
       ],
 
       show1: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => (v && v.length >= 8) || 'Min 8 characters'
+        required: value => !!value || this.$i18n.t('Required'),
+        min: v => (v && v.length >= 8) || this.$i18n.t('Min8Characters')
       },
       success: false,
       username: '',
@@ -150,7 +148,8 @@ export default {
   },
   computed: {
     passwordMatch() {
-      return () => this.password === this.verify || 'Password must match';
+      return () =>
+        this.password === this.verify || this.$i18n.t('PasswordMustMatch');
     }
   },
   methods: {

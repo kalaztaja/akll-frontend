@@ -6,11 +6,15 @@
         <v-text-field
           v-model="applicationText"
           :rules="[rules.required]"
-          label="Application text"
+          :label="$t('ApplicationText')"
           required
         />
       </v-col>
-      <v-select :items="seasonNames" label="Select season" v-model="seasonId" />
+      <v-select
+        :items="seasonNames"
+        :label="$t('SelectSeason')"
+        v-model="seasonId"
+      />
       <v-col cols="4" align="end">
         <v-btn
           color="success"
@@ -18,7 +22,7 @@
           @click="sendApplication()"
           align="end"
         >
-          Send Application
+          {{ $t('SendApplication') }}
         </v-btn>
       </v-col>
     </v-form>
@@ -33,7 +37,7 @@ export default {
       applicationText: '',
       seasonId: '',
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || this.$i18n.t('Required')
       }
     };
   },

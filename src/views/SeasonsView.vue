@@ -4,7 +4,7 @@
       <v-flex>
         <v-row align="center">
           <v-col>
-            <p id="title" class="text-left display-1">Teams</p>
+            <p id="title" class="text-left display-1">{{ $t('Teams') }}</p>
           </v-col>
           <v-col align="end">
             <v-btn
@@ -12,7 +12,7 @@
               v-on="() => (this.state.show = true)"
               color="secondary"
             >
-              Create Season
+              {{ $t('CreateSeason') }}
             </v-btn>
           </v-col>
         </v-row>

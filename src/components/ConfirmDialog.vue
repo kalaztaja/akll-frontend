@@ -7,7 +7,9 @@
       </v-btn>
     </template>
     <v-card>
-      <v-card-title>Are you sure you want to {{ dialogText }}?</v-card-title>
+      <v-card-title>
+        {{ $t('AreYouSureYouWantTo') }} {{ dialogText }}?
+      </v-card-title>
 
       <v-card-actions>
         <v-spacer />
@@ -19,10 +21,10 @@
             callback();
           "
         >
-          Yes
+          {{ $t('Yes') }}
         </v-btn>
         <v-btn color="white" text @click="dialog = false">
-          Cancel
+          {{ $t('Cancel') }}
         </v-btn>
       </v-card-actions>
     </v-card>

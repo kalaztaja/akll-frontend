@@ -7,7 +7,7 @@
             <v-text-field
               v-model="firstName"
               :rules="[rules.required]"
-              label="First Name"
+              :label="$t('FirstName')"
               maxlength="20"
               required
             />
@@ -16,19 +16,19 @@
             <v-text-field
               v-model="surname"
               :rules="[rules.required]"
-              label="Surname"
+              :label="$t('Surname')"
               maxlength="40"
               required
             />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="university" label="University" />
+            <v-text-field v-model="university" :label="$t('University')" />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="guild" label="Guild" />
+            <v-text-field v-model="guild" :label="$t('Guild')" />
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="age" label="Age" type="number" />
+            <v-text-field v-model="age" :label="$t('Age')" type="number" />
           </v-col>
 
           <v-spacer />
@@ -40,7 +40,7 @@
               color="success"
               @click="editUserInfo"
             >
-              Update
+              {{ $t('Update') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -69,14 +69,14 @@ export default {
       verify: '',
       newPassword: '',
       emailRules: [
-        v => !!v || 'Required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        v => !!v || this.$i18n.t('Required'),
+        v => /.+@.+\..+/.test(v) || this.$i18n.t('EmailMustBeValid')
       ],
 
       show1: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => (v && v.length >= 8) || 'Min 8 characters'
+        required: value => !!value || this.$i18n.t('Required'),
+        min: v => (v && v.length >= 8) || this.$i18n.t('Min8Characters')
       },
       success: false,
       username: '',
@@ -101,7 +101,10 @@ export default {
       await this.$store.dispatch('editUserInfo', formData);
 
       this.$store.dispatch('stopLoading');
-      this.$store.dispatch('setAlertSuccess', 'Tiedot päivitetty');
+      this.$store.dispatch(
+        'setAlertSuccess',
+        this.$i18n.t('InformationUpdated')
+      );
       this.$router.replace(`/user/${this.$route.params.id}`);
     },
 

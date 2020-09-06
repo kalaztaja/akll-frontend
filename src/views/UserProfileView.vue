@@ -3,9 +3,7 @@
     <v-card block v-if="user" class="main-container">
       <div class="d-flex justify-space-between flex-column flex-sm-row">
         <div>
-          <v-card-title class="display-3">
-            {{ user.username }}
-          </v-card-title>
+          <v-card-title class="display-3">{{ user.username }}</v-card-title>
           <v-card-subtitle class="text-subtitle-1" v-if="user.firstName">
             {{ user.firstName }} {{ user.surname }}
           </v-card-subtitle>
@@ -18,11 +16,13 @@
       </div>
       <v-spacer />
       <v-card-text class="meta-text">
-        University: {{ user.university }}
+        {{ $t('University') }}: {{ user.university }}
       </v-card-text>
-      <v-card-text class="meta-text">Guild: {{ user.guild }}</v-card-text>
+      <v-card-text class="meta-text">
+        {{ $t('Guild') }}: {{ user.guild }}
+      </v-card-text>
       <v-card-text class="meta-text" v-if="user.currentTeams">
-        Nykyinen tiimi:
+        {{ $t('CurrentTeam') }}:
         <router-link :to="`/teams/${user.currentTeams[0]._id}`">
           {{ user.currentTeams[0].teamName }}
         </router-link>
@@ -32,7 +32,7 @@
         <h2 class="mb-4">Tunnuksen hallinta</h2>
         <div class="d-flex mb-4">
           <div class="link-info">
-            <span>Sähköposti vahvistettu:</span>
+            <span>{{ $t('EmailConfirmed') }}:</span>
             <v-icon>
               {{ user.emailConfirmed ? 'mdi-check' : 'mdi-alert-circle' }}
             </v-icon>
@@ -43,26 +43,28 @@
             v-if="!user.emailConfirmed"
           >
             <v-btn class="link-btn" @click="resendVerification">
-              Lähetä vahvistusviesti
+              {{ $t('SendVerificationEmail') }}
             </v-btn>
           </div>
         </div>
 
         <div class="d-flex mb-4" v-if="game === 'csgo'">
           <div class="link-info">
-            <span>Steam-tili yhdistetty:</span>
+            <span>{{ $t('SteamAccountLinked') }}:</span>
             <v-icon>{{ user.steam ? 'mdi-check' : 'mdi-alert-circle' }}</v-icon>
           </div>
           <div class="d-flex" style="flex-basis: 50%;" v-if="!user.steam">
             <v-btn class="link-btn" @click="startSteamLinking">
-              Linkitä Steam-tili
+              {{ $t('LinkSteamAccount') }}
             </v-btn>
           </div>
         </div>
 
-        <v-btn class="mb-4" block :to="userEditUrl">Muokkaa tietojasi</v-btn>
+        <v-btn class="mb-4" block :to="userEditUrl">
+          {{ $t('EditYourInfo') }}
+        </v-btn>
         <v-btn class="mb-4" block @click="togglePasswordChange">
-          Vaihda salasana
+          {{ $t('ChangePassword') }}
           <v-icon dark right>
             {{ showPasswordChange ? 'mdi-menu-up' : 'mdi-menu-down' }}
           </v-icon>
@@ -74,7 +76,7 @@
           class="mb-4"
         />
         <v-btn class="mb-4" block @click="toggleEmailChange">
-          Vaihda sähköpostiosoite
+          {{ $t('ChangeEmail') }}
           <v-icon dark right>
             {{ showEmailChange ? 'mdi-menu-up' : 'mdi-menu-down' }}
           </v-icon>
@@ -130,7 +132,10 @@ export default {
   methods: {
     async resendVerification() {
       this.$store.dispatch('resendVerificationEmail');
-      this.$store.dispatch('setAlertSuccess', 'Uusi varmistusviesti lähetetty');
+      this.$store.dispatch(
+        'setAlertSuccess',
+        this.$i18n.t('NewVerificationEmailSent')
+      );
     },
 
     async startSteamLinking() {

@@ -3,7 +3,12 @@
     <v-form ref="loginModel" v-model="valid" lazy-validation>
       <v-container v-on:keyup.enter="login">
         <v-col cols="12">
-          <v-text-field v-model="email" maxlength="30" label="Email" required />
+          <v-text-field
+            v-model="email"
+            maxlength="30"
+            :label="$t('Email')"
+            required
+          />
         </v-col>
         <v-col cols="12">
           <v-text-field
@@ -12,7 +17,7 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
-            label="Password"
+            :label="$t('Password')"
             counter
             @click:append="show1 = !show1"
           />
@@ -20,12 +25,12 @@
         <v-spacer />
         <div class="mb-4">
           <router-link class="mx-3" to="/reset-password">
-            Unohditko salasanasi?
+            {{ $t('ForgetPassword') }}
           </router-link>
         </div>
         <div class="mb-4">
           <router-link class="mx-3" to="/register">
-            Luo uusi tunnus tästä!
+            {{ $t('CreateNewUser') }}
           </router-link>
         </div>
         <v-spacer />
@@ -39,7 +44,7 @@
             color="success"
             href="/aklapi/integration/steam/login"
           >
-            Login with Steam
+            {{ $t('LoginWithSteam') }}
           </v-btn>
           <v-btn
             x-large
@@ -82,11 +87,14 @@ export default {
           this.$store.dispatch('getFullUserInfo');
         })
         .then(() => {
-          this.$store.dispatch('setAlertSuccess', 'Logged in!');
+          this.$store.dispatch('setAlertSuccess', this.$i18n.t('LoggedIn'));
           this.$router.push({ name: 'home-view' });
         })
         .catch(() => {
-          this.$store.dispatch('setAlertError', 'Incorrect email or password');
+          this.$store.dispatch(
+            'setAlertError',
+            this.$i18n.t('IncorrectEmailPassword')
+          );
         });
       this.$store.dispatch('stopLoading');
     }

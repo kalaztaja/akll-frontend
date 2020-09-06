@@ -4,18 +4,16 @@
       <v-flex>
         <v-row align="center">
           <v-col>
-            <p id="title" class="text-left display-1">Teams</p>
+            <p id="title" class="text-left display-1">{{ $t('Teams') }}</p>
           </v-col>
           <v-col align="end">
-            <div v-if="!canCreateOrJoinTeam">
-              {{ createTeamTooltip }}
-            </div>
+            <div v-if="!canCreateOrJoinTeam">{{ createTeamTooltip }}</div>
             <v-btn
               to="/teams/create"
               color="secondary"
               :disabled="!canCreateOrJoinTeam"
             >
-              Create team
+              {{ $t('CreateTeam') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -32,10 +30,10 @@
         </v-col>
         <v-btn v-if="page > 0" class="float-left" @click="prevPage">
           <v-icon>mdi-arrow-left</v-icon>
-          Prev page
+          {{ $t('PreviousPage') }}
         </v-btn>
         <v-btn v-if="canGoRight" class="float-right" @click="nextPage">
-          Next page
+          {{ $t('NextPage') }}
           <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
       </v-flex>

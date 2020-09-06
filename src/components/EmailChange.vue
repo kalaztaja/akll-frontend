@@ -4,7 +4,7 @@
       <v-text-field
         v-model="email"
         :rules="emailRules"
-        label="E-mail"
+        :label="$t('Email')"
         required
       />
       <v-text-field
@@ -13,11 +13,11 @@
         :rules="[rules.required]"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        label="Password"
+        :label="$t('Password')"
         @click:append="show1 = !show1"
       />
       <v-btn x-large inlineblock color="success" @click="changeEmail">
-        Change email
+        {{ $t('ChangeEmail') }}
       </v-btn>
     </v-form>
   </div>
@@ -41,11 +41,11 @@ export default {
       show1: false,
       email: '',
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || this.$i18n.t('Required')
       },
       emailRules: [
-        v => !!v || 'Required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        v => !!v || this.$i18n.t('Required'),
+        v => /.+@.+\..+/.test(v) || this.$i18n.t('EmailMustBeValid')
       ]
     };
   },

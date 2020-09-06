@@ -17,11 +17,11 @@
           v-if="this.$store.getters.loggedIn && !isInAnyTeam"
           @click="openApplicationForm()"
         >
-          Apply for team
+          {{ $t('ApplyForTeam') }}
         </v-btn>
         <confirm-dialog
-          buttonText="Leave team"
-          dialogText="leave this team"
+          :buttonText="$t('LeaveTeam')"
+          :dialogText="$t('LeaveThisTeam')"
           :callback="leaveTeam"
           v-if="isInThisTeam"
         />
@@ -32,7 +32,7 @@
           :disabled="team.members.length < 5"
           :to="applyUrl"
         >
-          Apply for season
+          {{ $t('ApplyForSeason') }}
         </v-btn>
       </v-row>
       <v-form v-if="showApplicationForm" @submit.prevent>
@@ -40,7 +40,7 @@
           <v-text-field
             v-model="applicationText"
             :rules="[rules.required]"
-            label="Application text"
+            :label="$t('ApplicationText')"
             required
           />
         </v-col>
@@ -51,13 +51,13 @@
             @click="sendApplication()"
             align="end"
           >
-            Send Application
+            {{ $t('SendApplication') }}
           </v-btn>
         </v-col>
       </v-form>
       <div v-if="isOwner">
         <v-btn block @click="toggleApplications()">
-          Applications ({{ team.applications.length }})
+          {{ $t('Applications') }} ({{ team.applications.length }})
           <v-icon dark right>
             {{ showApplications ? 'mdi-menu-up' : 'mdi-menu-down' }}
           </v-icon>
@@ -79,11 +79,11 @@
               class="mr-4"
               @click="handleApplication(appli, true)"
             >
-              Accept
+              {{ $t('Accept') }}
               <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
             </v-btn>
             <v-btn color="red" @click="handleApplication(appli, false)">
-              Deny
+              {{ $t('Deny') }}
               <v-icon dark right>mdi-cancel</v-icon>
             </v-btn>
           </v-list-item>
@@ -107,7 +107,7 @@ export default {
       applicationText: '',
       applicationUsers: [],
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || this.$i18n.t('Required')
       }
     };
   },
@@ -127,7 +127,7 @@ export default {
       this.showApplicationForm = false;
       this.$store.dispatch(
         'setAlertSuccess',
-        'Hakemus lähetetty onnistuneesti!'
+        this.$i18n.t('ApplicationSetSuccesfully')
       );
     },
 

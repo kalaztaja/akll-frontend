@@ -1,18 +1,22 @@
 <template>
   <v-container>
     <div v-if="!passwordChange">
-      <h1>Unohditko salasanasi?</h1>
-      Kirjoita sähköpostisiosoittesi ja lähetämme sinulle salasanan nollaus
-      linkin.
+      <h1>{{ $t('DidYouForgetPassword') }}</h1>
+      {{ $t('PasswordResetMsg') }}
       <v-form lazy-validation>
-        <v-text-field v-model="email" maxlength="50" label="Email" required />
+        <v-text-field
+          v-model="email"
+          maxlength="50"
+          :label="$t('Email')"
+          required
+        />
         <v-btn x-large inlineblock color="success" @click="sendResetPassword">
-          Send
+          {{ $t('Send') }}
         </v-btn>
       </v-form>
     </div>
     <div v-if="passwordChange">
-      Aseta uusi salasana.
+      {{ $t('SetNewPassword') }}
       <v-form lazy-validation>
         <v-text-field
           v-model="password"
@@ -21,7 +25,7 @@
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
-          label="Password"
+          :label="$t('Password')"
           hint="At least 8 characters"
           counter
           @click:append="show1 = !show1"
@@ -33,12 +37,12 @@
           :rules="[rules.required, passwordMatch]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
-          label="Confirm Password"
+          :label="$t('ConfirmPassword')"
           counter
           @click:append="show1 = !show1"
         />
         <v-btn x-large inlineblock color="success" @click="resetPassword">
-          Reset password
+          {{ $t('ResetPassword') }}
         </v-btn>
       </v-form>
     </div>
@@ -56,14 +60,15 @@ export default {
       verify: '',
       show1: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => (v && v.length >= 8) || 'Min 8 characters'
+        required: value => !!value || this.$i18n.t('Required'),
+        min: v => (v && v.length >= 8) || this.$i18n.t('Min8Characters')
       }
     };
   },
   computed: {
     passwordMatch() {
-      return () => this.password === this.verify || 'Password must match';
+      return () =>
+        this.password === this.verify || this.$i18n.t('PasswordMustMatch');
     }
   },
   methods: {
@@ -72,10 +77,10 @@ export default {
         await this.$store.dispatch('sendPasswordReset', { email: this.email });
         this.$store.dispatch(
           'setAlertSuccess',
-          'Sähköpostiisi on lähetetty nollauslinkki'
+          this.$i18n.t('ResetEmailHasBeenSent')
         );
       } catch (error) {
-        this.$store.dispatch('setAlertError', 'Virheellinen sähköposti');
+        this.$store.dispatch('setAlertError', this.$i18n.t('InvalidEmail'));
       }
     },
     async resetPassword() {
@@ -86,11 +91,11 @@ export default {
         });
         this.$store.dispatch(
           'setAlertSuccess',
-          'Salasana on vaihdettu onnistuneesti! Voit nyt kirjautua uudella salasanalla.'
+          this.$i18n.t('PasswordResetSuccess')
         );
         this.$router.push('/login');
       } catch (error) {
-        this.$store.dispatch('setAlertError', 'Tapahtui virhe!');
+        this.$store.dispatch('setAlertError', this.$i18n.t('ErrorHappened'));
       }
     }
   },

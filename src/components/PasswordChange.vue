@@ -1,6 +1,6 @@
 <template>
   <div>
-    Aseta uusi salasana.
+    {{ $t('SetNewPassword') }}
     <v-form lazy-validation>
       <v-text-field
         v-model="oldPassword"
@@ -8,7 +8,7 @@
         :rules="[rules.required]"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        label="Old password"
+        :label="$t('OldPassword')"
         @click:append="show1 = !show1"
       />
       <v-text-field
@@ -18,7 +18,7 @@
         :rules="[rules.required, rules.min]"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        label="New password"
+        :label="$t('NewPassword')"
         hint="At least 8 characters"
         counter
         @click:append="show1 = !show1"
@@ -30,12 +30,12 @@
         :rules="[rules.required, passwordMatch]"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        label="Repeat new password"
+        :label="$t('RepeatNewPassword')"
         counter
         @click:append="show1 = !show1"
       />
       <v-btn x-large inlineblock color="success" @click="changePassword">
-        Change password
+        {{ $t('ChangePassword') }}
       </v-btn>
     </v-form>
   </div>
@@ -60,14 +60,15 @@ export default {
       verify: '',
       show1: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => (v && v.length >= 8) || 'Min 8 characters'
+        required: value => !!value || this.$i18n.t('Required'),
+        min: v => (v && v.length >= 8) || this.$i18n.t('Min8Characters')
       }
     };
   },
   computed: {
     passwordMatch() {
-      return () => this.password === this.verify || 'Password must match';
+      return () =>
+        this.password === this.verify || this.$i18n.t('PasswordMustMatch');
     }
   },
   methods: {

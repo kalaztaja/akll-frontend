@@ -23,20 +23,22 @@
           >
             <v-card-title />
           </v-img>
-          <v-card-title class="text-left">The season 4 is here!</v-card-title>
+          <v-card-title class="text-left">
+            {{ $t('AKLJoinTitle') }}
+          </v-card-title>
           <v-card-subtitle class="text-left">
-            Sign up and join a team to join the upcoming season!
+            {{ $t('JoinMessage') }}
           </v-card-subtitle>
           <v-card-actions>
             <v-btn v-if="!this.$store.getters.loggedIn" text :to="'register'">
-              Login
+              {{ $t('Login') }}
             </v-btn>
 
             <v-spacer />
             <v-btn v-if="this.$store.getters.loggedIn" text :to="'teams'">
-              Join a team!
+              {{ $t('JoinATeam') }}
             </v-btn>
-            <v-btn v-else text :to="'register'">Register</v-btn>
+            <v-btn v-else text :to="'register'">{{ $t('Register') }}</v-btn>
           </v-card-actions>
         </v-card>
         <v-card v-else>
@@ -47,20 +49,22 @@
           >
             <v-card-title />
           </v-img>
-          <v-card-title class="text-left">The season 1 is here!</v-card-title>
+          <v-card-title class="text-left">
+            {{ $t('ALLJoinTitle') }}
+          </v-card-title>
           <v-card-subtitle class="text-left">
-            Sign up and join a team to join the upcoming season!
+            {{ $t('JoinMessage') }}
           </v-card-subtitle>
           <v-card-actions>
             <v-btn v-if="!this.$store.getters.loggedIn" text :to="'register'">
-              Login
+              {{ $t('Login') }}
             </v-btn>
 
             <v-spacer />
             <v-btn v-if="this.$store.getters.loggedIn" text :to="'teams'">
-              Join a team!
+              {{ $t('JoinATeam') }}
             </v-btn>
-            <v-btn v-else text :to="'register'">Register</v-btn>
+            <v-btn v-else text :to="'register'">{{ $t('Register') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -72,10 +76,10 @@
             src="@/assets/DiscordLogo.png"
           />
           <v-card-title class="text-left">
-            Join the discussion at Discord
+            {{ $t('DiscordTitle') }}
           </v-card-title>
           <v-card-subtitle class="text-left">
-            Click the link and hop on to our channel
+            {{ $t('DiscordMessage') }}
           </v-card-subtitle>
           <v-card-actions>
             <v-spacer />
@@ -87,7 +91,7 @@
                   : 'http://discord.gg/unB7YDP'
               "
             >
-              Join the discord!
+              {{ $t('JoinDiscord') }}
             </v-btn>
           </v-card-actions>
         </v-card>

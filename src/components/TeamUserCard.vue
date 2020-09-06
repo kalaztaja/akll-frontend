@@ -10,22 +10,22 @@
       <v-dialog v-model="dialog" width="500" v-if="isOwner && !isCaptain">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="red" v-bind="attrs" v-on="on">
-            Kick
+            {{ $t('Kick') }}
             <v-icon dark right>mdi-cancel</v-icon>
           </v-btn>
         </template>
         <v-card>
           <v-card-title>
-            Are you sure you want to kick {{ user.username }}?
+            {{ $t('AreYouSureYouWantKick') }} {{ user.username }}?
           </v-card-title>
 
           <v-card-actions>
             <v-spacer />
             <v-btn color="red" text @click="kickPlayer()">
-              Yes
+              {{ $t('Yes') }}
             </v-btn>
             <v-btn color="white" text @click="dialog = false">
-              Cancel
+              {{ $t('Cancel') }}
             </v-btn>
           </v-card-actions>
         </v-card>

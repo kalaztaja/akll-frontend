@@ -2,18 +2,18 @@
   <v-card class="main-container">
     <v-container>
       <div v-if="!success">
-        <h2 class="text-center display-1 mb-4">Tunnus on aktivoitu</h2>
-        <div>Voit nyt käyttää tunnustasi ja luoda tiimin.</div>
+        <h2 class="text-center display-1 mb-4">{{ $t('VerifyHeader') }}</h2>
+        <div>{{ $t('VerifyText1') }}</div>
         <div v-if="game === 'csgo' && !isSteamLinked">
-          AKL:ää varten sinun pitää linkittää steamtilisi. Voit tehdä sen
-          <router-link :to="userPage">omasta profiilistasi.</router-link>
+          {{ $t('VerifyTextAKL1') }}
+          <router-link :to="userPage">{{ $t('VerifyTextAKL2') }}</router-link>
         </div>
         <v-spacer />
-        <v-btn class="mt-6" to="/">Etusivulle</v-btn>
+        <v-btn class="mt-6" to="/">{{ $t('FrontPage') }}</v-btn>
       </div>
       <div v-if="!error">
-        <h2>Jokin meni mönkään.</h2>
-        <div>Yritä uudestaan hetken päästä</div>
+        <h2>{{ $t('VerifyTextError1') }}</h2>
+        <div>{{ $t('VerifyTextError2') }}</div>
       </div>
     </v-container>
   </v-card>

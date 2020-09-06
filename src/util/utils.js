@@ -47,18 +47,18 @@ export const canCreateOrJoinTeam = () => {
 
 export const createTeamTooltip = () => {
   if (!store.getters.loggedIn) {
-    return 'Sinun pitää kirjautua sisään!';
+    return this.$i18n.t('YouHaveToLogin');
   }
   const { fullUserInfo } = store.state.auth;
 
   if (!fullUserInfo) return '';
 
   if (!fullUserInfo.registrationComplete) {
-    return 'Sinun pitää luoda tunnuksesi loppuun!';
+    return this.$i18n.t('YouHaveToFinishYourAccount');
   } else if (!fullUserInfo.emailConfirmed) {
-    return 'Sinun pitää vahvistaa sähköpostisi!';
+    return this.$i18n.t('YouHaveToVerifyYourEmail');
   } else if (env.game === 'csgo' && !fullUserInfo.steam) {
-    return 'Sinun pitää linkittää Steam-tilisi AKL-tiliisi';
+    return this.$i18n.t('YouHaveToLinkYourSteam');
   }
   return '';
 };
