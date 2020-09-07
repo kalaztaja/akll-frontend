@@ -8,6 +8,7 @@ import axios from 'axios';
 import { checkTokensOnRequest } from './util/utils';
 
 import messages from '../localization/messages.js';
+import { env } from '../env';
 
 Vue.config.productionTip = false;
 
@@ -35,6 +36,11 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+document.title =
+  env.game === 'csgo'
+    ? 'Akateeminen kynäriliiga'
+    : 'Akateeminen legendojenliiga';
 
 router.afterEach(() => {
   store.dispatch('stopLoading');
