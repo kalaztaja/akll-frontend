@@ -56,10 +56,15 @@ export default {
 
   methods: {
     async sendApplication() {
-      this.$store.dispatch('applyForSeason', {
-        applicationText: this.applicationText,
-        id: this.seasonId
-      });
+      try {
+        await this.$store.dispatch('applyForSeason', {
+          applicationText: this.applicationText,
+          id: this.seasonId
+        });
+        this.$store.dispatch('setAlertSuccess', 'Application send succesfully');
+      } catch (err) {
+        this.$store.dispatch('setAlertError', err.response.data.message);
+      }
     }
   },
   created() {
