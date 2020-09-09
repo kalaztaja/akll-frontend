@@ -59,6 +59,7 @@ export default {
   height: 50px;
   color: white;
   font-family: Raleway;
+  z-index: 1;
 }
 .logo-short {
   line-height: 1;
@@ -89,10 +90,14 @@ export default {
   padding-bottom: 10px !important;
 }
 .akl-t3g-button {
-  color: #272727;
+  color: #f5f5f5;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 0;
 }
 .all-t3g-button {
   color: black;
   background-color: #f5f5f5 !important;
+  overflow: hidden;
 }
 </style>

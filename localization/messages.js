@@ -41,7 +41,7 @@ const messages = {
     DiscordMessage: 'Click the link and hop on to our channel',
     JoinDiscord: 'Join the Discord!',
 
-    OrganizedBy: 'Organized by',
+    OrganizedBy: 'By',
 
     //SEASON
 
@@ -204,7 +204,7 @@ const messages = {
     JoinDiscord: 'Liity discordiin!',
     JoinATeam: 'Liity joukkueeseen!',
 
-    OrganizedBy: 'Järjestänä',
+    OrganizedBy: '',
 
     //SEASON
 
