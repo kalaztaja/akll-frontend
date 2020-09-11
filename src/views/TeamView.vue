@@ -67,7 +67,10 @@
           <v-list-item v-for="appli in team.applications" :key="appli._id">
             <v-list-item-content>
               <v-list-item-title>
-                <router-link :to="`/user/${appli.user._id}`">
+                <router-link
+                  :to="`/user/${appli.user._id}`"
+                  style="isCsgo ? '' : 'all-teamname'"
+                >
                   {{ appli.user.username }}
                 </router-link>
               </v-list-item-title>
@@ -97,6 +100,7 @@
 <script>
 import TeamUserCard from '../components/TeamUserCard';
 import ConfirmDialog from '../components/ConfirmDialog';
+import { env } from '../../env';
 
 export default {
   name: 'TeamView',
@@ -196,6 +200,9 @@ export default {
     loaded() {
       // bubblegumfix to prevent teamscreen flashing wrong team for a second
       return this.$store.state.team.currentTeam.id === this.$route.params.id;
+    },
+    isCsgo() {
+      return env.game === 'csgo';
     }
   },
   async beforeCreate() {
@@ -224,5 +231,8 @@ export default {
 .team-container h3 {
   font-size: 28px;
   margin-bottom: 10px;
+}
+.all-teamname {
+  color: black !important;
 }
 </style>

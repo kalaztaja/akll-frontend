@@ -20,7 +20,12 @@
         <v-divider id="divider" />
 
         <v-col>
-          <v-col v-for="team in teams" :key="team.teamName" no-gutters>
+          <v-col
+            v-for="team in teams"
+            :key="team.teamName"
+            no-gutters
+            style="isCsgo ? '' : 'all-team'"
+          >
             <team-card
               :teamName="team.teamName"
               :teamTag="team.abbreviation"
@@ -44,6 +49,7 @@
 <script>
 import TeamCard from '../components/TeamCard.vue';
 import { canCreateOrJoinTeam, createTeamTooltip } from '../util/utils';
+import { env } from '../../env';
 
 const PAGE_SIZE = 20;
 
@@ -72,10 +78,15 @@ export default {
   },
   computed: {
     teams() {
-      return this.$store.state.team.teams.slice(
+      var tempTeams = this.$store.state.team.teams.slice(
         this.page * PAGE_SIZE,
         (this.page + 1) * PAGE_SIZE
       );
+      if (this.isCsgo()) {
+        return tempTeams.filter(team => team.game === 'csgo');
+      } else {
+        return tempTeams.filter(team => team.game === 'lol');
+      }
     },
     canCreateOrJoinTeam() {
       return canCreateOrJoinTeam();
@@ -87,6 +98,9 @@ export default {
       return (
         (this.page + 1) * PAGE_SIZE - this.$store.state.team.teams.length <= 0
       );
+    },
+    isCsgo() {
+      return env.game === 'csgo';
     }
   },
   created() {
@@ -115,5 +129,8 @@ export default {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+.all-team {
+  color: black !important;
 }
 </style>
