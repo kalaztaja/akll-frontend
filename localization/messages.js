@@ -32,7 +32,7 @@ const messages = {
     TeamCreated: 'Team created!',
 
     // HOME PAGE
-    AKLJoinTitle: 'The season 4 is here',
+    AKLJoinTitle: 'The season 5 is here',
     ALLJoinTitle: 'The season 1 is here!',
     JoinMessage: 'Sign up and join a team to join the upcoming season!',
     JoinATeam: 'Join a team!',
@@ -194,8 +194,8 @@ const messages = {
     TeamCreated: 'Tiimi luotu!',
 
     // HOME PAGE
-    AKLJoinTitle: 'Season 4 on vihdoin täällä!',
-    ALLJoinTitle: 'Season 1 on vihdoin täällä!',
+    AKLJoinTitle: 'Viides kausi on vihdoin täällä!',
+    ALLJoinTitle: 'Ensimmäinen kausi on vihdoin täällä!',
     JoinMessage:
       'Rekisteröidy ja liity joukkueeseen liittyäksesi tulevalle kaudelle!',
 

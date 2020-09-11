@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <p>Tähän vielä jotain kunnon hölinää säännöistä yms.</p>
+    <p>
+      From here you can send an application to a season! You can only apply
+      once!
+    </p>
     <v-form @submit.prevent>
       <v-col cols="12">
         <v-text-field
@@ -56,10 +59,18 @@ export default {
 
   methods: {
     async sendApplication() {
-      this.$store.dispatch('applyForSeason', {
-        applicationText: this.applicationText,
-        id: this.seasonId
-      });
+      try {
+        await this.$store.dispatch('applyForSeason', {
+          applicationText: this.applicationText,
+          id: this.seasonId
+        });
+        this.$store.dispatch(
+          'setAlertSuccess',
+          'Application sent succesfully!'
+        );
+      } catch (err) {
+        this.$store.dispatch('setAlertError', err.response.data.message);
+      }
     }
   },
   created() {

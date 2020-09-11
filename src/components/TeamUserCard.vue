@@ -21,7 +21,7 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn color="red" text @click="kickPlayer()">
+            <v-btn color="red" text @click="kick()">
               {{ $t('Yes') }}
             </v-btn>
             <v-btn color="white" text @click="dialog = false">
@@ -49,6 +49,10 @@ export default {
     isCaptain: {
       type: Boolean,
       default: false
+    },
+    kickPlayer: {
+      type: Function,
+      default: () => {}
     }
   },
 
@@ -59,9 +63,9 @@ export default {
   },
 
   methods: {
-    kickPlayer() {
+    kick() {
       this.dialog = false;
-      this.$store.dispatch('kickPlayer', this.user._id);
+      this.kickPlayer(this.user._id);
     }
   },
 

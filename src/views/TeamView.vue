@@ -10,6 +10,7 @@
           :user="member"
           :isOwner="isOwner"
           :isCaptain="member._id === team.captain._id"
+          :kickPlayer="kickPlayer"
         />
       </div>
       <v-row class="toolbar mb-4 mx-0">
@@ -121,14 +122,18 @@ export default {
     },
 
     async sendApplication() {
-      await this.$store.dispatch('sendApplication', {
-        applicationText: this.applicationText
-      });
-      this.showApplicationForm = false;
-      this.$store.dispatch(
-        'setAlertSuccess',
-        this.$i18n.t('ApplicationSetSuccesfully')
-      );
+      try {
+        await this.$store.dispatch('sendApplication', {
+          applicationText: this.applicationText
+        });
+        this.showApplicationForm = false;
+        this.$store.dispatch(
+          'setAlertSuccess',
+          this.$i18n.t('ApplicationSetSuccesfully')
+        );
+      } catch (err) {
+        this.$store.dispatch('setAlertError', err.response.data.message);
+      }
     },
 
     async handleApplication(appli, accepted) {
@@ -136,12 +141,20 @@ export default {
         userId: appli.user._id,
         accepted
       });
-      const i = this.applicationUsers.findIndex(u => u.id === appli.user);
-      this.applicationUsers.splice(i, 1);
+      // const i = this.applicationUsers.findIndex(u => u.id === appli.user);
+      // this.applicationUsers.splice(i, 1);
+      // lazy way to show updated data.
+      await this.$store.dispatch('retrieveTeam', this.$route.params.id);
     },
 
     async leaveTeam() {
       await this.$store.dispatch('leaveTeam');
+    },
+
+    async kickPlayer(id) {
+      await this.$store.dispatch('kickPlayer', id);
+      // lazy way to show updated data.
+      await this.$store.dispatch('retrieveTeam', this.$route.params.id);
     }
   },
   computed: {

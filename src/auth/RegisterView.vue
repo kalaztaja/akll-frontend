@@ -167,10 +167,12 @@ export default {
       };
 
       if (this.steamToken) formData.steamRegistrationToken = this.steamToken;
-
-      await this.$store.dispatch('formRegister', formData);
-      this.success = true;
-
+      try {
+        await this.$store.dispatch('formRegister', formData);
+        this.success = true;
+      } catch (err) {
+        this.$store.dispatch('setAlertError', err.response.data.message);
+      }
       this.$store.dispatch('stopLoading');
     },
 
