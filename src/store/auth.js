@@ -62,7 +62,7 @@ const authStore = {
   actions: {
     async formRegister(context, data) {
       const res = await axios.post('/user/create/', data);
-      if (res.status !== 200) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error(res.data.message);
       } else {
         context.commit('setTokens', res.data);
