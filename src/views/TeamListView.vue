@@ -12,7 +12,9 @@
               to="/teams/create"
               color="secondary"
               :disabled="!canCreateOrJoinTeam"
-            >{{ $t('CreateTeam') }}</v-btn>
+            >
+              {{ $t('CreateTeam') }}
+            </v-btn>
           </v-col>
         </v-row>
         <v-divider id="divider" />
