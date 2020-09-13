@@ -12,9 +12,7 @@
               to="/teams/create"
               color="secondary"
               :disabled="!canCreateOrJoinTeam"
-            >
-              {{ $t('CreateTeam') }}
-            </v-btn>
+            >{{ $t('CreateTeam') }}</v-btn>
           </v-col>
         </v-row>
         <v-divider id="divider" />
@@ -64,7 +62,10 @@ export default {
     nextPage() {
       this.page += 1;
       if (this.$store.state.team.teams.length % PAGE_SIZE === 0) {
-        this.$store.dispatch('retrieveTeams', { page: this.page });
+        this.$store.dispatch('retrieveTeams', {
+          page: this.page,
+          game: env.game
+        });
       }
     },
 
