@@ -77,15 +77,10 @@ export default {
       return env.game === 'csgo';
     },
     teams() {
-      var tempTeams = this.$store.state.team.teams.slice(
+      return this.$store.state.team.teams.slice(
         this.page * PAGE_SIZE,
         (this.page + 1) * PAGE_SIZE
       );
-      if (env.game === 'csgo') {
-        return tempTeams.filter(team => team.game === 'csgo');
-      } else {
-        return tempTeams.filter(team => team.game === 'lol');
-      }
     },
     canCreateOrJoinTeam() {
       return canCreateOrJoinTeam();
@@ -104,7 +99,7 @@ export default {
       this.$store.state.team.teams.length === 0 ||
       this.$store.state.team.teams.length % PAGE_SIZE === 0
     ) {
-      this.$store.dispatch('retrieveTeams', { page: 0 });
+      this.$store.dispatch('retrieveTeams', { page: 0, game: env.game });
     }
   }
 };
