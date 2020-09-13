@@ -20,16 +20,12 @@
         <v-divider id="divider" />
 
         <v-col>
-          <v-col
-            v-for="team in teams"
-            :key="team.teamName"
-            no-gutters
-            style="isCsgo ? '' : 'all-team'"
-          >
+          <v-col v-for="team in teams" :key="team.teamName" no-gutters>
             <team-card
               :teamName="team.teamName"
               :teamTag="team.abbreviation"
               :teamId="team._id"
+              :style="isCsgo ? '' : 'all-team'"
             />
           </v-col>
         </v-col>
@@ -77,12 +73,15 @@ export default {
     }
   },
   computed: {
+    isCsgo() {
+      return env.game === 'csgo';
+    },
     teams() {
       var tempTeams = this.$store.state.team.teams.slice(
         this.page * PAGE_SIZE,
         (this.page + 1) * PAGE_SIZE
       );
-      if (this.isCsgo()) {
+      if (env.game === 'csgo') {
         return tempTeams.filter(team => team.game === 'csgo');
       } else {
         return tempTeams.filter(team => team.game === 'lol');
@@ -98,9 +97,6 @@ export default {
       return (
         (this.page + 1) * PAGE_SIZE - this.$store.state.team.teams.length <= 0
       );
-    },
-    isCsgo() {
-      return env.game === 'csgo';
     }
   },
   created() {

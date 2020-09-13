@@ -1,7 +1,18 @@
 <template>
   <v-card class="d-flex">
     <v-card-text>
-      <router-link :to="redirectionURL" class="team-username text--primary">
+      <router-link
+        v-if="isCsgo"
+        :to="redirectionURL"
+        class="team-username text--primary"
+      >
+        {{ user.username }}
+      </router-link>
+      <router-link
+        v-else
+        :to="redirectionURL"
+        class="team-username all-team-member"
+      >
         {{ user.username }}
       </router-link>
       <v-icon v-if="isCaptain" dark right>mdi-crown-outline</v-icon>
@@ -21,9 +32,7 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn color="red" text @click="kick()">
-              {{ $t('Yes') }}
-            </v-btn>
+            <v-btn color="red" text @click="kick()">{{ $t('Yes') }}</v-btn>
             <v-btn color="white" text @click="dialog = false">
               {{ $t('Cancel') }}
             </v-btn>
@@ -35,6 +44,8 @@
 </template>
 
 <script>
+import { env } from '../../env';
+
 export default {
   name: 'TeamUserCard',
   props: {
@@ -75,6 +86,9 @@ export default {
         path: `/user/${this.user._id}`,
         props: { id: this.user._id }
       };
+    },
+    isCsgo() {
+      return env.game === 'csgo';
     }
   }
 };
@@ -83,5 +97,8 @@ export default {
 <style>
 .team-username {
   font-size: 24px;
+}
+.all-team-member {
+  color: black !important;
 }
 </style>

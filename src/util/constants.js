@@ -18,3 +18,33 @@ export const CS_RANKS = [
   'Supreme Master First Class',
   'The Global Elite'
 ];
+
+export const LOL_RANKS = [
+  'IRON IV',
+  'IRON III',
+  'IRON II',
+  'IRON I',
+  'BRONZE IV',
+  'BRONZE III',
+  'BRONZE II',
+  'BRONZE I',
+  'SILVER IV',
+  'SILVER III',
+  'SILVER II',
+  'SILVER I',
+  'GOLD IV',
+  'GOLD III',
+  'GOLD II',
+  'GOLD I',
+  'PLATINUM IV',
+  'PLATINUM III',
+  'PLATINUM II',
+  'PLATINUM I',
+  'DIAMOND IV',
+  'DIAMOND III',
+  'DIAMOND II',
+  'DIAMOND I',
+  'MASTER',
+  'GRANDMASTER',
+  'CHALLENGER'
+];

@@ -2,9 +2,7 @@
   <v-card :to="redirectionURL">
     <v-card-text>
       <div>{{ teamTag }}</div>
-      <p class="display-1 text--primary">
-        {{ teamName }}
-      </p>
+      <p class="display-1">{{ teamName }}</p>
     </v-card-text>
   </v-card>
 </template>

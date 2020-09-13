@@ -30,7 +30,6 @@ const teamStore = {
     },
     async createTeam(context, formData) {
       await axios.post('/team/create', formData);
-      // console.log(res);
     },
     async editTeam(context, formData) {
       await axios.post(

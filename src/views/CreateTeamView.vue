@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { CS_RANKS } from '../util/constants';
+import { CS_RANKS, LOL_RANKS } from '../util/constants';
 import { env } from '../../env';
 
 export default {
@@ -66,8 +66,7 @@ export default {
       rules: {
         required: value => !!value || this.$i18n.t('Required'),
         max: v => (v && v.length <= 11) || this.$i18n.t('TooLong')
-      },
-      ranks: CS_RANKS
+      }
     };
   },
   methods: {
@@ -111,6 +110,15 @@ export default {
   created() {
     if (this.$route.params.team) {
       this.setTeam();
+    }
+  },
+  computed: {
+    ranks() {
+      if (env.game === 'csgo') {
+        return CS_RANKS;
+      } else {
+        return LOL_RANKS;
+      }
     }
   }
 };
