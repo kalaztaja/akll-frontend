@@ -23,6 +23,9 @@ import ResetPasswordView from '../auth/ResetPasswordView';
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
 import HomePageView from '../views/HomePageView.vue';
+
+import CalendarView from '../views/CalendarView.vue';
+
 import { env } from '../../env';
 
 Vue.use(VueRouter);
@@ -145,6 +148,14 @@ const routes = [
     path: '/seasons/:id',
     name: 'season-view',
     component: SeasonView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/calendar',
+    name: 'calendar-view',
+    component: CalendarView,
     meta: {
       requiresAuth: true
     }
