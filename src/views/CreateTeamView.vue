@@ -84,7 +84,7 @@ export default {
           'setAlertSuccess',
           this.$i18n.t('InformationUpdated')
         );
-        this.$router.replace('/teams');
+        this.$router.replace(`/teams/${this.$store.state.team.currentTeam.id}`);
       } else {
         await this.$store.dispatch('createTeam', data);
         this.$store.dispatch('setAlertSuccess', this.$i18n.t('TeamCreated'));

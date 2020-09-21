@@ -56,7 +56,7 @@
             {{ $t('JoinMessage') }}
           </v-card-subtitle>
           <v-card-actions>
-            <v-btn v-if="!this.$store.getters.loggedIn" text :to="'register'">
+            <v-btn v-if="!this.$store.getters.loggedIn" text :to="'login'">
               {{ $t('Login') }}
             </v-btn>
 

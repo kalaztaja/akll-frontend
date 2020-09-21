@@ -20,6 +20,7 @@ node_modules/
 # akll specific envs
 .env.akl
 .env.all
+public/riot.txt
 
 # Log files
 npm-debug.log*
