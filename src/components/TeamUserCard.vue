@@ -4,14 +4,22 @@
       <router-link
         v-if="isCsgo"
         :to="redirectionURL"
-        class="team-username text--primary"
+        :class="[
+          floatRight
+            ? ['team-username', 'text--primary', 'float-right']
+            : ['team-username', 'text--primary']
+        ]"
       >
         {{ user.username }}
       </router-link>
       <router-link
         v-else
         :to="redirectionURL"
-        class="team-username all-team-member"
+        :class="[
+          floatRight
+            ? ['team-username', 'all-team-member', 'float-right']
+            : ['team-username', 'all-team-member']
+        ]"
       >
         {{ user.username }}
       </router-link>
@@ -64,6 +72,10 @@ export default {
     kickPlayer: {
       type: Function,
       default: () => {}
+    },
+    floatRight: {
+      type: Boolean,
+      default: false
     }
   },
 

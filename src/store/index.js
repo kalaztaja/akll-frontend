@@ -10,6 +10,7 @@ import teamStore from './team';
 import seasonStore from './season';
 import authStore from './auth';
 import alertStore from './alert';
+import matchStore from './match';
 
 Vue.use(Vuex);
 axios.defaults.baseURL = env.backendUrl;
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     team: teamStore,
     season: seasonStore,
     auth: authStore,
-    alert: alertStore
+    alert: alertStore,
+    match: matchStore
   }
 });

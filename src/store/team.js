@@ -100,6 +100,11 @@ const teamStore = {
 
     async leaveTeam(context) {
       await axios.post(`/team/${context.state.currentTeam.id}/members/leave`);
+    },
+    async getTeams(context, teamIds) {
+      const team1 = await axios.get(`/team/${teamIds.team1Id}/info`);
+      const team2 = await axios.get(`/team/${teamIds.team2Id}/info`);
+      return [team1.data, team2.data];
     }
   }
 };

@@ -25,6 +25,7 @@ import PostDetailView from '../views/PostDetailView.vue';
 import HomePageView from '../views/HomePageView.vue';
 
 import CalendarView from '../views/CalendarView.vue';
+import TeamMatchesView from '../views/TeamMatchesView.vue';
 
 import { env } from '../../env';
 
@@ -156,6 +157,14 @@ const routes = [
     path: '/calendar',
     name: 'calendar-view',
     component: CalendarView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/teams/:id/matches',
+    name: 'team-matches-view',
+    component: TeamMatchesView,
     meta: {
       requiresAuth: true
     }

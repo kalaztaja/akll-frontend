@@ -1,0 +1,30 @@
+<template>
+  <v-card to="">
+    <v-container fluid>
+      <v-row>
+        <v-card-title>{{ match.challongeRound }}</v-card-title>
+        <v-spacer />
+
+        <v-card-title>{{ match.challongeRound }}</v-card-title>
+      </v-row>
+      <v-row>
+        <v-card-text>{{ match.teamOne.name }}</v-card-text>
+        <v-card-text>{{ match.teamTwo.name }}</v-card-text>
+      </v-row>
+    </v-container>
+  </v-card>
+</template>
+
+<script>
+export default {
+  name: 'MatchPreview',
+  props: {
+    match: {
+      type: Object,
+      required: true
+    }
+  }
+};
+</script>
+
+<style></style>

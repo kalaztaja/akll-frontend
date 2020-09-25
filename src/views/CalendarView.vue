@@ -1,14 +1,25 @@
 <template>
-  <SharedCalendar />
+  <v-flex>
+    <TeamPreview />
+    <SharedCalendar />
+  </v-flex>
 </template>
 
 <script>
 import SharedCalendar from '../components/SharedCalendar.vue';
+import TeamPreview from '../components/TeamPreview.vue';
 
 export default {
   name: 'CalendarView',
   components: {
-    SharedCalendar
+    SharedCalendar,
+    TeamPreview
+  },
+  props: {
+    matchId: {
+      type: String,
+      default: ''
+    }
   }
 };
 </script>
