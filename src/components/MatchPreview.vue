@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="'/teams/' + teamId + '/matches/' + match_id">
+  <v-card :to="'/teams/' + teamId + '/matches/' + match._id">
     <v-container fluid>
       <v-row>
         <v-card-title>{{ match.challongeRound }}</v-card-title>
