@@ -44,12 +44,13 @@ const matchStore = {
     },
     async getLockedMatches() {
       const result = await matchAxios.get(`/match/confirmed`);
+      console.log('results ' + result);
       return result.data;
     },
     async proposeTimeslot(context, parameters) {
       const result = await matchAxios.post('/timeslot/propose', {
         matchId: parameters.matchId,
-        proposeTimeslot: {
+        proposedTimeslot: {
           startTime: parameters.startTime,
           endTime: parameters.endTime
         }

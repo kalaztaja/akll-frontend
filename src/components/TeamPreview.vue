@@ -19,7 +19,7 @@
             <team-user-card
               :user="member"
               :isCaptain="member._id === team2.captain._id"
-              floatRight="true"
+              :floatRight="true"
             />
           </div>
         </v-card>
@@ -49,16 +49,25 @@ export default {
       team2: {}
     };
   },
-  mounted() {
-    this.$store
-      .dispatch('getTeams', {
-        team1Id: this.team1Id,
-        team2Id: this.team2Id
-      })
-      .then(result => {
-        this.team1 = result[0];
-        this.team2 = result[1];
-      });
+  mounted: function() {
+    setTimeout(() => {
+      const t1 = this.team1Id;
+      const t2 = this.team2Id;
+      this.$store
+        .dispatch('getTeams', {
+          team1Id: t1,
+          team2Id: t2
+        })
+        .then(result => {
+          this.team1 = result[0];
+          this.team2 = result[1];
+        });
+    }, 1000);
+    console.log('t1baby' + this.team1Id);
+    console.log(this.team2Id);
+
+    console.log(this.team1);
+    console.log(this.team2);
   }
 };
 </script>
