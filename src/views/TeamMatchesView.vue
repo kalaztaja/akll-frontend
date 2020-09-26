@@ -23,7 +23,7 @@ export default {
     this.$store
       .dispatch('getTeamMatches', this.$route.params.id)
       .then(result => {
-        this.matches = result;
+        this.matches = result.matches;
       })
       .catch(error => {
         this.$store.dispatch('setAlertError', error.response.data.message);
