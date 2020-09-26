@@ -36,11 +36,11 @@ export default {
   props: {
     team1Id: {
       type: String,
-      default: '5f5ddf7ea154470720d88c89'
+      required: true
     },
     team2Id: {
       type: String,
-      default: '5f5ddf7ea154470720d88c89'
+      required: true
     }
   },
   data() {

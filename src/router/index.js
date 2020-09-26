@@ -24,8 +24,8 @@ import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
 import HomePageView from '../views/HomePageView.vue';
 
-import CalendarView from '../views/CalendarView.vue';
 import TeamMatchesView from '../views/TeamMatchesView.vue';
+import TeamMatchDetail from '../views/TeamMatchDetail.vue';
 
 import { env } from '../../env';
 
@@ -154,17 +154,17 @@ const routes = [
     }
   },
   {
-    path: '/calendar',
-    name: 'calendar-view',
-    component: CalendarView,
+    path: '/teams/:id/matches',
+    name: 'team-matches-view',
+    component: TeamMatchesView,
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/teams/:id/matches',
-    name: 'team-matches-view',
-    component: TeamMatchesView,
+    path: '/teams/:id/matches/:matchid',
+    name: 'team-match-detail',
+    component: TeamMatchDetail,
     meta: {
       requiresAuth: true
     }

@@ -168,6 +168,16 @@
 <script>
 export default {
   name: 'SharedCalendar',
+  props: {
+    matchId: {
+      type: String,
+      default: ''
+    },
+    match: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     today: '2020-10-01',
     type: 'month',
@@ -186,26 +196,12 @@ export default {
       { text: 'Month', value: 'month' }
     ],
     colors: ['blue', 'deep-purple', 'green', 'grey darken-1'],
-    events: [
-      {
-        name: 'Servulla turpaan',
-        start: '2020-09-24 09:00',
-        end: '2020-09-24 10:00'
-      },
-      {
-        name: 'Servulla turpaan',
-        start: '2020-09-26'
-      },
-      {
-        name: 'Minuutin hölkkä',
-        start: '2020-09-27 09:30',
-        end: '2020-09-27 15:30'
-      }
-    ],
+    events: [],
     suggestedTime: null,
     timeDialog: false,
     suggestedDate: null,
-    dateDialog: false
+    dateDialog: false,
+    scheduledEvents: []
   }),
   mounted() {
     this.$refs.calendar.checkChange();
@@ -216,6 +212,11 @@ export default {
     var yyyy = todayDate.getFullYear();
 
     this.today = yyyy + '-' + mm + '-' + dd;
+
+    this.$store.dispatch('getLockedMatches').then(result => {
+      this.scheduledEvents = result;
+    });
+    this.events = this.scheduledEvents.concat(this.match.proposedTimeslots);
   },
   methods: {
     viewDay({ date }) {
@@ -249,6 +250,18 @@ export default {
       }
 
       nativeEvent.stopPropagation();
+    }
+  },
+  proposeTime() {
+    if (this.suggestedTime !== null && this.suggestedDate !== null) {
+      const body = {
+        matchId: this.matchId,
+        startTime: '2020-09-25T17:08:39.172Z',
+        endTime: '2020-09-25T17:08:39.172Z'
+      };
+      this.$store.dispatch('proposeTimeslot', body);
+    } else {
+      this.$store.dispatch('setAlertError', 'Choose a date and time');
     }
   }
 };

@@ -20,9 +20,11 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch('getMatches', this.$route.params.id).then(result => {
-      this.matches = result;
-    });
+    this.$store
+      .dispatch('getTeamMatches', this.$route.params.id)
+      .then(result => {
+        this.matches = result;
+      });
   }
 };
 </script>
