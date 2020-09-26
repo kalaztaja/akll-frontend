@@ -1,9 +1,6 @@
 <template>
   <v-flex>
-    <TeamPreview
-      :v-bind:team1Id="this.match.teamOne.coreId"
-      v-bind:team2Id="team2Id"
-    />
+    <TeamPreview v-bind:team1Id="team1Id" v-bind:team2Id="team2Id" />
     <SharedCalendar v-bind:matchId="matchId" v-bind:match="match" />
   </v-flex>
 </template>
