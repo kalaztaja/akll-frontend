@@ -128,7 +128,7 @@
             </v-menu>
           </v-toolbar>
           <v-calendar
-            ref="calendar"
+            :ref="'calendar'"
             :title="'Suggestion calendar'"
             :now="today"
             :value="today"
