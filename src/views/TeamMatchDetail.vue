@@ -17,18 +17,14 @@ export default {
   },
   data() {
     return {
-      match: {}
+      match: {},
+      team1Id: '',
+      team2Id: ''
     };
   },
   computed: {
     matchId() {
       return this.$route.params.matchid;
-    },
-    team1Id() {
-      return this.match.teamOne.coreId;
-    },
-    team2Id() {
-      return this.match.teamTwo.coreId;
     }
   },
   created() {
@@ -37,6 +33,8 @@ export default {
         .dispatch('getMatchById', this.matchId)
         .then(result => {
           this.match = result;
+          this.team1Id = this.match.teamOne.coreId;
+          this.team2Id = this.match.teamTwo.coreId;
         })
         .catch(error => {
           this.$store.dispatch('setAlertError', error.response);
