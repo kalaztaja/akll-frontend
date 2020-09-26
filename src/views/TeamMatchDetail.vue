@@ -1,6 +1,9 @@
 <template>
   <v-flex>
-    <TeamPreview v-bind:team1Id="team1Id" v-bind:team2Id="team2Id" />
+    <TeamPreview
+      :v-bind:team1Id="this.matches.teamOne.coreId"
+      v-bind:team2Id="team2Id"
+    />
     <SharedCalendar v-bind:matchId="matchId" v-bind:match="match" />
   </v-flex>
 </template>
@@ -42,6 +45,7 @@ export default {
           this.$store.dispatch('setAlertError', error.response);
         });
     }
+    console.log('Match after created produced' + this.match);
   }
 };
 </script>

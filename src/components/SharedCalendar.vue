@@ -260,10 +260,14 @@ export default {
   },
   proposeTime() {
     if (this.suggestedTime !== null && this.suggestedDate !== null) {
+      const startingTimeslot =
+        this.suggestedDate + 'T17:' + this.startTime + '.172Z';
+      const endingTimeslot = this.suggestedDate + 'T17:' + '23:59' + '.172Z';
+
       const body = {
         matchId: this.matchId,
-        startTime: '2020-09-25T17:08:39.172Z',
-        endTime: '2020-09-25T17:08:39.172Z'
+        startTime: startingTimeslot,
+        endTime: endingTimeslot
       };
       this.$store.dispatch('proposeTimeslot', body);
     } else {
