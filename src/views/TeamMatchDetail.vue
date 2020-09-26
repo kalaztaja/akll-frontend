@@ -37,7 +37,7 @@ export default {
         .dispatch('getMatchById', this.matchId)
         .then(result => {
           console.log(result);
-          this.match = result;
+          this.match = result.matches;
         })
         .catch(error => {
           this.$store.dispatch('setAlertError', error.response);
