@@ -24,6 +24,9 @@ export default {
       .dispatch('getTeamMatches', this.$route.params.id)
       .then(result => {
         this.matches = result;
+      })
+      .catch(error => {
+        this.$store.dispatch('setAlertError', error.response.data.message);
       });
   }
 };

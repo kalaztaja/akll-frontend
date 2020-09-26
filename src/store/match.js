@@ -27,8 +27,8 @@ const matchStore = {
     }
   },
   actions: {
-    async getTeamMatches(context, parameters) {
-      const result = await matchAxios.get(`/match/${parameters.id}/all`);
+    async getTeamMatches(context, id) {
+      const result = await matchAxios.get(`/match/${id}/all`);
       context.commit('addTeamMatches', result.data);
       return result.data;
     },

@@ -73,7 +73,13 @@
           </v-time-picker>
         </v-dialog>
         <v-container class="my-2">
-          <v-btn depressed right color="primary" class="submit-button">
+          <v-btn
+            depressed
+            right
+            color="primary"
+            class="submit-button"
+            @click="proposeTime()"
+          >
             Send suggestion
           </v-btn>
         </v-container>
