@@ -18,7 +18,7 @@ export default {
   props: {
     match: {
       type: Object,
-      required: true
+      default: {}
     }
   },
   computed: {
@@ -30,6 +30,18 @@ export default {
     },
     team2Id() {
       return this.match.teamTwo.coreId;
+    }
+  },
+  created() {
+    if (this.match !== {}) {
+      this.$store
+        .dispatch('getMatchById', this.matchId)
+        .then(result => {
+          this.match = result;
+        })
+        .catch(error => {
+          this.$store.dispatch('setAlertError', error.response);
+        });
     }
   }
 };

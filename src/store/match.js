@@ -55,6 +55,10 @@ const matchStore = {
         }
       });
       return result;
+    },
+    async getMatchById(context, id) {
+      const result = await matchAxios.get('/match/' + id + '/info');
+      return result.data;
     }
   }
 };
