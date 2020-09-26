@@ -1,5 +1,5 @@
 <template>
-  <v-card to="">
+  <v-card :to="'/teams/' + teamId + '/matches/' + match_id">
     <v-container fluid>
       <v-row>
         <v-card-title>{{ match.challongeRound }}</v-card-title>
@@ -21,6 +21,10 @@ export default {
   props: {
     match: {
       type: Object,
+      required: true
+    },
+    teamId: {
+      type: String,
       required: true
     }
   }

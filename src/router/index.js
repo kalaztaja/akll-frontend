@@ -27,6 +27,8 @@ import HomePageView from '../views/HomePageView.vue';
 import TeamMatchesView from '../views/TeamMatchesView.vue';
 import TeamMatchDetail from '../views/TeamMatchDetail.vue';
 
+import CalendarView from '../components/SharedCalendar.vue';
+
 import { env } from '../../env';
 
 Vue.use(VueRouter);
@@ -165,6 +167,14 @@ const routes = [
     path: '/teams/:id/matches/:matchid',
     name: 'team-match-detail',
     component: TeamMatchDetail,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/calendar',
+    name: 'calendar-view',
+    component: CalendarView,
     meta: {
       requiresAuth: true
     }

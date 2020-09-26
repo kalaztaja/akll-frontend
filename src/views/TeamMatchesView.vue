@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <div v-for="match in matches" :key="match._id">
-      <match-preview :match="match" />
+      <match-preview :match="match" :teamId="teamId" />
     </div>
   </v-container>
 </template>
@@ -28,6 +28,11 @@ export default {
       .catch(error => {
         this.$store.dispatch('setAlertError', error.response.data.message);
       });
+  },
+  computed: {
+    teamId() {
+      return this.$route.params.id;
+    }
   }
 };
 </script>
