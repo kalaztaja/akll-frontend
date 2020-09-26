@@ -15,11 +15,10 @@ export default {
     SharedCalendar,
     TeamPreview
   },
-  props: {
-    match: {
-      type: Object,
-      default: {}
-    }
+  data() {
+    return {
+      match: {}
+    };
   },
   computed: {
     matchId() {
