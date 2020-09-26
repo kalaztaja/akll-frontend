@@ -58,8 +58,7 @@ const matchStore = {
     },
     async getMatchById(context, id) {
       const result = await matchAxios.get('/match/' + id + '/info');
-      console.log(result);
-      return result.matches;
+      return result.data.match;
     }
   }
 };
