@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if="isInThisTeam">
     <h1 class="font-weight-bold">Team matches</h1>
     <div v-for="match in matches" :key="match._id">
       <match-preview :match="match" :teamId="teamId" />
@@ -33,6 +33,14 @@ export default {
   computed: {
     teamId() {
       return this.$route.params.id;
+    },
+    isInThisTeam() {
+      if (this.$store.getters.loggedIn && this.$store.state.auth.fullUserInfo) {
+        return this.$store.state.auth.fullUserInfo.currentTeams.some(
+          item => item._id === this.teamId
+        );
+      }
+      return false;
     }
   }
 };

@@ -93,7 +93,7 @@
           </v-list-item>
         </v-list>
       </div>
-      <div v-if="isInThisTeam">
+      <div v-if="isInThisTeam && isCsgo">
         <v-card>
           <v-btn
             class="my-4"

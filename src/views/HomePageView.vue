@@ -15,53 +15,84 @@
     </v-row>
     <v-row>
       <v-col align="center" justify="center" xs="6" md="6">
-        <v-card v-if="isCsgo">
-          <v-img
-            class="white--text align-end"
-            height="88px"
-            src="@/assets/AKLLBannerMatches.png"
-          >
-            <v-card-title />
-          </v-img>
-          <v-card-title class="text-left">
-            {{ $t('AKLMatchTitle') }}
-          </v-card-title>
-          <v-card-subtitle class="text-left">
-            {{ $t('MatchMessage') }}
-          </v-card-subtitle>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn text :to="'matches/all'">
-              {{ $t('MatchATeam') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-        <v-card v-else>
-          <v-img
-            class="white--text align-end"
-            height="88px"
-            src="@/assets/ALLJoin.png"
-          >
-            <v-card-title />
-          </v-img>
-          <v-card-title class="text-left">
-            {{ $t('ALLJoinTitle') }}
-          </v-card-title>
-          <v-card-subtitle class="text-left">
-            {{ $t('JoinMessage') }}
-          </v-card-subtitle>
-          <v-card-actions>
-            <v-btn v-if="!this.$store.getters.loggedIn" text :to="'register'">
-              {{ $t('Login') }}
-            </v-btn>
-
-            <v-spacer />
-            <v-btn v-if="this.$store.getters.loggedIn" text :to="'teams'">
-              {{ $t('JoinATeam') }}
-            </v-btn>
-            <v-btn v-else text :to="'register'">{{ $t('Register') }}</v-btn>
-          </v-card-actions>
-        </v-card>
+        <v-carousel
+          :continuous="true"
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-minus"
+          height="250"
+          :cycle="true"
+        >
+          <v-carousel-item v-if="isCsgo">
+            <v-card height="250">
+              <v-img
+                class="align-end"
+                height="88px"
+                src="@/assets/AKLLBannerMatches.png"
+              >
+                <v-card-title />
+              </v-img>
+              <v-card-title class="text-left">
+                {{ $t('AKLMatchTitle') }}
+              </v-card-title>
+              <v-card-subtitle class="text-left">
+                {{ $t('MatchMessage') }}
+              </v-card-subtitle>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn text :to="'matches/all'">
+                  {{ $t('MatchATeam') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-card height="250">
+              <v-img
+                class="white--text align-end"
+                height="88px"
+                src="@/assets/AKLLTwitchLogo.png"
+              >
+                <v-card-title />
+              </v-img>
+              <v-card-title class="text-left">
+                {{ $t('AKLTwitchTitle') }}
+              </v-card-title>
+              <v-card-subtitle class="text-left">
+                {{ $t('TwitchMessage') }}
+              </v-card-subtitle>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn text :href="'https://twitch.tv/tr3gamers'">
+                  {{ $t('TwitchAction') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-card height="250">
+              <v-img
+                class="white--text align-end"
+                height="88px"
+                src="@/assets/AKLLT3GLogo.png"
+              >
+                <v-card-title />
+              </v-img>
+              <v-card-title class="text-left">
+                {{ $t('AKLLT3GTitle') }}
+              </v-card-title>
+              <v-card-subtitle class="text-left">
+                {{ $t('AKLLT3GMessage') }}
+              </v-card-subtitle>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn text :href="'https://t3g.fi'">
+                  {{ $t('AKLLT3GAction') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-carousel-item>
+        </v-carousel>
       </v-col>
       <v-col align="center" justify="center" xs="6" md="6">
         <v-card>

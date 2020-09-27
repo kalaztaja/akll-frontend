@@ -8,7 +8,7 @@
     />
     <h2 class="my-8">List of matches</h2>
     <div v-for="match in matches" :key="match._id">
-      <match-preview :match="match" />
+      <match-preview :match="match" :link="false" />
     </div>
   </v-container>
 </template>
