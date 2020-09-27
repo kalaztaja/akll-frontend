@@ -137,7 +137,6 @@ export default {
       this.focus = '';
     },
     prev() {
-      console.log(this.$refs.calendar);
       this.$refs.calendar.prev();
     },
     next() {
@@ -161,7 +160,6 @@ export default {
     },
     acceptTimeslot(event) {
       if (event.color === 'orange') {
-        console.log('event ' + JSON.stringify(event));
         this.$store
           .dispatch('acceptTimeslot', {
             matchId: event.matchId,

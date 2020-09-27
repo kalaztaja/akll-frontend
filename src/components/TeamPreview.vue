@@ -63,11 +63,6 @@ export default {
           this.team2 = result[1];
         });
     }, 1000);
-    console.log('t1baby' + this.team1Id);
-    console.log(this.team2Id);
-
-    console.log(this.team1);
-    console.log(this.team2);
   }
 };
 </script>

@@ -221,7 +221,6 @@ export default {
     this.$store
       .dispatch('getUserInfoById', userId)
       .then(result => {
-        console.log('result ' + JSON.stringify(result));
         this.userTeamIds = result.currentTeams;
       })
       .then(() => {
@@ -230,8 +229,6 @@ export default {
           this.mapMatchToTimeslots();
         });
       });
-
-    console.log(this.events);
   },
   methods: {
     proposeTime() {
@@ -267,7 +264,6 @@ export default {
     },
     mapMatchToTimeslots() {
       const eventArray = [];
-      console.log(JSON.stringify(this.match.proposedTimeslots));
       this.match.proposedTimeslots.forEach(element => {
         var color = 'black';
         var name = 'Other reservation';

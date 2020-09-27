@@ -49,7 +49,6 @@ export default {
   methods: {
     mapToEvents(matches) {
       const eventArray = [];
-      console.log(JSON.stringify(matches.proposedTimeslots));
       matches.forEach(element => {
         var startValue = element.acceptedTimeslot.startTime.substring(0, 10);
         var startTime = element.acceptedTimeslot.startTime.substring(14, 19);

@@ -43,7 +43,6 @@ const matchStore = {
     },
     async getLockedMatches() {
       const result = await matchAxios.get(`/match/confirmed`);
-      console.log('results ' + result);
       return result.data;
     },
     async proposeTimeslot(context, parameters) {

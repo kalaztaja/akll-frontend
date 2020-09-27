@@ -95,7 +95,6 @@ export default {
           this.$store.dispatch('setAlertError', error.response.data.message);
         });
     }
-    console.log('Match after created produced' + this.match);
   }
 };
 </script>
