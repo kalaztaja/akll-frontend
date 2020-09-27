@@ -32,9 +32,8 @@ const matchStore = {
       context.commit('addTeamMatches', result.data);
       return result.data;
     },
-    async getConfirmedMatches(context) {
+    async getConfirmedMatches() {
       const result = await matchAxios.get('/match/confirmed');
-      context.commit('');
       return result.data;
     },
     async getTimeslotlessTeamMatches(context, parameters) {
@@ -54,6 +53,13 @@ const matchStore = {
           startTime: parameters.startTime,
           endTime: parameters.endTime
         }
+      });
+      return result;
+    },
+    async acceptTimeslot(context, id) {
+      const result = await matchAxios.post('/timeslot/accept', {
+        matchId: id.matchId,
+        acceptedTimeslotId: id._id
       });
       return result;
     },

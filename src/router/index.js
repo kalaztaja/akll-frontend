@@ -26,6 +26,7 @@ import HomePageView from '../views/HomePageView.vue';
 
 import TeamMatchesView from '../views/TeamMatchesView.vue';
 import TeamMatchDetail from '../views/TeamMatchDetail.vue';
+import AllMatchView from '../views/AllMatchView.vue';
 
 import CalendarView from '../components/SharedCalendar.vue';
 
@@ -178,6 +179,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/matches/all',
+    name: 'all-match-view',
+    component: AllMatchView
   }
 ];
 

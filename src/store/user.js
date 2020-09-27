@@ -27,6 +27,7 @@ const userStore = {
       return res.data;
     },
     async getUserInfoById(context, id) {
+      console.log(id);
       const res = await axios.get(`/user/id/${id}`);
       return res.data;
     },

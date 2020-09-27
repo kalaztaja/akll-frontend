@@ -1,7 +1,52 @@
 <template>
   <v-flex>
-    <TeamPreview :team1Id="team1Id" :team2Id="team2Id" />
-    <SharedCalendar v-bind:matchId="matchId" v-bind:matchProp="match" />
+    <v-card-text>
+      <v-row class="stable-row" align="center" justify="center">
+        <v-btn-toggle v-model="tabToggle">
+          <v-btn>Calendar</v-btn>
+          <v-btn>Info</v-btn>
+        </v-btn-toggle>
+      </v-row>
+    </v-card-text>
+    <div v-if="tabToggle === 0" class="priority-class">
+      <TeamPreview :team1Id="team1Id" :team2Id="team2Id" />
+      <div v-if="timeslot === null">
+        <SharedCalendar v-bind:matchId="matchId" v-bind:matchProp="match" />
+      </div>
+      <div v-else>
+        <v-card v-if="match.matchPlayed === false">
+          <v-card-title>Timeslot for game: {{ timeslot }}</v-card-title>
+          <v-card-title class="font-weight-thin">
+            Paste this to your console to connect to your server
+          </v-card-title>
+          <v-card-text>
+            connect
+            {{ match.csgo.server.ip }}:{{ match.csgo.server.port }};password
+            {{ match.csgo.server.password }}
+          </v-card-text>
+        </v-card>
+        <v-card v-else>
+          <v-card-title>Match has been played</v-card-title>
+          <v-card-text>
+            Visit challonge to see the result. We are working on bringing the
+            results here during this season of AKL
+          </v-card-text>
+        </v-card>
+      </div>
+    </div>
+    <div v-if="tabToggle === 1" class="priority-class">
+      <v-card>
+        <v-card-title>Guide for match page</v-card-title>
+        <v-card-text>
+          In this page you can suggest a timeslot for the game to take place.
+          Opponent team members can see your proposals and accept them like you
+          can see enemy proposals on calendar and accepted. Once accepted, the
+          timeslot will lock and the page will display when the game will take
+          place. There's also guide on how to connect to the game server where
+          the match will take place
+        </v-card-text>
+      </v-card>
+    </div>
   </v-flex>
 </template>
 
@@ -19,12 +64,22 @@ export default {
     return {
       match: {},
       team1Id: '',
-      team2Id: ''
+      team2Id: '',
+      tabToggle: 0
     };
   },
   computed: {
     matchId() {
       return this.$route.params.matchid;
+    },
+    timeslot() {
+      if (this.match.acceptedTimeslot !== null) {
+        var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
+        var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
+        var startTimeSlot = startValue + ' ' + startTime;
+        return startTimeSlot;
+      }
+      return null;
     }
   },
   created() {
@@ -45,4 +100,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.stable-row {
+  top: 70px;
+  width: 100%;
+  z-index: 0;
+}
+.priority-class {
+  z-index: 1;
+}
+</style>

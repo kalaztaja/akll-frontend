@@ -43,6 +43,11 @@ const messages = {
 
     OrganizedBy: 'By',
 
+    //ALL MATCHES
+    AKLMatchTitle: 'All upcoming matches',
+    ALLMatchTitle: 'All upcoming matches',
+    MatchMessage: 'View the calendar to see what matches are played and when!',
+    MatchATeam: 'Calendar',
     //SEASON
 
     SendApplication: 'Send application',
@@ -198,6 +203,11 @@ const messages = {
     ALLJoinTitle: 'Ensimmäinen kausi on vihdoin täällä!',
     JoinMessage:
       'Rekisteröidy ja liity joukkueeseen liittyäksesi tulevalle kaudelle!',
+
+    AKLMatchTitle: 'Tulevat pelit',
+    ALLMatchTitle: 'Tulevat peit',
+    MatchMessage: 'Katso mitä pelejä pelataan seuraavaksi ja milloin!',
+    MatchATeam: 'Kalenteri',
 
     DiscordTitle: 'Liity Discordin keskusteluun',
     DiscordMessage: 'Napsauta linkkiä ja siirry kanavallemme',

@@ -96,7 +96,7 @@
       <div v-if="isInThisTeam">
         <v-card>
           <v-btn
-            class="mx-4 my-4"
+            class="my-4"
             :to="'/teams/' + this.$route.params.id + '/matches'"
             block
           >

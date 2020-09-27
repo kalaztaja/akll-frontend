@@ -19,26 +19,21 @@
           <v-img
             class="white--text align-end"
             height="88px"
-            src="@/assets/AKLJoin.png"
+            src="@/assets/AKLLBannerMatches.png"
           >
             <v-card-title />
           </v-img>
           <v-card-title class="text-left">
-            {{ $t('AKLJoinTitle') }}
+            {{ $t('AKLMatchTitle') }}
           </v-card-title>
           <v-card-subtitle class="text-left">
-            {{ $t('JoinMessage') }}
+            {{ $t('MatchMessage') }}
           </v-card-subtitle>
           <v-card-actions>
-            <v-btn v-if="!this.$store.getters.loggedIn" text :to="'register'">
-              {{ $t('Login') }}
-            </v-btn>
-
             <v-spacer />
-            <v-btn v-if="this.$store.getters.loggedIn" text :to="'teams'">
-              {{ $t('JoinATeam') }}
+            <v-btn text :to="'matches/all'">
+              {{ $t('MatchATeam') }}
             </v-btn>
-            <v-btn v-else text :to="'register'">{{ $t('Register') }}</v-btn>
           </v-card-actions>
         </v-card>
         <v-card v-else>

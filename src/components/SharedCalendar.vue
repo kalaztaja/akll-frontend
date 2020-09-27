@@ -3,126 +3,165 @@
     <v-col>
       <v-card>
         <v-card-title>Suggest a timeslot</v-card-title>
-        <v-dialog
-          ref="dateDialog"
-          v-model="dateDialog"
-          :return-value.sync="suggestedDate"
-          persistent
-          width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="suggestedDate"
-              label="Suggest the date"
-              prepend-icon="mdi-calendar"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-              class="mx-5"
-            />
-          </template>
-          <v-date-picker v-model="suggestedDate" scrollable>
-            <v-spacer />
-            <v-btn text color="primary" @click="dateDialog = false">
-              Cancel
-            </v-btn>
-            <v-btn
-              text
-              color="primary"
-              @click="$refs.dateDialog.save(suggestedDate)"
-            >
-              OK
-            </v-btn>
-          </v-date-picker>
-        </v-dialog>
-        <v-dialog
-          ref="startTimeDialog"
-          v-model="startTimeDialog"
-          :return-value.sync="suggestedStartTime"
-          persistent
-          width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
+        <v-row>
+          <v-dialog
+            ref="startDateDialog"
+            v-model="startDateDialog"
+            :return-value.sync="suggestedStartDate"
+            persistent
+            width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="suggestedStartDate"
+                label="Starting date"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                class="mx-5"
+              />
+            </template>
+            <v-date-picker v-model="suggestedStartDate" scrollable>
+              <v-spacer />
+              <v-btn text color="primary" @click="startDateDialog = false">
+                Cancel
+              </v-btn>
+              <v-btn
+                text
+                color="primary"
+                @click="$refs.startDateDialog.save(suggestedStartDate)"
+              >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-dialog>
+          <v-dialog
+            ref="endDateDialog"
+            v-model="endDateDialog"
+            :return-value.sync="suggestedEndDate"
+            persistent
+            width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="suggestedEndDate"
+                label="Ending date"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                class="mx-5"
+              />
+            </template>
+            <v-date-picker v-model="suggestedEndDate" scrollable>
+              <v-spacer />
+              <v-btn text color="primary" @click="endDateDialog = false">
+                Cancel
+              </v-btn>
+              <v-btn
+                text
+                color="primary"
+                @click="$refs.endDateDialog.save(suggestedEndDate)"
+              >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-dialog>
+        </v-row>
+        <v-row>
+          <v-dialog
+            ref="startTimeDialog"
+            v-model="startTimeDialog"
+            :return-value.sync="suggestedStartTime"
+            persistent
+            width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="suggestedStartTime"
+                label="Starting time"
+                prepend-icon="mdi-clock-time-eight-outline"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                class="mx-5"
+              />
+            </template>
+            <v-time-picker
+              v-if="startTimeDialog"
               v-model="suggestedStartTime"
-              label="Suggest the start time"
-              prepend-icon="mdi-clock-time-eight-outline"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-              class="mx-5"
-            />
-          </template>
-          <v-time-picker
-            v-if="startTimeDialog"
-            v-model="suggestedStartTime"
-            full-width
-            format="24h"
-          >
-            <v-spacer />
-            <v-btn text color="primary" @click="startTimeDialog = false">
-              Cancel
-            </v-btn>
-            <v-btn
-              text
-              color="primary"
-              @click="$refs.startTimeDialog.save(suggestedStartTime)"
+              full-width
+              format="24h"
             >
-              OK
-            </v-btn>
-          </v-time-picker>
-        </v-dialog>
-        <v-dialog
-          ref="endTimeDialog"
-          v-model="endTimeDialog"
-          :return-value.sync="suggestedEndTime"
-          persistent
-          width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
+              <v-spacer />
+              <v-btn text color="primary" @click="startTimeDialog = false">
+                Cancel
+              </v-btn>
+              <v-btn
+                text
+                color="primary"
+                @click="$refs.startTimeDialog.save(suggestedStartTime)"
+              >
+                OK
+              </v-btn>
+            </v-time-picker>
+          </v-dialog>
+          <v-dialog
+            ref="endTimeDialog"
+            v-model="endTimeDialog"
+            :return-value.sync="suggestedEndTime"
+            persistent
+            width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="suggestedEndTime"
+                label="Ending time"
+                prepend-icon="mdi-clock-time-eleven-outline"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                class="mx-5"
+              />
+            </template>
+            <v-time-picker
+              v-if="endTimeDialog"
               v-model="suggestedEndTime"
-              label="Suggest the end time"
-              prepend-icon="mdi-clock-time-eleven-outline"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-              class="mx-5"
-            />
-          </template>
-          <v-time-picker
-            v-if="endTimeDialog"
-            v-model="suggestedEndTime"
-            full-width
-            format="24h"
-          >
-            <v-spacer />
-            <v-btn text color="primary" @click="endTimeDialog = false">
-              Cancel
-            </v-btn>
-            <v-btn
-              text
-              color="primary"
-              @click="$refs.endTimeDialog.save(suggestedEndTime)"
+              full-width
+              format="24h"
             >
-              OK
-            </v-btn>
-          </v-time-picker>
-        </v-dialog>
+              <v-spacer />
+              <v-btn text color="primary" @click="endTimeDialog = false">
+                Cancel
+              </v-btn>
+              <v-btn
+                text
+                color="primary"
+                @click="$refs.endTimeDialog.save(suggestedEndTime)"
+              >
+                OK
+              </v-btn>
+            </v-time-picker>
+          </v-dialog>
+        </v-row>
         <v-container class="my-2">
-          <v-btn
-            depressed
-            right
-            color="primary"
-            class="submit-button"
-            @click="proposeTime()"
-          >
-            Send suggestion
-          </v-btn>
+          <v-row>
+            <v-btn class="mx-2" depressed color="primary">Clear</v-btn>
+            <v-spacer />
+            <v-btn
+              depressed
+              float-right
+              color="primary"
+              class="mx-2"
+              @click="proposeTime()"
+            >
+              Send suggestion
+            </v-btn>
+          </v-row>
         </v-container>
       </v-card>
-      <v-spacer />
-      <event-calendar v-bind:eventArray="events" />
+      <event-calendar class="calendar-class" v-bind:eventArray="events" />
     </v-col>
   </v-row>
 </template>
@@ -169,16 +208,29 @@ export default {
     suggestedEndTime: null,
     startTimeDialog: false,
     endTimeDialog: false,
-    suggestedDate: null,
-    dateDialog: false,
-    match: {}
+    suggestedStartDate: null,
+    startDateDialog: false,
+    suggestedEndDate: null,
+    endDateDialog: false,
+    match: {},
+    userTeamIds: []
   }),
   mounted() {
     this.match = this.matchProp;
-    this.$store.dispatch('getMatchById', this.matchId).then(result => {
-      this.match = result;
-      this.mapMatchToTimeslots();
-    });
+    const userId = this.$store.getters.userInfo._id;
+    this.$store
+      .dispatch('getUserInfoById', userId)
+      .then(result => {
+        console.log('result ' + JSON.stringify(result));
+        this.userTeamIds = result.currentTeams;
+      })
+      .then(() => {
+        this.$store.dispatch('getMatchById', this.matchId).then(result => {
+          this.match = result;
+          this.mapMatchToTimeslots();
+        });
+      });
+
     console.log(this.events);
   },
   methods: {
@@ -189,25 +241,49 @@ export default {
         this.suggestedEndTime !== null
       ) {
         const startingTimeslot =
-          this.suggestedDate + 'T17:' + this.suggestedStartTime + '.172Z';
+          this.suggestedStartDate + 'T17:' + this.suggestedStartTime + '.172Z';
         const endingTimeslot =
-          this.suggestedDate + 'T17:' + this.suggestedEndTime + '.172Z';
+          this.suggestedEndDate + 'T17:' + this.suggestedEndTime + '.172Z';
 
         const body = {
           matchId: this.matchId,
           startTime: startingTimeslot,
           endTime: endingTimeslot
         };
-        this.$store.dispatch('proposeTimeslot', body).catch(error => {
-          console.log(error);
-        });
+        this.$store
+          .dispatch('proposeTimeslot', body)
+          .then(() => {
+            this.$store.dispatch(
+              'setAlertSuccess',
+              'Suggestion send succesfully! Refresh the page to update calendar'
+            );
+          })
+          .catch(error => {
+            this.$store.dispatch('setAlertError', error.data.message);
+          });
       } else {
         this.$store.dispatch('setAlertError', 'Choose a date and time');
       }
     },
     mapMatchToTimeslots() {
       const eventArray = [];
+      console.log(JSON.stringify(this.match.proposedTimeslots));
       this.match.proposedTimeslots.forEach(element => {
+        var color = 'black';
+        var name = 'Other reservation';
+        var inProposingTeam = false;
+        this.userTeamIds.forEach(teamElement => {
+          if (teamElement._id === element.proposerTeamId) {
+            inProposingTeam = true;
+          }
+        });
+        if (inProposingTeam) {
+          color = 'orange';
+          name = 'Own team proposal';
+        } else {
+          name = 'Opponent proposal';
+          color = 'cyan';
+        }
         var startValue = element.startTime.substring(0, 10);
         var startTime = element.startTime.substring(14, 19);
         var endValue = element.endTime.substring(0, 10);
@@ -217,15 +293,13 @@ export default {
         eventArray.push({
           start: startTimeSlot,
           end: endTimeSlot,
-          name: element._id
+          name: name,
+          color: color,
+          _id: element._id,
+          matchId: this.matchId
         });
       });
-      console.log(
-        'here we had an array ' + JSON.stringify(this.match.proposedTimeslots)
-      );
-      console.log('and here is the result ' + JSON.stringify(eventArray));
       this.events = eventArray;
-      console.log(JSON.stringify(this.events));
     }
   }
 };
@@ -237,5 +311,8 @@ export default {
 }
 .priority {
   z-index: 2;
+}
+.calendar-class {
+  margin-bottom: 50px;
 }
 </style>

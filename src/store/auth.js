@@ -37,6 +37,9 @@ const authStore = {
         return !!state.fullUserInfo.steam;
       }
       return false;
+    },
+    getUserID: state => {
+      state.fullUserInfo._id;
     }
   },
   mutations: {

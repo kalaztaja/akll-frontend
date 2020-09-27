@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <h1 class="font-weight-bold">Team matches</h1>
     <div v-for="match in matches" :key="match._id">
       <match-preview :match="match" :teamId="teamId" />
     </div>

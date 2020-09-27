@@ -10,9 +10,6 @@
       <v-btn fab text small color="grey darken-2" @click="next">
         <v-icon small>mdi-chevron-right</v-icon>
       </v-btn>
-      <v-toolbar-title class="black--text">
-        Opponent suggestions and other reservations
-      </v-toolbar-title>
       <v-spacer />
 
       <v-menu bottom right>
@@ -44,6 +41,7 @@
       :type="type"
       color="primary"
       :weekdays="weekdays"
+      v-model="today"
       @click:event="showEvent"
       @click:more="viewDay"
       @click:date="viewDay"
@@ -67,7 +65,12 @@
             Cancel
           </v-btn>
           <v-spacer />
-          <v-btn text color="primary" @click="selectedOpen = false">
+          <v-btn
+            v-if="activeCalendar"
+            text
+            color="primary"
+            @click="acceptTimeslot(selectedEvent)"
+          >
             Accept
           </v-btn>
         </v-card-actions>
@@ -83,6 +86,10 @@ export default {
     eventArray: {
       type: Array,
       default: () => {}
+    },
+    activeCalendar: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -102,7 +109,6 @@ export default {
       { text: 'Week', value: 'week' },
       { text: 'Month', value: 'month' }
     ],
-    colors: ['blue', 'deep-purple', 'green', 'grey darken-1'],
     events: [],
     scheduledEvents: []
   }),
@@ -121,13 +127,17 @@ export default {
       this.focus = date;
       this.type = 'day';
     },
-    getEventColor(event) {
-      return event.color;
-    },
     setToday() {
+      var todayDate = new Date();
+      var dd = String(todayDate.getDate()).padStart(2, '0');
+      var mm = String(todayDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = todayDate.getFullYear();
+
+      this.today = yyyy + '-' + mm + '-' + dd;
       this.focus = '';
     },
     prev() {
+      console.log(this.$refs.calendar);
       this.$refs.calendar.prev();
     },
     next() {
@@ -148,6 +158,28 @@ export default {
       }
 
       nativeEvent.stopPropagation();
+    },
+    acceptTimeslot(event) {
+      if (event.color === 'orange') {
+        console.log('event ' + JSON.stringify(event));
+        this.$store
+          .dispatch('acceptTimeslot', {
+            matchId: event.matchId,
+            _id: event._id
+          })
+          .then(result => {
+            this.$store.dispatch('setAlertSuccess', result);
+          })
+          .catch(error => {
+            this.$store.dispatch('setAlertError', error.response.data.message);
+          });
+      } else {
+        this.$store.dispatch(
+          'setAlertError',
+          'You cannot accept your own proposals'
+        );
+      }
+      this.selectedOpen = false;
     }
   }
 };
