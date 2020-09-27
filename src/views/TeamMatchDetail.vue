@@ -1,5 +1,5 @@
 <template>
-  <v-flex>
+  <v-flex v-if="isInThisTeam">
     <v-card-text>
       <v-row class="stable-row" align="center" justify="center">
         <v-btn-toggle v-model="tabToggle">
@@ -36,15 +36,9 @@
     </div>
     <div v-if="tabToggle === 1" class="priority-class">
       <v-card>
-        <v-card-title>Guide for match page</v-card-title>
-        <v-card-text>
-          In this page you can suggest a timeslot for the game to take place.
-          Opponent team members can see your proposals and accept them like you
-          can see enemy proposals on calendar and accepted. Once accepted, the
-          timeslot will lock and the page will display when the game will take
-          place. There's also guide on how to connect to the game server where
-          the match will take place
-        </v-card-text>
+        <v-card-title>{{ $t('MatchDetailGuideTitle') }}</v-card-title>
+        <v-card-text>{{ $t('MatchDetailGuideMessage1') }}</v-card-text>
+        <v-card-text>{{ $t('MatchDetailGuideMessage2') }}</v-card-text>
       </v-card>
     </div>
   </v-flex>
@@ -80,6 +74,14 @@ export default {
         return startTimeSlot;
       }
       return null;
+    },
+    isInThisTeam() {
+      if (this.$store.getters.loggedIn && this.$store.state.auth.fullUserInfo) {
+        return this.$store.state.auth.fullUserInfo.currentTeams.some(
+          item => item._id === this.team1Id || item._id === this.team2Id
+        );
+      }
+      return false;
     }
   },
   created() {

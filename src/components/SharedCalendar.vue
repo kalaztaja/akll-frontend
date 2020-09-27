@@ -2,7 +2,7 @@
   <v-row>
     <v-col>
       <v-card>
-        <v-card-title>Suggest a timeslot</v-card-title>
+        <v-card-title>{{ $t('MatchDetailTitle') }}</v-card-title>
         <v-row>
           <v-dialog
             ref="startDateDialog"
@@ -14,7 +14,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="suggestedStartDate"
-                label="Starting date"
+                :label="$t('MatchDetailStart1')"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
@@ -46,7 +46,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="suggestedEndDate"
-                label="Ending date"
+                :label="$t('MatchDetailEnd1')"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
@@ -80,7 +80,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="suggestedStartTime"
-                label="Starting time"
+                :label="$t('MatchDetailStart2')"
                 prepend-icon="mdi-clock-time-eight-outline"
                 readonly
                 v-bind="attrs"
@@ -117,7 +117,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="suggestedEndTime"
-                label="Ending time"
+                :label="$t('MatchDetailEnd2')"
                 prepend-icon="mdi-clock-time-eleven-outline"
                 readonly
                 v-bind="attrs"

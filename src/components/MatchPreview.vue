@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="'/teams/' + teamId + '/matches/' + match._id">
+  <v-card :to="toUrl">
     <v-container fluid>
       <v-row>
         <v-card-title>Match number: {{ match.challongeRound }}</v-card-title>
@@ -48,6 +48,10 @@ export default {
     teamId: {
       type: String,
       required: true
+    },
+    link: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -59,6 +63,13 @@ export default {
         return startTimeSlot;
       }
       return null;
+    },
+    toUrl() {
+      if (this.link) {
+        return '/teams/matches/' + this.match._id;
+      } else {
+        return null;
+      }
     }
   }
 };
