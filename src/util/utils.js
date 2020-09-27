@@ -11,10 +11,11 @@ export const isTokenValid = token => {
 };
 
 export const checkTokensOnRequest = config => {
-  if (!store.getters.loggedIn) {
+  const { token, refreshToken } = store.state.auth;
+
+  if (!token || !refreshToken) {
     return config;
   }
-  const { token, refreshToken } = store.state.auth;
 
   if (token && isTokenValid(token)) {
     config.headers.Authorization = `Bearer ${token}`;
