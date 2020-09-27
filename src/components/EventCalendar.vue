@@ -159,7 +159,7 @@ export default {
       nativeEvent.stopPropagation();
     },
     acceptTimeslot(event) {
-      if (event.color === 'orange') {
+      if (event.color !== 'orange') {
         this.$store
           .dispatch('acceptTimeslot', {
             matchId: event.matchId,
