@@ -23,6 +23,11 @@ import ResetPasswordView from '../auth/ResetPasswordView';
 import CreatePostView from '../views/CreatePostView.vue';
 import PostDetailView from '../views/PostDetailView.vue';
 import HomePageView from '../views/HomePageView.vue';
+
+import TeamMatchesView from '../views/TeamMatchesView.vue';
+import TeamMatchDetail from '../views/TeamMatchDetail.vue';
+import AllMatchView from '../views/AllMatchView.vue';
+
 import { env } from '../../env';
 
 Vue.use(VueRouter);
@@ -148,6 +153,27 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/teams/:id/matches',
+    name: 'team-matches-view',
+    component: TeamMatchesView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/teams/matches/:matchid',
+    name: 'team-match-detail',
+    component: TeamMatchDetail,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/matches/all',
+    name: 'all-match-view',
+    component: AllMatchView
   }
 ];
 

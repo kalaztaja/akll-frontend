@@ -93,6 +93,17 @@
           </v-list-item>
         </v-list>
       </div>
+      <div v-if="isInThisTeam && isCsgo">
+        <v-card>
+          <v-btn
+            class="my-4"
+            :to="'/teams/' + this.$route.params.id + '/matches'"
+            block
+          >
+            Team matches
+          </v-btn>
+        </v-card>
+      </div>
     </v-container>
   </v-card>
 </template>

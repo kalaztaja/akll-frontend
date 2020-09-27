@@ -37,12 +37,37 @@ const messages = {
     JoinMessage: 'Sign up and join a team to join the upcoming season!',
     JoinATeam: 'Join a team!',
 
+    AKLTwitchTitle: 'Watch the games unfold live!',
+    ALLTwitchTitle: 'Watch the games unfold live!',
+    TwitchMessage: 'Watch the competition live at our Twitch-channel!',
+    TwitchAction: 'Twitch',
+
     DiscordTitle: 'Join the discussion at Discord',
     DiscordMessage: 'Click the link and hop on to our channel',
     JoinDiscord: 'Join the Discord!',
 
+    AKLLT3GTitle: 'Meet the makers',
+    AKLLT3GMessage:
+      'Meet the makers, learn more about the club and join us at T3G.fi!',
+    AKLLT3GAction: 'T3G.FI',
+
+    MatchDetailGuideTitle: 'Guide for the match page',
+    MatchDetailGuideMessage1:
+      'In this page you can suggest a timeslot for the game to take place. Opponent team members can see your proposals and accept them like you can see enemy proposals on calendar and accepted. Once accepted, the timeslot will lock and the page will display when the game will take place. There is also guide on how to connect to the game server where the match will take place',
+    MatchDetailGuideMessage2:
+      'In calendar you can see both your and opponents proposals. We recommend you to refresh the page if you do not see your own proposals. We are working on these pages throughout the season so bear with us as we try to make the pages a bit better!',
+    MatchDetailTitle: 'Suggest a timeslot',
+    MatchDetailStart1: 'Starting date',
+    MatchDetailStart2: 'Starting time',
+    MatchDetailEnd1: 'Ending date',
+    MatchDetailEnd2: 'Ending time',
     OrganizedBy: 'By',
 
+    //ALL MATCHES
+    AKLMatchTitle: 'All upcoming matches',
+    ALLMatchTitle: 'All upcoming matches',
+    MatchMessage: 'View the calendar to see what matches are played and when!',
+    MatchATeam: 'Calendar',
     //SEASON
 
     SendApplication: 'Send application',
@@ -199,11 +224,37 @@ const messages = {
     JoinMessage:
       'Rekisteröidy ja liity joukkueeseen liittyäksesi tulevalle kaudelle!',
 
+    AKLMatchTitle: 'Tulevat pelit',
+    ALLMatchTitle: 'Tulevat pelit',
+    MatchMessage: 'Katso mitä pelejä pelataan seuraavaksi ja milloin!',
+    MatchATeam: 'Kalenteri',
+
+    AKLTwitchTitle: 'Katso pelejä livenä!',
+    ALLTwitchTitle: 'Katso pelejä livenä!',
+    TwitchMessage:
+      'Tule seuraamaan kilpailuja livenä suoraan twitch-tililtämme!',
+    TwitchAction: 'Twitch',
+
+    AKLLT3GTitle: 'Tutustu tekijöihin!',
+    AKLLT3GMessage:
+      'Tapaa tekijät, tutustu kerhoon ja liity mukaan tekemään T3G.FI-sivustolla!',
+    AKLLT3GAction: 'T3G.FI',
+
     DiscordTitle: 'Liity Discordin keskusteluun',
     DiscordMessage: 'Napsauta linkkiä ja siirry kanavallemme',
     JoinDiscord: 'Liity discordiin!',
     JoinATeam: 'Liity joukkueeseen!',
 
+    MatchDetailGuideTitle: 'Ohjeet matsisivulle',
+    MatchDetailGuideMessage1:
+      'Tällä sivustolla voit ehdottaa vastustajalle ajankohtia pelejä varten. Vastustajan joukkueen pelaajat näkevät ehdotuksenne ja voi hyväksyä ne kuten voit itse nähdä vastustajan ehdotukset ja hyväksyä ne. Kun ajankohta on hyväksytty, sivusto näyttää valitun ajankohdan sekä ohjeet serverille yhdistämiseen',
+    MatchDetailGuideMessage2:
+      'Kalenterissa voitte nähdä omia ehdotuksianne ja vastustajan ehdotuksia. Suosittelemme päivittämään sivua, jos ette näe omia ehdotuksianne. Tulemme päivittämään sivustoa vielä kauden aikana paremmaksi, joten koittakaa kestää!',
+    MatchDetailTitle: 'Ehdota matsille ajankohtaa',
+    MatchDetailStart1: 'Alkamisen päivänmäärä',
+    MatchDetailStart2: 'Alkamisen kellonaika',
+    MatchDetailEnd1: 'Lopettamisen päivänmäärä',
+    MatchDetailEnd2: 'Lopettamisen kellonaika',
     OrganizedBy: '',
 
     //SEASON

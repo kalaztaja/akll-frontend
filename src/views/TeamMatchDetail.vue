@@ -1,0 +1,113 @@
+<template>
+  <v-flex v-if="isInThisTeam">
+    <v-card-text>
+      <v-row class="stable-row" align="center" justify="center">
+        <v-btn-toggle v-model="tabToggle">
+          <v-btn>Calendar</v-btn>
+          <v-btn>Info</v-btn>
+        </v-btn-toggle>
+      </v-row>
+    </v-card-text>
+    <div v-if="tabToggle === 0" class="priority-class">
+      <TeamPreview :team1Id="team1Id" :team2Id="team2Id" />
+      <div v-if="timeslot === null">
+        <SharedCalendar v-bind:matchId="matchId" v-bind:matchProp="match" />
+      </div>
+      <div v-else>
+        <v-card v-if="match.matchPlayed === false">
+          <v-card-title>Timeslot for game: {{ timeslot }}</v-card-title>
+          <v-card-title class="font-weight-thin">
+            Paste this to your console to connect to your server
+          </v-card-title>
+          <v-card-text>
+            connect
+            {{ match.csgo.server.ip }}:{{ match.csgo.server.port }};password
+            {{ match.csgo.server.password }}
+          </v-card-text>
+        </v-card>
+        <v-card v-else>
+          <v-card-title>Match has been played</v-card-title>
+          <v-card-text>
+            Visit challonge to see the result. We are working on bringing the
+            results here during this season of AKL
+          </v-card-text>
+        </v-card>
+      </div>
+    </div>
+    <div v-if="tabToggle === 1" class="priority-class">
+      <v-card>
+        <v-card-title>{{ $t('MatchDetailGuideTitle') }}</v-card-title>
+        <v-card-text>{{ $t('MatchDetailGuideMessage1') }}</v-card-text>
+        <v-card-text>{{ $t('MatchDetailGuideMessage2') }}</v-card-text>
+      </v-card>
+    </div>
+  </v-flex>
+</template>
+
+<script>
+import SharedCalendar from '../components/SharedCalendar.vue';
+import TeamPreview from '../components/TeamPreview.vue';
+
+export default {
+  name: 'TeamMatchDetail',
+  components: {
+    SharedCalendar,
+    TeamPreview
+  },
+  data() {
+    return {
+      match: {},
+      team1Id: '',
+      team2Id: '',
+      tabToggle: 0
+    };
+  },
+  computed: {
+    matchId() {
+      return this.$route.params.matchid;
+    },
+    timeslot() {
+      if (this.match.acceptedTimeslot !== null) {
+        var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
+        var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
+        var startTimeSlot = startValue + ' ' + startTime;
+        return startTimeSlot;
+      }
+      return null;
+    },
+    isInThisTeam() {
+      if (this.$store.getters.loggedIn && this.$store.state.auth.fullUserInfo) {
+        return this.$store.state.auth.fullUserInfo.currentTeams.some(
+          item => item._id === this.team1Id || item._id === this.team2Id
+        );
+      }
+      return false;
+    }
+  },
+  created() {
+    if (this.match !== {}) {
+      this.$store
+        .dispatch('getMatchById', this.matchId)
+        .then(result => {
+          this.match = result;
+          this.team1Id = this.match.teamOne.coreId;
+          this.team2Id = this.match.teamTwo.coreId;
+        })
+        .catch(error => {
+          this.$store.dispatch('setAlertError', error.response.data.message);
+        });
+    }
+  }
+};
+</script>
+
+<style scoped>
+.stable-row {
+  top: 70px;
+  width: 100%;
+  z-index: 0;
+}
+.priority-class {
+  z-index: 1;
+}
+</style>
