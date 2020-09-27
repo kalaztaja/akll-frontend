@@ -1,11 +1,5 @@
 import axios from 'axios';
 
-if (localStorage.getItem('accessToken')) {
-  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
-    'accessToken'
-  )}`;
-}
-
 const userStore = {
   state: {
     allUsersArray: []

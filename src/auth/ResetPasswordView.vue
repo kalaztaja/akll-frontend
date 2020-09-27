@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container class="main-container">
     <div v-if="!passwordChange">
       <h1>{{ $t('DidYouForgetPassword') }}</h1>
       {{ $t('PasswordResetMsg') }}
-      <v-form lazy-validation>
+      <v-form lazy-validation v-on:keyup.enter="sendResetPassword">
         <v-text-field
           v-model="email"
           maxlength="50"
@@ -49,6 +49,7 @@
   </v-container>
 </template>
 <script>
+import { env } from '../../env';
 export default {
   name: 'ResetPasswordView',
   data() {
@@ -74,7 +75,10 @@ export default {
   methods: {
     async sendResetPassword() {
       try {
-        await this.$store.dispatch('sendPasswordReset', { email: this.email });
+        await this.$store.dispatch('sendPasswordReset', {
+          game: env.game,
+          email: this.email
+        });
         this.$store.dispatch(
           'setAlertSuccess',
           this.$i18n.t('ResetEmailHasBeenSent')
@@ -109,4 +113,11 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.main-container {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

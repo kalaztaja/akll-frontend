@@ -74,7 +74,7 @@
                   {{ appli.user.username }}
                 </router-link>
               </v-list-item-title>
-              <v-list-item-subtitle>
+              <v-list-item-subtitle class="mr-4" style="white-space: normal;">
                 {{ appli.applicationText }}
               </v-list-item-subtitle>
             </v-list-item-content>

@@ -38,6 +38,7 @@
           class="d-flex flex-column justify-space-between flex-sm-row mx-3 mt-4"
         >
           <v-btn
+            v-if="game === 'csgo'"
             x-large
             class="mb-4"
             inlineblock
@@ -62,6 +63,7 @@
 </template>
 
 <script>
+import { env } from '../../env';
 // import jwt_decode from 'jwt-decode';
 
 export default {
@@ -72,7 +74,8 @@ export default {
       password: '',
       show1: false,
       valid: true,
-      steamUrl: ''
+      steamUrl: '',
+      game: env.game
     };
   },
   methods: {
