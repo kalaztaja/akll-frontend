@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const matchAxios = axios.create({
-  baseURL: 'http://localhost:3002/akll-match'
+  baseURL: 'http://akl.gg/akll-match'
 });
 
 const matchStore = {
