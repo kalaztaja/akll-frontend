@@ -175,6 +175,7 @@
 
 <script>
 import EventCalendar from '../components/EventCalendar.vue';
+import moment from 'moment';
 
 export default {
   name: 'SharedCalendar',
@@ -244,22 +245,15 @@ export default {
         this.suggestedDate !== null &&
         this.suggestedEndTime !== null
       ) {
-        var startTimeslot = new Date(
-          this.suggestedStartDate.substring(0, 3),
-          this.suggestedStartDate.substring(5, 6),
-          this.suggestedStartDate.substring(8, 9),
-          this.suggestedStartTime.substring(0, 2),
-          this.suggestedStartTime.substring(4, 5),
-          '00'
+        var startTimeslot = moment(
+          this.suggestedStartTime + this.suggestedStartDate,
+          'YYYY-MM-DD HH:MM'
         );
-        var endTimeslot = new Date(
-          this.suggestedEndDate.substring(0, 3),
-          this.suggestedEndDate.substring(5, 6),
-          this.suggestedEndDate.substring(8, 9),
-          this.suggestedEndTime.substring(0, 1),
-          this.suggestedEndTime.substring(3, 4),
-          '00'
+        var endTimeslot = moment(
+          this.suggestedEndTime + this.suggestedEndDate,
+          'YYYY-MM-DD HH:MM'
         );
+
         console.log('Starting timeslot ' + startTimeslot);
         console.log('Ending timeslot ' + endTimeslot);
         const body = {
