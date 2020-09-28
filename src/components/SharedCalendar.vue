@@ -294,15 +294,12 @@ export default {
           name = 'Opponent proposal';
           color = 'cyan';
         }
-        var startValue = element.startTime.substring(0, 10);
-        var startTime = element.startTime.substring(12, 16);
-        var endValue = element.endTime.substring(0, 10);
-        var endTime = element.endTime.substring(12, 16);
-        var startTimeSlot = startValue + ' ' + startTime;
-        var endTimeSlot = endValue + ' ' + endTime;
+        var start = moment(element.startTime, 'yyyy-MM-DD HH:MM');
+        var end = moment(element.endTime, 'yyyy-MM-DD HH:MM');
+        console.log('start ' + start + ' and end ' + end);
         eventArray.push({
-          start: startTimeSlot,
-          end: endTimeSlot,
+          start: start,
+          end: end,
           name: name,
           color: color,
           _id: element._id,

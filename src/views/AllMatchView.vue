@@ -16,7 +16,7 @@
 <script>
 import MatchPreview from '../components/MatchPreview.vue';
 import EventCalendar from '../components/EventCalendar.vue';
-
+import moment from 'moment';
 export default {
   name: 'AllMatchView',
   components: { MatchPreview, EventCalendar },
@@ -50,16 +50,15 @@ export default {
     mapToEvents(matches) {
       const eventArray = [];
       matches.forEach(element => {
-        var startValue = element.acceptedTimeslot.startTime.substring(0, 10);
-        var startTime = element.acceptedTimeslot.startTime.substring(12, 16);
-        var endValue = element.acceptedTimeslot.endTime.substring(0, 10);
-        var endTime = element.acceptedTimeslot.endTime.substring(12, 16);
-        var startTimeSlot = startValue + ' ' + startTime;
-        var endTimeSlot = endValue + ' ' + endTime;
+        var start = moment(
+          element.acceptedTimeslot.startTime,
+          'yyyy-MM-DD HH:MM'
+        );
+        var end = moment(element.acceptedTimeslot.endTime, 'yyyy-MM-DD HH:MM');
         const colorNumber = Math.floor(Math.random() * 7);
         eventArray.push({
-          start: startTimeSlot,
-          end: endTimeSlot,
+          start: start,
+          end: end,
           name: element.teamOne.name + ' versus ' + element.teamTwo.name,
           color: this.colors[colorNumber],
           _id: element._id,
