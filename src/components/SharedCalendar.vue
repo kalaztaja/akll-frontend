@@ -245,14 +245,10 @@ export default {
         this.suggestedDate !== null &&
         this.suggestedEndTime !== null
       ) {
-        var startTimeslot = moment(
-          this.suggestedStartTime + this.suggestedStartDate,
-          'yyyy-MM-DD HH:MM'
-        ).toISOString();
-        var endTimeslot = moment(
-          this.suggestedEndTime + this.suggestedEndDate,
-          'yyyy-MM-DD HH:MM'
-        ).toISOString();
+        var start = this.suggestedStartDate.concat(this.suggestedStartTime);
+        var end = this.suggestedEndDate.concat(this.suggestedEndTime);
+        var startTimeslot = moment(start).toISOString();
+        var endTimeslot = moment(end).toISOString();
 
         console.log('Starting timeslot ' + startTimeslot);
         console.log('Ending timeslot ' + endTimeslot);
