@@ -247,6 +247,7 @@ export default {
       ) {
         var start = this.suggestedStartDate.concat(this.suggestedStartTime);
         var end = this.suggestedEndDate.concat(this.suggestedEndTime);
+        console.log('Before  ' + start + '  and  ' + end);
         var startTimeslot = moment(start).toISOString();
         var endTimeslot = moment(end).toISOString();
 
