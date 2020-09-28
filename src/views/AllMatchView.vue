@@ -51,9 +51,9 @@ export default {
       const eventArray = [];
       matches.forEach(element => {
         var startValue = element.acceptedTimeslot.startTime.substring(0, 10);
-        var startTime = element.acceptedTimeslot.startTime.substring(14, 19);
+        var startTime = element.acceptedTimeslot.startTime.substring(12, 16);
         var endValue = element.acceptedTimeslot.endTime.substring(0, 10);
-        var endTime = element.acceptedTimeslot.endTime.substring(14, 19);
+        var endTime = element.acceptedTimeslot.endTime.substring(12, 16);
         var startTimeSlot = startValue + ' ' + startTime;
         var endTimeSlot = endValue + ' ' + endTime;
         const colorNumber = Math.floor(Math.random() * 7);

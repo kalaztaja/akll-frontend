@@ -244,15 +244,28 @@ export default {
         this.suggestedDate !== null &&
         this.suggestedEndTime !== null
       ) {
-        const startingTimeslot =
-          this.suggestedStartDate + 'T17:' + this.suggestedStartTime + '.172Z';
-        const endingTimeslot =
-          this.suggestedEndDate + 'T17:' + this.suggestedEndTime + '.172Z';
-
+        var startTimeslot = new Date(
+          this.suggestedStartDate.substring(0, 3),
+          this.suggestedStartDate.substring(5, 6),
+          this.suggestedStartDate.substring(8, 9),
+          this.suggestedStartTime.substring(0, 2),
+          this.suggestedStartTime.substring(4, 5),
+          '00'
+        );
+        var endTimeslot = new Date(
+          this.suggestedEndDate.substring(0, 3),
+          this.suggestedEndDate.substring(5, 6),
+          this.suggestedEndDate.substring(8, 9),
+          this.suggestedEndTime.substring(0, 1),
+          this.suggestedEndTime.substring(3, 4),
+          '00'
+        );
+        console.log('Starting timeslot ' + startTimeslot);
+        console.log('Ending timeslot ' + endTimeslot);
         const body = {
           matchId: this.matchId,
-          startTime: startingTimeslot,
-          endTime: endingTimeslot
+          startTime: startTimeslot.toISOString(),
+          endTime: endTimeslot.toISOString()
         };
         this.$store
           .dispatch('proposeTimeslot', body)
