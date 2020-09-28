@@ -9,18 +9,12 @@
             Match has been played
           </v-card-title>
         </div>
-        <div v-if="match.acceptedTimeslot === null">
+        <div v-if="timeslot === null">
           <v-card-title class="font-weight-thin">
             Match time not yet locked
           </v-card-title>
         </div>
-        <div
-          v-if="
-            match.acceptedTimeslot !== null &&
-              match.matchPlayed === false &&
-              match.acceptedTimeslot !== undefined
-          "
-        >
+        <div v-if="timeslot !== null && match.matchPlayed === false">
           <v-card-title class="font-weight-thin">
             Match will be played: {{ timeslot }}
           </v-card-title>
@@ -61,8 +55,8 @@ export default {
   computed: {
     timeslot() {
       if (
-        this.match.acceptedTimeslot !== null &&
-        this.match.acceptedTimeslot !== undefined
+        this.match.acceptedTimeslot !== undefined &&
+        this.match.acceptedTimeslot !== null
       ) {
         var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
         var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
