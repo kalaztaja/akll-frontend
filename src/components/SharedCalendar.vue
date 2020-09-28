@@ -247,11 +247,11 @@ export default {
       ) {
         var startTimeslot = moment(
           this.suggestedStartTime + this.suggestedStartDate,
-          'YYYY-MM-DD HH:MM'
+          'yyyy-MM-DD HH:MM'
         ).toISOString();
         var endTimeslot = moment(
           this.suggestedEndTime + this.suggestedEndDate,
-          'YYYY-MM-DD HH:MM'
+          'yyyy-MM-DD HH:MM'
         ).toISOString();
 
         console.log('Starting timeslot ' + startTimeslot);
