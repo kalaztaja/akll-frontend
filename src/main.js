@@ -50,7 +50,7 @@ axios.interceptors.request.use(checkTokensOnRequest, error => {
   return Promise.reject(error);
 });
 const matchAxios = axios.create({
-  baseURL: 'https://akl.gg/akll-match'
+  baseURL: 'http://localhost:3002/akll-match'
 });
 matchAxios.interceptors.request.use(checkTokensOnRequest, error => {
   return Promise.reject(error);
