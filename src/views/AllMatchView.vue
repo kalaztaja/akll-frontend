@@ -50,11 +50,12 @@ export default {
     mapToEvents(matches) {
       const eventArray = [];
       matches.forEach(element => {
-        var start = moment(
-          element.acceptedTimeslot.startTime,
+        var start = moment(element.acceptedTimeslot.startTime).format(
           'yyyy-MM-DD HH:MM'
         );
-        var end = moment(element.acceptedTimeslot.endTime, 'yyyy-MM-DD hh:mm');
+        var end = moment(element.acceptedTimeslot.endTime).format(
+          'yyyy-MM-DD hh:mm'
+        );
         const colorNumber = Math.floor(Math.random() * 7);
         eventArray.push({
           start: start,
