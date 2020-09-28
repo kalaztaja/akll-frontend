@@ -147,7 +147,14 @@
         </v-row>
         <v-container class="my-2">
           <v-row>
-            <v-btn class="mx-2" depressed color="primary">Clear</v-btn>
+            <v-btn
+              class="mx-2"
+              depressed
+              color="primary"
+              @click="clearProposals()"
+            >
+              Clear
+            </v-btn>
             <v-spacer />
             <v-btn
               depressed
@@ -281,9 +288,9 @@ export default {
           color = 'cyan';
         }
         var startValue = element.startTime.substring(0, 10);
-        var startTime = element.startTime.substring(14, 19);
+        var startTime = element.startTime.substring(12, 16);
         var endValue = element.endTime.substring(0, 10);
-        var endTime = element.endTime.substring(14, 19);
+        var endTime = element.endTime.substring(12, 16);
         var startTimeSlot = startValue + ' ' + startTime;
         var endTimeSlot = endValue + ' ' + endTime;
         eventArray.push({
@@ -296,6 +303,12 @@ export default {
         });
       });
       this.events = eventArray;
+    },
+    clearProposals() {
+      this.suggestedStartTime = null;
+      this.suggestedStartDate = null;
+      this.suggestedEndTime = null;
+      this.suggestedEndDate = null;
     }
   }
 };
