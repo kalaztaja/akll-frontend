@@ -49,6 +49,12 @@ router.afterEach(() => {
 axios.interceptors.request.use(checkTokensOnRequest, error => {
   return Promise.reject(error);
 });
+const matchAxios = axios.create({
+  baseURL: 'https://akl.gg/akll-match'
+});
+matchAxios.interceptors.request.use(checkTokensOnRequest, error => {
+  return Promise.reject(error);
+});
 
 const i18n = new VueI18n({
   locale: window.localStorage.language || 'en',
@@ -63,3 +69,5 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app');
+
+export { matchAxios };

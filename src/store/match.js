@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const matchAxios = axios.create({
-  baseURL: 'https://akl.gg/akll-match'
-});
+import { matchAxios } from '../main.js';
 
 const matchStore = {
   state: {
