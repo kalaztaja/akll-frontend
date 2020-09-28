@@ -250,12 +250,9 @@ export default {
           this.suggestedStartTime
         );
         var end = this.suggestedEndDate.concat(' ', this.suggestedEndTime);
-        console.log('Before  ' + start + '  and  ' + end);
         var startTimeslot = moment(start).toISOString();
         var endTimeslot = moment(end).toISOString();
 
-        console.log('Starting timeslot ' + startTimeslot);
-        console.log('Ending timeslot ' + endTimeslot);
         const body = {
           matchId: this.matchId,
           startTime: startTimeslot,
@@ -296,7 +293,6 @@ export default {
         }
         var start = moment(element.startTime).format('YYYY-MM-DD HH:mm');
         var end = moment(element.endTime).format('YYYY-MM-DD HH:mm');
-        console.log('start ' + start + ' and end ' + end);
         eventArray.push({
           start: start,
           end: end,
