@@ -54,7 +54,7 @@ export default {
           element.acceptedTimeslot.startTime,
           'yyyy-MM-DD HH:MM'
         );
-        var end = moment(element.acceptedTimeslot.endTime, 'yyyy-MM-DD HH:MM');
+        var end = moment(element.acceptedTimeslot.endTime, 'yyyy-MM-DD hh:mm');
         const colorNumber = Math.floor(Math.random() * 7);
         eventArray.push({
           start: start,
