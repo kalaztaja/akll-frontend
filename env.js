@@ -1,7 +1,7 @@
 // fill in these parameters in .env file
 const env = {
-  backendUrl: process.env.VUE_APP_BACKEND_URL,
-  game: process.env.VUE_APP_GAME,
+  backendUrl: 'http://localhost:3000/aklapi',
+  game: 'csgo',
   gaPropertyId: process.env.VUE_APP_GA_PROPERTY_ID
 };
 

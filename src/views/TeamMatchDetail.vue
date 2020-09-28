@@ -67,7 +67,7 @@ export default {
       return this.$route.params.matchid;
     },
     timeslot() {
-      if (this.match.acceptedTimeslot !== null) {
+      if (this.match.acceptedTimeslot) {
         var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
         var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
         var startTimeSlot = startValue + ' ' + startTime;
