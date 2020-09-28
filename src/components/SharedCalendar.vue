@@ -294,8 +294,8 @@ export default {
           name = 'Opponent proposal';
           color = 'cyan';
         }
-        var start = moment(element.startTime).format('yyyy-MM-DD hh:mm');
-        var end = moment(element.endTime).format('yyyy-MM-DD hh:mm');
+        var start = moment(element.startTime).format('YYYY-MM-DD HH:mm');
+        var end = moment(element.endTime).format('YYYY-MM-DD HH:mm');
         console.log('start ' + start + ' and end ' + end);
         eventArray.push({
           start: start,

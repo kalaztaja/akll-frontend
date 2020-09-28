@@ -51,10 +51,10 @@ export default {
       const eventArray = [];
       matches.forEach(element => {
         var start = moment(element.acceptedTimeslot.startTime).format(
-          'yyyy-MM-DD HH:MM'
+          'YYYY-MM-DD HH:mm'
         );
         var end = moment(element.acceptedTimeslot.endTime).format(
-          'yyyy-MM-DD hh:mm'
+          'YYYY-MM-DD HH:mm'
         );
         const colorNumber = Math.floor(Math.random() * 7);
         eventArray.push({
