@@ -245,8 +245,11 @@ export default {
         this.suggestedDate !== null &&
         this.suggestedEndTime !== null
       ) {
-        var start = this.suggestedStartDate.concat(this.suggestedStartTime);
-        var end = this.suggestedEndDate.concat(this.suggestedEndTime);
+        var start = this.suggestedStartDate.concat(
+          ' ',
+          this.suggestedStartTime
+        );
+        var end = this.suggestedEndDate.concat(' ', this.suggestedEndTime);
         console.log('Before  ' + start + '  and  ' + end);
         var startTimeslot = moment(start).toISOString();
         var endTimeslot = moment(end).toISOString();
