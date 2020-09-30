@@ -26,9 +26,7 @@
         <v-card-title class="font-weight-regular">
           {{ match.teamOne.name }}
         </v-card-title>
-        <v-spacer />
         <v-card-title>VERSUS</v-card-title>
-        <v-spacer />
         <v-card-title class="font-weight-regular">
           {{ match.teamTwo.name }}
         </v-card-title>
@@ -38,6 +36,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'MatchPreview',
   props: {
@@ -57,10 +57,10 @@ export default {
   computed: {
     timeslot() {
       if (this.match.acceptedTimeslot) {
-        var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
-        var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
-        var startTimeSlot = startValue + ' ' + startTime;
-        return startTimeSlot;
+        const start = moment(this.match.acceptedTimeslot.startTime).format(
+          'YYYY-MM-DD HH:mm'
+        );
+        return start;
       }
       return null;
     },
