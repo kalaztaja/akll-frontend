@@ -16,9 +16,9 @@
       <div v-else>
         <v-card v-if="match.matchPlayed === false">
           <v-card-title>Timeslot for game: {{ timeslot }}</v-card-title>
-          <v-card-title class="font-weight-thin">
-            Paste this to your console to connect to your server
-          </v-card-title>
+          <v-card-title
+            class="font-weight-thin"
+          >Paste this to your console to connect to your server</v-card-title>
           <v-card-text>
             connect
             {{ match.csgo.server.ip }}:{{ match.csgo.server.port }};password
@@ -47,6 +47,7 @@
 <script>
 import SharedCalendar from '../components/SharedCalendar.vue';
 import TeamPreview from '../components/TeamPreview.vue';
+import moment from 'moment';
 
 export default {
   name: 'TeamMatchDetail',
@@ -68,10 +69,10 @@ export default {
     },
     timeslot() {
       if (this.match.acceptedTimeslot) {
-        var startValue = this.match.acceptedTimeslot.startTime.substring(0, 10);
-        var startTime = this.match.acceptedTimeslot.startTime.substring(14, 19);
-        var startTimeSlot = startValue + ' ' + startTime;
-        return startTimeSlot;
+        var start = moment(this.match.acceptedTimeslot.startTime).format(
+          'YYYY-MM-DD HH:mm'
+        );
+        return start;
       }
       return null;
     },
