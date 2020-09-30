@@ -16,9 +16,9 @@
       <div v-else>
         <v-card v-if="match.matchPlayed === false">
           <v-card-title>Timeslot for game: {{ timeslot }}</v-card-title>
-          <v-card-title
-            class="font-weight-thin"
-          >Paste this to your console to connect to your server</v-card-title>
+          <v-card-title class="font-weight-thin">
+            Paste this to your console to connect to your server
+          </v-card-title>
           <v-card-text>
             connect
             {{ match.csgo.server.ip }}:{{ match.csgo.server.port }};password
