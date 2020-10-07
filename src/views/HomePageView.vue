@@ -25,13 +25,15 @@
         >
           <v-carousel-item v-if="isCsgo">
             <v-card height="250">
-              <v-img
-                class="align-end"
-                height="88px"
-                src="@/assets/AKLLBannerMatches.png"
-              >
-                <v-card-title />
-              </v-img>
+              <router-link :to="'/matches/all'">
+                <v-img
+                  class="align-end"
+                  height="88px"
+                  src="@/assets/AKLLBannerMatches.png"
+                >
+                  <v-card-title />
+                </v-img>
+              </router-link>
               <v-card-title class="text-left">
                 {{ $t('AKLMatchTitle') }}
               </v-card-title>
@@ -48,13 +50,15 @@
           </v-carousel-item>
           <v-carousel-item>
             <v-card height="250">
-              <v-img
-                class="white--text align-end"
-                height="88px"
-                src="@/assets/AKLLTwitchLogo.png"
-              >
-                <v-card-title />
-              </v-img>
+              <a :href="'https://twitch.tv/tr3gamers'">
+                <v-img
+                  class="white--text align-end"
+                  height="88px"
+                  src="@/assets/AKLLTwitchLogo.png"
+                >
+                  <v-card-title />
+                </v-img>
+              </a>
               <v-card-title class="text-left">
                 {{ $t('AKLTwitchTitle') }}
               </v-card-title>
@@ -71,13 +75,16 @@
           </v-carousel-item>
           <v-carousel-item>
             <v-card height="250">
-              <v-img
-                class="white--text align-end"
-                height="88px"
-                src="@/assets/AKLLT3GLogo.png"
-              >
-                <v-card-title />
-              </v-img>
+              <a :href="'https://t3g.fi'">
+                <v-img
+                  class="white--text align-end"
+                  height="88px"
+                  src="@/assets/AKLLT3GLogo.png"
+                  :href="'https://t3g.fi'"
+                >
+                  <v-card-title />
+                </v-img>
+              </a>
               <v-card-title class="text-left">
                 {{ $t('AKLLT3GTitle') }}
               </v-card-title>
@@ -96,11 +103,19 @@
       </v-col>
       <v-col align="center" justify="center" xs="6" md="6">
         <v-card>
-          <v-img
-            class="white--text align-end"
-            height="88px"
-            src="@/assets/DiscordLogo.png"
-          />
+          <a
+            :href="
+              isCsgo
+                ? 'https://discord.gg/xd2BTyY'
+                : 'http://discord.gg/unB7YDP'
+            "
+          >
+            <v-img
+              class="white--text align-end"
+              height="88px"
+              src="@/assets/DiscordLogo.png"
+            />
+          </a>
           <v-card-title class="text-left">
             {{ $t('DiscordTitle') }}
           </v-card-title>

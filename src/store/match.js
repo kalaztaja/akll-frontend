@@ -61,6 +61,12 @@ const matchStore = {
     async getMatchById(context, id) {
       const result = await matchAxios.get('/match/' + id + '/info');
       return result.data.match;
+    },
+    async requestMatchCancel(context, id) {
+      const result = await matchAxios.post('/timeslot/cancel', {
+        matchId: id
+      });
+      return result.data;
     }
   }
 };

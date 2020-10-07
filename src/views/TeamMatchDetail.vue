@@ -24,6 +24,34 @@
             {{ match.csgo.server.ip }}:{{ match.csgo.server.port }};password
             {{ match.csgo.server.password }}
           </v-card-text>
+          <v-card>
+            <v-dialog v-model="cancelDialog">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn class="my-4" block dark v-bind="attrs" v-on="on">
+                  Cancel Match
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  Are you sure you want to cancel the match?
+                </v-card-title>
+                <v-card-text>
+                  Cancelling match forces you and your opponent to lock on new
+                  timeslot for the match If you cancel the timeslot, please make
+                  sure that the opponents are aware of this
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn class="my-4 mx-4" @click="cancelDialog = false">
+                    Back
+                  </v-btn>
+                  <v-spacer />
+                  <v-btn class="my-4 mx-4" @click="cancelMatch()">
+                    Cancel match
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-card>
         </v-card>
         <v-card v-else>
           <v-card-title>Match has been played</v-card-title>
@@ -60,7 +88,8 @@ export default {
       match: {},
       team1Id: '',
       team2Id: '',
-      tabToggle: 0
+      tabToggle: 0,
+      cancelDialog: false
     };
   },
   computed: {
@@ -93,6 +122,25 @@ export default {
           this.match = result;
           this.team1Id = this.match.teamOne.coreId;
           this.team2Id = this.match.teamTwo.coreId;
+        })
+        .catch(error => {
+          this.$store.dispatch('setAlertError', error.response.data.message);
+        });
+    }
+  },
+  methods: {
+    cancelMatch() {
+      this.cancelDialog = false;
+      this.$store
+        .dispatch('requestMatchCancel', this.matchId)
+        .then(() => {
+          this.$store.dispatch(
+            'setAlertSuccess',
+            'Match cancelled succesfully! Refreshing...'
+          );
+          setTimeout(function() {
+            location.reload(true);
+          }, 3000);
         })
         .catch(error => {
           this.$store.dispatch('setAlertError', error.response.data.message);
