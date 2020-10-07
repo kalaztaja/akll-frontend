@@ -5,7 +5,7 @@
         <v-col cols="12">
           <v-text-field
             v-model="email"
-            maxlength="30"
+            maxlength="50"
             :label="$t('Email')"
             required
           />
