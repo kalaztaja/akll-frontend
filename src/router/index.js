@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import ga from 'vue-ga';
 
 import TeamListView from '../views/TeamListView.vue';
 import TeamView from '../views/TeamView.vue';
@@ -27,8 +26,6 @@ import HomePageView from '../views/HomePageView.vue';
 import TeamMatchesView from '../views/TeamMatchesView.vue';
 import TeamMatchDetail from '../views/TeamMatchDetail.vue';
 import AllMatchView from '../views/AllMatchView.vue';
-
-import { env } from '../../env';
 
 Vue.use(VueRouter);
 
@@ -182,7 +179,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-
-ga(router, env.gaPropertyId);
 
 export default router;
